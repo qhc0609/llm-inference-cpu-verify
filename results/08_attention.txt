@@ -1,0 +1,16 @@
+# seq     完整矩阵(ms)   流式(ms)   分数矩阵大小(MB)   QK乘加量(M)
+ATT|   32         0.079      0.068           0.00           0.1
+RES|attn_seq32_full=0.079|ms|stream=0.068|ms|score_mb=0.00
+ATT|   64         0.278      0.282           0.02           0.3
+RES|attn_seq64_full=0.278|ms|stream=0.282|ms|score_mb=0.02
+ATT|  128         1.214      1.103           0.06           1.0
+RES|attn_seq128_full=1.214|ms|stream=1.103|ms|score_mb=0.06
+ATT|  256         4.941      4.485           0.25           4.2
+RES|attn_seq256_full=4.941|ms|stream=4.485|ms|score_mb=0.25
+ATT|  512        20.395     19.774           1.00          16.8
+RES|attn_seq512_full=20.395|ms|stream=19.774|ms|score_mb=1.00
+ATT| 1024       123.655     74.695           4.00          67.1
+RES|attn_seq1024_full=123.655|ms|stream=74.695|ms|score_mb=4.00
+RES|attn_scaling=seq*2_time*6.1|quadratic_check
+RES|attn_note=full_vs_stream_same_math_different_memory|1
+WALL 268 ms

@@ -1,0 +1,84 @@
+===== 0. 工具链 =====
+CROSS   = /opt/cross/gcc_arm64le/bin/aarch64-linux-gnueabi-gcc
+OBJDUMP = /opt/cross/gcc_arm64le/bin/aarch64-linux-gnueabi-objdump
+QEMU    = qemu-aarch64-static
+
+===== 1. x86-64 本机编译并执行 =====
+RES|dot=-661.249984
+RES|add_if_true=1.250000
+RES|add_if_false=3.750000
+
+===== 2. aarch64 交叉编译 =====
+dot.aarch64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, not stripped
+
+===== 3. aarch64 执行（QEMU 用户态）=====
+RES|dot=-661.249984
+RES|add_if_true=1.250000
+RES|add_if_false=3.750000
+qemu_rc=0
+
+===== 4. 两侧数值比对 =====
+PASS: x86-64 与 aarch64 输出完全一致（同一份 C，两种指令集）
+
+===== 5. x86-64 的 dot 反汇编 =====
+00000000004012a0 <dot>:
+  4012a0:	test   %edx,%edx
+  4012a2:	jle    4012d8 <dot+0x38>
+  4012a4:	movslq %edx,%rdx
+  4012a7:	xor    %eax,%eax
+  4012a9:	pxor   %xmm1,%xmm1
+  4012ad:	shl    $0x2,%rdx
+  4012b1:	nopl   0x0(%rax)
+  4012b8:	movss  (%rdi,%rax,1),%xmm0
+  4012bd:	mulss  (%rsi,%rax,1),%xmm0
+  4012c2:	add    $0x4,%rax
+  4012c6:	addss  %xmm0,%xmm1
+  4012ca:	cmp    %rax,%rdx
+  4012cd:	jne    4012b8 <dot+0x18>
+  4012cf:	movaps %xmm1,%xmm0
+  4012d2:	ret
+  4012d3:	nopl   0x0(%rax,%rax,1)
+  4012d8:	pxor   %xmm1,%xmm1
+  4012dc:	movaps %xmm1,%xmm0
+  4012df:	ret
+
+
+===== 6. aarch64 的 dot 反汇编 =====
+0000000000400220 <dot>:
+  400220:	movi	v0.2s, #0x0
+  400224:	cmp	w2, #0x0
+  400228:	b.le	400250 <dot+0x30>
+  40022c:	sbfiz	x3, x2, #2, #32
+  400230:	mov	x2, #0x0                   	// #0
+  400234:	nop
+  400238:	ldr	s2, [x0, x2]
+  40023c:	ldr	s1, [x1, x2]
+  400240:	add	x2, x2, #0x4
+  400244:	fmadd	s0, s2, s1, s0
+  400248:	cmp	x3, x2
+  40024c:	b.ne	400238 <dot+0x18>  // b.any
+  400250:	ret
+
+
+===== 7. add_if：条件分支怎么编 =====
+--- x86-64 ---
+00000000004012e0 <add_if>:
+  4012e0:	test   %edi,%edi
+  4012e2:	jne    4012f0 <add_if+0x10>
+  4012e4:	subss  %xmm1,%xmm0
+  4012e8:	ret
+  4012e9:	nopl   0x0(%rax)
+  4012f0:	addss  %xmm1,%xmm0
+  4012f4:	ret
+  4012f5:	data16 cs nopw 0x0(%rax,%rax,1)
+
+--- aarch64 ---
+0000000000400254 <add_if>:
+  400254:	cbnz	w0, 400260 <add_if+0xc>
+  400258:	fsub	s0, s0, s1
+  40025c:	ret
+  400260:	fadd	s0, s0, s1
+  400264:	ret
+  400268:	nop
+  40026c:	nop
+

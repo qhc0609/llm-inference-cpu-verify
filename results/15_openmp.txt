@@ -1,0 +1,24 @@
+RES|omp_procs=4
+OMP|compute  threads=1     36.86 ms  speedup=1.00x  eff=100%
+RES|omp_compute_threads1=36.86|ms|speedup=1.00|eff_pct=100
+OMP|compute  threads=2     21.93 ms  speedup=1.68x  eff=84%
+RES|omp_compute_threads2=21.93|ms|speedup=1.68|eff_pct=84
+OMP|compute  threads=3     31.58 ms  speedup=1.17x  eff=39%
+RES|omp_compute_threads3=31.58|ms|speedup=1.17|eff_pct=39
+OMP|compute  threads=4     27.31 ms  speedup=1.35x  eff=34%
+RES|omp_compute_threads4=27.31|ms|speedup=1.35|eff_pct=34
+OMP|memcpy   threads=1     65.34 ms  speedup=1.00x  bw=14.7 GB/s
+RES|omp_memory_threads1=65.34|ms|speedup=1.00|bw_gbs=14.7
+OMP|memcpy   threads=2     37.53 ms  speedup=1.74x  bw=25.6 GB/s
+RES|omp_memory_threads2=37.53|ms|speedup=1.74|bw_gbs=25.6
+OMP|memcpy   threads=3     50.40 ms  speedup=1.30x  bw=19.0 GB/s
+RES|omp_memory_threads3=50.40|ms|speedup=1.30|bw_gbs=19.0
+OMP|memcpy   threads=4     56.44 ms  speedup=1.16x  bw=17.0 GB/s
+RES|omp_memory_threads4=56.44|ms|speedup=1.16|bw_gbs=17.0
+RES|omp_contrast=compute_vs_memory|并行只对算得多的有效|对搬得多的无效
+FS|adjacent      33.45 ms
+FS|padded        69.97 ms
+RES|false_sharing_adjacent=33.45|ms
+RES|false_sharing_padded=69.97|ms
+RES|false_sharing_ratio=0.48|x|padded_faster
+RES|fs_check=adj:15000000|pad:15000000|should_equal

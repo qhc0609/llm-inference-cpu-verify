@@ -1,0 +1,16 @@
+RES|weights_file_size=512|MB
+RES|mmap_time=0.008|ms
+RES|rss_before_mmap=1.5|MB
+RES|rss_after_mmap=1.7|MB|虚拟映射512MB
+RES|cold_read=28.7|ms|effective_bw=18.68GB/s
+RES|page_faults_minor=8193
+RES|page_faults_major=0
+RES|warm_read=1.6|ms|effective_bw=329.43GB/s
+RES|cold_vs_warm=17.6|x
+RES|random_access=0.2|us_per_page
+RES|sequential_access=0.01|us_per_page
+RES|rand_vs_seq=13|x_slower
+RES|madvise_willneed=0.6|ms|cost
+RES|read_after_madvise=25.2|ms|vs_cold_28.7
+# sink=1479648
+WALL 416 ms

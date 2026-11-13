@@ -1,0 +1,11 @@
+# 精度      权重体积(MB)   耗时(ms)   有效带宽(GB/s)   相对误差RMSE
+Q|FP32         16.00      5.716             2.9       0.00e+00
+Q|INT8          4.00      1.089             3.9       3.80e-01
+Q|INT4          2.00      9.531             0.2       6.97e+00
+RES|quant_f32=5.716|ms|bytes_mb=16.00|bw_gbs=2.9
+RES|quant_int8=1.089|ms|bytes_mb=4.00|bw_gbs=3.9|rmse=3.7995e-01
+RES|quant_int4=9.531|ms|bytes_mb=2.00|bw_gbs=0.2|rmse=6.9666e+00
+RES|quant_speedup_i8=5.25|x|vs_f32
+RES|quant_speedup_i4=0.60|x|vs_f32
+RES|quant_err_ratio=18.3|x|i4_over_i8
+WALL 86 ms

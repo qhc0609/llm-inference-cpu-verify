@@ -1,0 +1,23 @@
+# cpu_capacity: 0 0 0 0 
+RES|platform_symmetric=1|cpu_capacity_uniform
+RES|platform_ncpu=4
+TASK|balanced|task0|cpu-1|247.4 ms
+TASK|balanced|task1|cpu-1|194.2 ms
+TASK|balanced|task2|cpu-1|195.4 ms
+TASK|balanced|task3|cpu-1|244.0 ms
+TASK|balanced|task4|cpu-1|260.5 ms
+TASK|balanced|task5|cpu-1|185.9 ms
+TASK|balanced|task6|cpu-1|184.8 ms
+TASK|balanced|task7|cpu-1|256.1 ms
+RES|case_balanced=wall:272.6|ms|min_task:184.8|max_task:260.5|spread:1.41x|avg:221.0
+TASK|asymmetric|task0|cpu0|190.1 ms
+TASK|asymmetric|task1|cpu0|183.8 ms
+TASK|asymmetric|task2|cpu0|214.1 ms
+TASK|asymmetric|task3|cpu0|157.0 ms
+TASK|asymmetric|task4|cpu1|194.1 ms
+TASK|asymmetric|task5|cpu2|151.5 ms
+TASK|asymmetric|task6|cpu3|40.5 ms
+TASK|asymmetric|task7|cpu1|217.5 ms
+RES|case_asymmetric=wall:299.5|ms|min_task:40.5|max_task:217.5|spread:5.37x|avg:168.6
+RES|note=case_asymmetric_emulates_bigLITTLE_capacity_gap_not_real_EAS|1
+WALL 598 ms

@@ -1,0 +1,22 @@
+# 编译产物
+*.o
+*.x86
+*.aarch64
+01_topology/topology
+03_cache/cache_lat
+04_pipeline/branch
+06_infer_flow/mini_transformer
+07_gemm/gemm_block
+08_attention/attn
+09_quant/quant_gemv
+10_prefill_decode/pd
+11_thread/thread_cost
+12_sched/sched_lat
+13_affinity/affinity
+14_biglittle/capacity
+15_openmp/omp_scale
+16_mmap_load/mmap_load
+# 私有
+.ssh/
+deploy.log
+__pycache__/

@@ -1,0 +1,16 @@
+RES|fork_us=150.6|us|n=200
+RES|thread_create_us=22.4|us|n=2000
+RES|fork_vs_thread_small_rss=6.72|x
+RES|rss_when_fork_big=513.5|MB
+RES|fork_us_big_rss=596.4|us|n=50
+RES|thread_us_big_rss=815.4|us|n=500
+RES|fork_growth=3.96|x|when_rss_grew
+RES|fork_vs_thread_big_rss=0.7|x
+RES|default_thread_stack=8.0|MB
+RES|barrier_8threads=18.56|ms
+RES|shared_counter_after=8|expected=8
+RES|rss_before=1.5|MB
+RES|rss_after=1.5|MB
+RES|rss_delta_8threads=0.0|MB|vs_virtual_stack_64_MB
+RES|sched_yield_once=1.004|us|n=100000
+WALL 762 ms

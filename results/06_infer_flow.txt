@@ -1,0 +1,19 @@
+# 配置: d_model=256 heads=8 head_dim=32 seq=64 ffn=1024 vocab=4096 layers=1
+#
+# 阶段           耗时(ms)   占比
+STAGE|embedding      0.016    0.0%
+STAGE|qkv_proj       8.939   21.4%
+STAGE|attention      2.407    5.8%
+STAGE|out_proj       3.218    7.7%
+STAGE|ffn           25.882   62.0%
+STAGE|lm_head        1.276    3.1%
+# 合计 41.739 ms / 64 token = 0.65 ms/token
+RES|stage_embedding_ms=0.016|ms
+RES|stage_qkv_ms=8.939|ms
+RES|stage_attention_ms=2.407|ms
+RES|stage_outproj_ms=3.218|ms
+RES|stage_ffn_ms=25.882|ms
+RES|stage_lmhead_ms=1.276|ms
+RES|stage_total_ms=41.739|ms
+RES|per_token_ms=0.652|ms/token|seq=64
+WALL 157 ms

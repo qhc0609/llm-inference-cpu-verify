@@ -1,0 +1,19 @@
+RES|cpu_online_list=0-3
+RES|cpu_count=4
+RES|cpu_model=Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+RES|cache_L1_Data=32K|size|line=64|ways=8
+RES|cache_L1_Instruction=32K|size|line=64|ways=8
+RES|cache_L2_Unified=256K|size|line=64|ways=4
+RES|cache_L3_Unified=6144K|size|line=64|ways=12
+RES|memcpy_32KB=36.35|GB/s|iters=91555
+RES|memcpy_256KB=14.03|GB/s|iters=11447
+RES|memcpy_2MB=18.96|GB/s|iters=1433
+RES|memcpy_32MB=7.48|GB/s|iters=92
+RES|memcpy_256MB=12.34|GB/s|iters=14
+RES|cpu0=core_id:0|package:0
+RES|cpu1=core_id:1|package:0
+RES|cpu2=core_id:2|package:0
+RES|cpu3=core_id:3|package:0
+RES|cpu_capacity_available=0
+RES|cpu_capacity_uniform=-1|first=-1
+WALL 1401 ms

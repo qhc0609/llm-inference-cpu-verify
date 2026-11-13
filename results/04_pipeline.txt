@@ -1,0 +1,11 @@
+RES|branch_random=5.1669|ns_per_elem
+RES|branch_sorted=0.8508|ns_per_elem
+RES|branch_speedup=6.07|x|same_code_diff_data
+# 校验和：826739200 vs 826739200（必须相等，说明只改了顺序没改语义）
+RES|dep_chain_add=0.6898|ns_per_op
+RES|dep_chain_mul=1.0333|ns_per_op
+RES|dep_chain_ratio=1.50|x
+RES|ilp_1chain=273.0|ms_total|ops=400000000
+RES|ilp_4chain=47.1|ms_total|ops=400000000
+RES|ilp_speedup=5.79|x|same_total_ops
+WALL 735 ms

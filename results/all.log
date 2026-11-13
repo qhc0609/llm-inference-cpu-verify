@@ -1,0 +1,523 @@
+================ 环境自证 ================
+2026-11-14T02:27:19+08:00
+OS: openEuler 24.03 (LTS-SP4)
+Linux bogon 6.12.0 #1 SMP Sun Oct 25 14:07:46 CST 2026 x86_64 x86_64 x86_64 GNU/Linux
+CPU: 4 核
+model name	: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+gcc: gcc (GCC) 12.3.1 (openEuler 12.3.1-110.oe2403sp4)
+
+================ 01_topology ================
+RES|cpu_online_list=0-3
+RES|cpu_count=4
+RES|cpu_model=Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+RES|cache_L1_Data=32K|size|line=64|ways=8
+RES|cache_L1_Instruction=32K|size|line=64|ways=8
+RES|cache_L2_Unified=256K|size|line=64|ways=4
+RES|cache_L3_Unified=6144K|size|line=64|ways=12
+RES|memcpy_32KB=36.35|GB/s|iters=91555
+RES|memcpy_256KB=14.03|GB/s|iters=11447
+RES|memcpy_2MB=18.96|GB/s|iters=1433
+RES|memcpy_32MB=7.48|GB/s|iters=92
+RES|memcpy_256MB=12.34|GB/s|iters=14
+RES|cpu0=core_id:0|package:0
+RES|cpu1=core_id:1|package:0
+RES|cpu2=core_id:2|package:0
+RES|cpu3=core_id:3|package:0
+RES|cpu_capacity_available=0
+RES|cpu_capacity_uniform=-1|first=-1
+WALL 1401 ms
+
+================ 03_cache ================
+# 工作集(字节)  每级元素数  每次访问(ns)  等效带宽(GB/s)
+WS|     8192|      2048|         1.97|         32.56   # sink=1660
+RES|cache_ws_8192B=1.97|ns_per_access|n=2048
+WS|    16384|      4096|         1.94|         32.95   # sink=1782
+RES|cache_ws_16384B=1.94|ns_per_access|n=4096
+WS|    32768|      8192|         1.96|         32.71   # sink=3948
+RES|cache_ws_32768B=1.96|ns_per_access|n=8192
+WS|    65536|     16384|         3.12|         20.52   # sink=860
+RES|cache_ws_65536B=3.12|ns_per_access|n=16384
+WS|   131072|     32768|         6.84|          9.35   # sink=24181
+RES|cache_ws_131072B=6.84|ns_per_access|n=32768
+WS|   262144|     65536|         5.85|         10.94   # sink=26019
+RES|cache_ws_262144B=5.85|ns_per_access|n=65536
+WS|   524288|    131072|        11.19|          5.72   # sink=46423
+RES|cache_ws_524288B=11.19|ns_per_access|n=131072
+WS|  1048576|    262144|        15.36|          4.17   # sink=229504
+RES|cache_ws_1048576B=15.36|ns_per_access|n=262144
+WS|  2097152|    524288|        19.78|          3.24   # sink=216593
+RES|cache_ws_2097152B=19.78|ns_per_access|n=524288
+WS|  4194304|   1048576|        27.31|          2.34   # sink=259124
+RES|cache_ws_4194304B=27.31|ns_per_access|n=1048576
+WS|  8388608|   2097152|        66.93|          0.96   # sink=1660414
+RES|cache_ws_8388608B=66.93|ns_per_access|n=2097152
+WS| 16777216|   4194304|        82.50|          0.78   # sink=817179
+RES|cache_ws_16777216B=82.50|ns_per_access|n=4194304
+WS| 33554432|   8388608|        91.40|          0.70   # sink=5478178
+RES|cache_ws_33554432B=91.40|ns_per_access|n=8388608
+WS| 67108864|  16777216|        98.68|          0.65   # sink=1412946
+RES|cache_ws_67108864B=98.68|ns_per_access|n=16777216
+WS|134217728|  33554432|       103.52|          0.62   # sink=5109366
+RES|cache_ws_134217728B=103.52|ns_per_access|n=33554432
+WS|268435456|  67108864|       106.00|          0.60   # sink=5584455
+RES|cache_ws_268435456B=106.00|ns_per_access|n=67108864
+WALL 62061 ms
+
+================ 04_pipeline ================
+RES|branch_random=5.1669|ns_per_elem
+RES|branch_sorted=0.8508|ns_per_elem
+RES|branch_speedup=6.07|x|same_code_diff_data
+# 校验和：826739200 vs 826739200（必须相等，说明只改了顺序没改语义）
+RES|dep_chain_add=0.6898|ns_per_op
+RES|dep_chain_mul=1.0333|ns_per_op
+RES|dep_chain_ratio=1.50|x
+RES|ilp_1chain=273.0|ms_total|ops=400000000
+RES|ilp_4chain=47.1|ms_total|ops=400000000
+RES|ilp_speedup=5.79|x|same_total_ops
+WALL 735 ms
+
+================ 06_infer_flow ================
+# 配置: d_model=256 heads=8 head_dim=32 seq=64 ffn=1024 vocab=4096 layers=1
+#
+# 阶段           耗时(ms)   占比
+STAGE|embedding      0.016    0.0%
+STAGE|qkv_proj       8.939   21.4%
+STAGE|attention      2.407    5.8%
+STAGE|out_proj       3.218    7.7%
+STAGE|ffn           25.882   62.0%
+STAGE|lm_head        1.276    3.1%
+# 合计 41.739 ms / 64 token = 0.65 ms/token
+RES|stage_embedding_ms=0.016|ms
+RES|stage_qkv_ms=8.939|ms
+RES|stage_attention_ms=2.407|ms
+RES|stage_outproj_ms=3.218|ms
+RES|stage_ffn_ms=25.882|ms
+RES|stage_lmhead_ms=1.276|ms
+RES|stage_total_ms=41.739|ms
+RES|per_token_ms=0.652|ms/token|seq=64
+WALL 157 ms
+
+================ 07_gemm ================
+GEMM|naive_ijk  N=1024   2715.417 ms     0.79 GFLOPS
+RES|gemm_naive_ijk=2715.417|ms|gflops=0.79
+GEMM|loop_ikj   N=1024    833.690 ms     2.58 GFLOPS
+RES|gemm_loop_ikj=833.690|ms|gflops=2.58
+GEMM|blocked_8    N=1024    965.491 ms     2.22 GFLOPS
+RES|gemm_block_8=965.491|ms|gflops=2.22
+GEMM|blocked_16   N=1024    852.136 ms     2.52 GFLOPS
+RES|gemm_block_16=852.136|ms|gflops=2.52
+GEMM|blocked_32   N=1024    804.042 ms     2.67 GFLOPS
+RES|gemm_block_32=804.042|ms|gflops=2.67
+GEMM|blocked_48   N=1024    799.041 ms     2.69 GFLOPS
+RES|gemm_block_48=799.041|ms|gflops=2.69
+GEMM|blocked_64   N=1024    802.430 ms     2.68 GFLOPS
+RES|gemm_block_64=802.430|ms|gflops=2.68
+GEMM|blocked_96   N=1024    839.832 ms     2.56 GFLOPS
+RES|gemm_block_96=839.832|ms|gflops=2.56
+GEMM|blocked_128  N=1024    772.120 ms     2.78 GFLOPS
+RES|gemm_block_128=772.120|ms|gflops=2.78
+GEMM|blocked_192  N=1024    768.799 ms     2.79 GFLOPS
+RES|gemm_block_192=768.799|ms|gflops=2.79
+GEMM|blocked_256  N=1024    720.962 ms     2.98 GFLOPS
+RES|gemm_block_256=720.962|ms|gflops=2.98
+RES|gemm_best_block=256|bs|gflops=2.98
+RES|gemm_check_diff=0.000000|abs|ref=257.9765|got=257.9765
+WALL 35980 ms
+
+================ 08_attention ================
+# seq     完整矩阵(ms)   流式(ms)   分数矩阵大小(MB)   QK乘加量(M)
+ATT|   32         0.079      0.068           0.00           0.1
+RES|attn_seq32_full=0.079|ms|stream=0.068|ms|score_mb=0.00
+ATT|   64         0.278      0.282           0.02           0.3
+RES|attn_seq64_full=0.278|ms|stream=0.282|ms|score_mb=0.02
+ATT|  128         1.214      1.103           0.06           1.0
+RES|attn_seq128_full=1.214|ms|stream=1.103|ms|score_mb=0.06
+ATT|  256         4.941      4.485           0.25           4.2
+RES|attn_seq256_full=4.941|ms|stream=4.485|ms|score_mb=0.25
+ATT|  512        20.395     19.774           1.00          16.8
+RES|attn_seq512_full=20.395|ms|stream=19.774|ms|score_mb=1.00
+ATT| 1024       123.655     74.695           4.00          67.1
+RES|attn_seq1024_full=123.655|ms|stream=74.695|ms|score_mb=4.00
+RES|attn_scaling=seq*2_time*6.1|quadratic_check
+RES|attn_note=full_vs_stream_same_math_different_memory|1
+WALL 268 ms
+
+================ 09_quant ================
+# 精度      权重体积(MB)   耗时(ms)   有效带宽(GB/s)   相对误差RMSE
+Q|FP32         16.00      5.716             2.9       0.00e+00
+Q|INT8          4.00      1.089             3.9       3.80e-01
+Q|INT4          2.00      9.531             0.2       6.97e+00
+RES|quant_f32=5.716|ms|bytes_mb=16.00|bw_gbs=2.9
+RES|quant_int8=1.089|ms|bytes_mb=4.00|bw_gbs=3.9|rmse=3.7995e-01
+RES|quant_int4=9.531|ms|bytes_mb=2.00|bw_gbs=0.2|rmse=6.9666e+00
+RES|quant_speedup_i8=5.25|x|vs_f32
+RES|quant_speedup_i4=0.60|x|vs_f32
+RES|quant_err_ratio=18.3|x|i4_over_i8
+WALL 86 ms
+
+================ 10_prefill_decode ================
+# phase      batch   耗时(ms)   每token(us)  算力(GFLOPS)  权重带宽(GB/s)
+PD|decode        1     13.106     13106.5          0.64             1.3
+RES|pd_batch1_ms=13.106|ms|per_token_us=13106.5|gflops=0.64|wbandwidth_gbs=1.3|phase=decode
+PD|mixed         8     22.096      2762.1          3.04             0.8
+RES|pd_batch8_ms=22.096|ms|per_token_us=2762.1|gflops=3.04|wbandwidth_gbs=0.8|phase=mixed
+PD|mixed        32    116.951      3654.7          2.30             0.1
+RES|pd_batch32_ms=116.951|ms|per_token_us=3654.7|gflops=2.30|wbandwidth_gbs=0.1|phase=mixed
+PD|prefill     128    337.017      2632.9          3.19             0.0
+RES|pd_batch128_ms=337.017|ms|per_token_us=2632.9|gflops=3.19|wbandwidth_gbs=0.0|phase=prefill
+PD|prefill     512   1330.048      2597.7          3.23             0.0
+RES|pd_batch512_ms=1330.048|ms|per_token_us=2597.7|gflops=3.23|wbandwidth_gbs=0.0|phase=prefill
+RES|pd_decode_per_token_us=12813.6|us
+RES|pd_prefill_per_token_us=2565.9|us
+RES|pd_ratio=5.0|x|decode_slower_than_prefill_per_token
+WALL 9913 ms
+
+================ 11_thread ================
+RES|fork_us=150.6|us|n=200
+RES|thread_create_us=22.4|us|n=2000
+RES|fork_vs_thread_small_rss=6.72|x
+RES|rss_when_fork_big=513.5|MB
+RES|fork_us_big_rss=596.4|us|n=50
+RES|thread_us_big_rss=815.4|us|n=500
+RES|fork_growth=3.96|x|when_rss_grew
+RES|fork_vs_thread_big_rss=0.7|x
+RES|default_thread_stack=8.0|MB
+RES|barrier_8threads=18.56|ms
+RES|shared_counter_after=8|expected=8
+RES|rss_before=1.5|MB
+RES|rss_after=1.5|MB
+RES|rss_delta_8threads=0.0|MB|vs_virtual_stack_64_MB
+RES|sched_yield_once=1.004|us|n=100000
+WALL 762 ms
+
+================ 12_sched ================
+RES|wakeup_rtt_idle_p50=6.04|us|min=5.30|p99=20.55|rounds=20000
+RES|cpu_online=4
+RES|wakeup_rtt_spin4_p50=7.16|us|min=5.82|p99=24.63|spinners=4
+RES|wakeup_rtt_spin8_p50=7.14|us|min=5.86|p99=23.90|spinners=8
+RES|ctx_switch_voluntary=89807
+RES|ctx_switch_involuntary=31584
+RES|nice_note=CFS按权重分配CPU|nice每降一级权重约乘1.25|差异需>30秒才明显
+RES|sched_policy=CFS(SCHED_NORMAL)
+WALL 3956 ms
+
+================ 13_affinity ================
+RES|cpu_online=4
+RES|affinity_run=threads:1|pin:0|wall_ms:28.6|invol_ctxsw:2
+RES|affinity_run=threads:1|pin:1|wall_ms:51.2|invol_ctxsw:3
+RES|single_thread_pin_effect=78.8|%|free=28.6ms|pinned=51.2ms
+RES|affinity_run=threads:4|pin:0|wall_ms:101.6|invol_ctxsw:35
+RES|affinity_run=threads:4|pin:1|wall_ms:73.4|invol_ctxsw:13
+RES|n_threads_free=101.6|ms|threads=4
+RES|n_threads_pinned=73.4|ms|threads=4
+RES|speedup_free=0.28|x|vs_single
+RES|speedup_pinned=0.70|x|vs_single
+RES|affinity_run=threads:8|pin:1|wall_ms:243.5|invol_ctxsw:69
+RES|oversub_pinned=243.5|ms|threads=8
+WALL 505 ms
+
+================ 14_biglittle ================
+# cpu_capacity: 0 0 0 0 
+RES|platform_symmetric=1|cpu_capacity_uniform
+RES|platform_ncpu=4
+TASK|balanced|task0|cpu-1|247.4 ms
+TASK|balanced|task1|cpu-1|194.2 ms
+TASK|balanced|task2|cpu-1|195.4 ms
+TASK|balanced|task3|cpu-1|244.0 ms
+TASK|balanced|task4|cpu-1|260.5 ms
+TASK|balanced|task5|cpu-1|185.9 ms
+TASK|balanced|task6|cpu-1|184.8 ms
+TASK|balanced|task7|cpu-1|256.1 ms
+RES|case_balanced=wall:272.6|ms|min_task:184.8|max_task:260.5|spread:1.41x|avg:221.0
+TASK|asymmetric|task0|cpu0|190.1 ms
+TASK|asymmetric|task1|cpu0|183.8 ms
+TASK|asymmetric|task2|cpu0|214.1 ms
+TASK|asymmetric|task3|cpu0|157.0 ms
+TASK|asymmetric|task4|cpu1|194.1 ms
+TASK|asymmetric|task5|cpu2|151.5 ms
+TASK|asymmetric|task6|cpu3|40.5 ms
+TASK|asymmetric|task7|cpu1|217.5 ms
+RES|case_asymmetric=wall:299.5|ms|min_task:40.5|max_task:217.5|spread:5.37x|avg:168.6
+RES|note=case_asymmetric_emulates_bigLITTLE_capacity_gap_not_real_EAS|1
+WALL 598 ms
+
+================ 15_openmp ================
+RES|omp_procs=4
+OMP|threads=1     63.46 ms  speedup=1.00x  eff=100%
+RES|omp_threads1=63.46|ms|speedup=1.00|eff_pct=100
+OMP|threads=2     59.14 ms  speedup=1.07x  eff=54%
+RES|omp_threads2=59.14|ms|speedup=1.07|eff_pct=54
+OMP|threads=3     68.28 ms  speedup=0.93x  eff=31%
+RES|omp_threads3=68.28|ms|speedup=0.93|eff_pct=31
+OMP|threads=4     52.88 ms  speedup=1.20x  eff=30%
+RES|omp_threads4=52.88|ms|speedup=1.20|eff_pct=30
+FS|adjacent       7.06 ms
+FS|padded         0.94 ms
+RES|false_sharing_adjacent=7.06|ms
+RES|false_sharing_padded=0.94|ms
+RES|false_sharing_ratio=7.47|x|padded_faster
+RES|fs_check=adj:60000000|pad:60000000|should_equal
+WALL 1156 ms
+
+================ 16_mmap_load ================
+RES|weights_file_size=512|MB
+RES|mmap_time=0.008|ms
+RES|rss_before_mmap=1.5|MB
+RES|rss_after_mmap=1.7|MB|虚拟映射512MB
+RES|cold_read=28.7|ms|effective_bw=18.68GB/s
+RES|page_faults_minor=8193
+RES|page_faults_major=0
+RES|warm_read=1.6|ms|effective_bw=329.43GB/s
+RES|cold_vs_warm=17.6|x
+RES|random_access=0.2|us_per_page
+RES|sequential_access=0.01|us_per_page
+RES|rand_vs_seq=13|x_slower
+RES|madvise_willneed=0.6|ms|cost
+RES|read_after_madvise=25.2|ms|vs_cold_28.7
+# sink=1479648
+WALL 416 ms
+
+================ 02_c2arm64 ================
+===== 0. 工具链 =====
+CROSS   = /opt/cross/gcc_arm64le/bin/aarch64-linux-gnueabi-gcc
+OBJDUMP = /opt/cross/gcc_arm64le/bin/aarch64-linux-gnueabi-objdump
+QEMU    = qemu-aarch64-static
+
+===== 1. x86-64 本机编译并执行 =====
+RES|dot=-661.249984
+RES|add_if_true=1.250000
+RES|add_if_false=3.750000
+
+===== 2. aarch64 交叉编译 =====
+dot.aarch64: ELF 64-bit LSB executable, ARM aarch64, version 1 (SYSV), statically linked, not stripped
+
+===== 3. aarch64 执行（QEMU 用户态）=====
+RES|dot=-661.249984
+RES|add_if_true=1.250000
+RES|add_if_false=3.750000
+qemu_rc=0
+
+===== 4. 两侧数值比对 =====
+PASS: x86-64 与 aarch64 输出完全一致（同一份 C，两种指令集）
+
+===== 5. x86-64 的 dot 反汇编 =====
+00000000004012a0 <dot>:
+  4012a0:	test   %edx,%edx
+  4012a2:	jle    4012d8 <dot+0x38>
+  4012a4:	movslq %edx,%rdx
+  4012a7:	xor    %eax,%eax
+  4012a9:	pxor   %xmm1,%xmm1
+  4012ad:	shl    $0x2,%rdx
+  4012b1:	nopl   0x0(%rax)
+  4012b8:	movss  (%rdi,%rax,1),%xmm0
+  4012bd:	mulss  (%rsi,%rax,1),%xmm0
+  4012c2:	add    $0x4,%rax
+  4012c6:	addss  %xmm0,%xmm1
+  4012ca:	cmp    %rax,%rdx
+  4012cd:	jne    4012b8 <dot+0x18>
+  4012cf:	movaps %xmm1,%xmm0
+  4012d2:	ret
+  4012d3:	nopl   0x0(%rax,%rax,1)
+  4012d8:	pxor   %xmm1,%xmm1
+  4012dc:	movaps %xmm1,%xmm0
+  4012df:	ret
+
+
+===== 6. aarch64 的 dot 反汇编 =====
+0000000000400220 <dot>:
+  400220:	movi	v0.2s, #0x0
+  400224:	cmp	w2, #0x0
+  400228:	b.le	400250 <dot+0x30>
+  40022c:	sbfiz	x3, x2, #2, #32
+  400230:	mov	x2, #0x0                   	// #0
+  400234:	nop
+  400238:	ldr	s2, [x0, x2]
+  40023c:	ldr	s1, [x1, x2]
+  400240:	add	x2, x2, #0x4
+  400244:	fmadd	s0, s2, s1, s0
+  400248:	cmp	x3, x2
+  40024c:	b.ne	400238 <dot+0x18>  // b.any
+  400250:	ret
+
+
+===== 7. add_if：条件分支怎么编 =====
+--- x86-64 ---
+00000000004012e0 <add_if>:
+  4012e0:	test   %edi,%edi
+  4012e2:	jne    4012f0 <add_if+0x10>
+  4012e4:	subss  %xmm1,%xmm0
+  4012e8:	ret
+  4012e9:	nopl   0x0(%rax)
+  4012f0:	addss  %xmm1,%xmm0
+  4012f4:	ret
+  4012f5:	data16 cs nopw 0x0(%rax,%rax,1)
+
+--- aarch64 ---
+0000000000400254 <add_if>:
+  400254:	cbnz	w0, 400260 <add_if+0xc>
+  400258:	fsub	s0, s0, s1
+  40025c:	ret
+  400260:	fadd	s0, s0, s1
+  400264:	ret
+  400268:	nop
+  40026c:	nop
+
+
+================ 汇总所有 RES 行 ================
+RES|add_if_false=3.750000
+RES|add_if_false=3.750000
+RES|add_if_true=1.250000
+RES|add_if_true=1.250000
+RES|affinity_run=threads:1|pin:0|wall_ms:28.6|invol_ctxsw:2
+RES|affinity_run=threads:1|pin:1|wall_ms:51.2|invol_ctxsw:3
+RES|affinity_run=threads:4|pin:0|wall_ms:101.6|invol_ctxsw:35
+RES|affinity_run=threads:4|pin:1|wall_ms:73.4|invol_ctxsw:13
+RES|affinity_run=threads:8|pin:1|wall_ms:243.5|invol_ctxsw:69
+RES|attn_note=full_vs_stream_same_math_different_memory|1
+RES|attn_scaling=seq*2_time*6.1|quadratic_check
+RES|attn_seq1024_full=123.655|ms|stream=74.695|ms|score_mb=4.00
+RES|attn_seq128_full=1.214|ms|stream=1.103|ms|score_mb=0.06
+RES|attn_seq256_full=4.941|ms|stream=4.485|ms|score_mb=0.25
+RES|attn_seq32_full=0.079|ms|stream=0.068|ms|score_mb=0.00
+RES|attn_seq512_full=20.395|ms|stream=19.774|ms|score_mb=1.00
+RES|attn_seq64_full=0.278|ms|stream=0.282|ms|score_mb=0.02
+RES|barrier_8threads=18.56|ms
+RES|branch_random=5.1669|ns_per_elem
+RES|branch_sorted=0.8508|ns_per_elem
+RES|branch_speedup=6.07|x|same_code_diff_data
+RES|cache_L1_Data=32K|size|line=64|ways=8
+RES|cache_L1_Instruction=32K|size|line=64|ways=8
+RES|cache_L2_Unified=256K|size|line=64|ways=4
+RES|cache_L3_Unified=6144K|size|line=64|ways=12
+RES|cache_ws_1048576B=15.36|ns_per_access|n=262144
+RES|cache_ws_131072B=6.84|ns_per_access|n=32768
+RES|cache_ws_134217728B=103.52|ns_per_access|n=33554432
+RES|cache_ws_16384B=1.94|ns_per_access|n=4096
+RES|cache_ws_16777216B=82.50|ns_per_access|n=4194304
+RES|cache_ws_2097152B=19.78|ns_per_access|n=524288
+RES|cache_ws_262144B=5.85|ns_per_access|n=65536
+RES|cache_ws_268435456B=106.00|ns_per_access|n=67108864
+RES|cache_ws_32768B=1.96|ns_per_access|n=8192
+RES|cache_ws_33554432B=91.40|ns_per_access|n=8388608
+RES|cache_ws_4194304B=27.31|ns_per_access|n=1048576
+RES|cache_ws_524288B=11.19|ns_per_access|n=131072
+RES|cache_ws_65536B=3.12|ns_per_access|n=16384
+RES|cache_ws_67108864B=98.68|ns_per_access|n=16777216
+RES|cache_ws_8192B=1.97|ns_per_access|n=2048
+RES|cache_ws_8388608B=66.93|ns_per_access|n=2097152
+RES|case_asymmetric=wall:299.5|ms|min_task:40.5|max_task:217.5|spread:5.37x|avg:168.6
+RES|case_balanced=wall:272.6|ms|min_task:184.8|max_task:260.5|spread:1.41x|avg:221.0
+RES|cold_read=28.7|ms|effective_bw=18.68GB/s
+RES|cold_vs_warm=17.6|x
+RES|cpu0=core_id:0|package:0
+RES|cpu1=core_id:1|package:0
+RES|cpu2=core_id:2|package:0
+RES|cpu3=core_id:3|package:0
+RES|cpu_capacity_available=0
+RES|cpu_capacity_uniform=-1|first=-1
+RES|cpu_count=4
+RES|cpu_model=Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+RES|cpu_online=4
+RES|cpu_online=4
+RES|cpu_online_list=0-3
+RES|ctx_switch_involuntary=31584
+RES|ctx_switch_voluntary=89807
+RES|default_thread_stack=8.0|MB
+RES|dep_chain_add=0.6898|ns_per_op
+RES|dep_chain_mul=1.0333|ns_per_op
+RES|dep_chain_ratio=1.50|x
+RES|dot=-661.249984
+RES|dot=-661.249984
+RES|false_sharing_adjacent=7.06|ms
+RES|false_sharing_padded=0.94|ms
+RES|false_sharing_ratio=7.47|x|padded_faster
+RES|fork_growth=3.96|x|when_rss_grew
+RES|fork_us=150.6|us|n=200
+RES|fork_us_big_rss=596.4|us|n=50
+RES|fork_vs_thread_big_rss=0.7|x
+RES|fork_vs_thread_small_rss=6.72|x
+RES|fs_check=adj:60000000|pad:60000000|should_equal
+RES|gemm_best_block=256|bs|gflops=2.98
+RES|gemm_block_128=772.120|ms|gflops=2.78
+RES|gemm_block_16=852.136|ms|gflops=2.52
+RES|gemm_block_192=768.799|ms|gflops=2.79
+RES|gemm_block_256=720.962|ms|gflops=2.98
+RES|gemm_block_32=804.042|ms|gflops=2.67
+RES|gemm_block_48=799.041|ms|gflops=2.69
+RES|gemm_block_64=802.430|ms|gflops=2.68
+RES|gemm_block_8=965.491|ms|gflops=2.22
+RES|gemm_block_96=839.832|ms|gflops=2.56
+RES|gemm_check_diff=0.000000|abs|ref=257.9765|got=257.9765
+RES|gemm_loop_ikj=833.690|ms|gflops=2.58
+RES|gemm_naive_ijk=2715.417|ms|gflops=0.79
+RES|ilp_1chain=273.0|ms_total|ops=400000000
+RES|ilp_4chain=47.1|ms_total|ops=400000000
+RES|ilp_speedup=5.79|x|same_total_ops
+RES|madvise_willneed=0.6|ms|cost
+RES|memcpy_256KB=14.03|GB/s|iters=11447
+RES|memcpy_256MB=12.34|GB/s|iters=14
+RES|memcpy_2MB=18.96|GB/s|iters=1433
+RES|memcpy_32KB=36.35|GB/s|iters=91555
+RES|memcpy_32MB=7.48|GB/s|iters=92
+RES|mmap_time=0.008|ms
+RES|nice_note=CFS按权重分配CPU|nice每降一级权重约乘1.25|差异需>30秒才明显
+RES|note=case_asymmetric_emulates_bigLITTLE_capacity_gap_not_real_EAS|1
+RES|n_threads_free=101.6|ms|threads=4
+RES|n_threads_pinned=73.4|ms|threads=4
+RES|omp_procs=4
+RES|omp_threads1=63.46|ms|speedup=1.00|eff_pct=100
+RES|omp_threads2=59.14|ms|speedup=1.07|eff_pct=54
+RES|omp_threads3=68.28|ms|speedup=0.93|eff_pct=31
+RES|omp_threads4=52.88|ms|speedup=1.20|eff_pct=30
+RES|oversub_pinned=243.5|ms|threads=8
+RES|page_faults_major=0
+RES|page_faults_minor=8193
+RES|pd_batch128_ms=337.017|ms|per_token_us=2632.9|gflops=3.19|wbandwidth_gbs=0.0|phase=prefill
+RES|pd_batch1_ms=13.106|ms|per_token_us=13106.5|gflops=0.64|wbandwidth_gbs=1.3|phase=decode
+RES|pd_batch32_ms=116.951|ms|per_token_us=3654.7|gflops=2.30|wbandwidth_gbs=0.1|phase=mixed
+RES|pd_batch512_ms=1330.048|ms|per_token_us=2597.7|gflops=3.23|wbandwidth_gbs=0.0|phase=prefill
+RES|pd_batch8_ms=22.096|ms|per_token_us=2762.1|gflops=3.04|wbandwidth_gbs=0.8|phase=mixed
+RES|pd_decode_per_token_us=12813.6|us
+RES|pd_prefill_per_token_us=2565.9|us
+RES|pd_ratio=5.0|x|decode_slower_than_prefill_per_token
+RES|per_token_ms=0.652|ms/token|seq=64
+RES|platform_ncpu=4
+RES|platform_symmetric=1|cpu_capacity_uniform
+RES|quant_err_ratio=18.3|x|i4_over_i8
+RES|quant_f32=5.716|ms|bytes_mb=16.00|bw_gbs=2.9
+RES|quant_int4=9.531|ms|bytes_mb=2.00|bw_gbs=0.2|rmse=6.9666e+00
+RES|quant_int8=1.089|ms|bytes_mb=4.00|bw_gbs=3.9|rmse=3.7995e-01
+RES|quant_speedup_i4=0.60|x|vs_f32
+RES|quant_speedup_i8=5.25|x|vs_f32
+RES|random_access=0.2|us_per_page
+RES|rand_vs_seq=13|x_slower
+RES|read_after_madvise=25.2|ms|vs_cold_28.7
+RES|rss_after=1.5|MB
+RES|rss_after_mmap=1.7|MB|虚拟映射512MB
+RES|rss_before=1.5|MB
+RES|rss_before_mmap=1.5|MB
+RES|rss_delta_8threads=0.0|MB|vs_virtual_stack_64_MB
+RES|rss_when_fork_big=513.5|MB
+RES|sched_policy=CFS(SCHED_NORMAL)
+RES|sched_yield_once=1.004|us|n=100000
+RES|sequential_access=0.01|us_per_page
+RES|shared_counter_after=8|expected=8
+RES|single_thread_pin_effect=78.8|%|free=28.6ms|pinned=51.2ms
+RES|speedup_free=0.28|x|vs_single
+RES|speedup_pinned=0.70|x|vs_single
+RES|stage_attention_ms=2.407|ms
+RES|stage_embedding_ms=0.016|ms
+RES|stage_ffn_ms=25.882|ms
+RES|stage_lmhead_ms=1.276|ms
+RES|stage_outproj_ms=3.218|ms
+RES|stage_qkv_ms=8.939|ms
+RES|stage_total_ms=41.739|ms
+RES|thread_create_us=22.4|us|n=2000
+RES|thread_us_big_rss=815.4|us|n=500
+RES|wakeup_rtt_idle_p50=6.04|us|min=5.30|p99=20.55|rounds=20000
+RES|wakeup_rtt_spin4_p50=7.16|us|min=5.82|p99=24.63|spinners=4
+RES|wakeup_rtt_spin8_p50=7.14|us|min=5.86|p99=23.90|spinners=8
+RES|warm_read=1.6|ms|effective_bw=329.43GB/s
+RES|weights_file_size=512|MB
+
+完成。结果目录: /root/verify/results

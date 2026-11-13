@@ -1,0 +1,25 @@
+GEMM|naive_ijk  N=1024   2715.417 ms     0.79 GFLOPS
+RES|gemm_naive_ijk=2715.417|ms|gflops=0.79
+GEMM|loop_ikj   N=1024    833.690 ms     2.58 GFLOPS
+RES|gemm_loop_ikj=833.690|ms|gflops=2.58
+GEMM|blocked_8    N=1024    965.491 ms     2.22 GFLOPS
+RES|gemm_block_8=965.491|ms|gflops=2.22
+GEMM|blocked_16   N=1024    852.136 ms     2.52 GFLOPS
+RES|gemm_block_16=852.136|ms|gflops=2.52
+GEMM|blocked_32   N=1024    804.042 ms     2.67 GFLOPS
+RES|gemm_block_32=804.042|ms|gflops=2.67
+GEMM|blocked_48   N=1024    799.041 ms     2.69 GFLOPS
+RES|gemm_block_48=799.041|ms|gflops=2.69
+GEMM|blocked_64   N=1024    802.430 ms     2.68 GFLOPS
+RES|gemm_block_64=802.430|ms|gflops=2.68
+GEMM|blocked_96   N=1024    839.832 ms     2.56 GFLOPS
+RES|gemm_block_96=839.832|ms|gflops=2.56
+GEMM|blocked_128  N=1024    772.120 ms     2.78 GFLOPS
+RES|gemm_block_128=772.120|ms|gflops=2.78
+GEMM|blocked_192  N=1024    768.799 ms     2.79 GFLOPS
+RES|gemm_block_192=768.799|ms|gflops=2.79
+GEMM|blocked_256  N=1024    720.962 ms     2.98 GFLOPS
+RES|gemm_block_256=720.962|ms|gflops=2.98
+RES|gemm_best_block=256|bs|gflops=2.98
+RES|gemm_check_diff=0.000000|abs|ref=257.9765|got=257.9765
+WALL 35980 ms

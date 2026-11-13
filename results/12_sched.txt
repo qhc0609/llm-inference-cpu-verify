@@ -1,0 +1,9 @@
+RES|wakeup_rtt_idle_p50=6.04|us|min=5.30|p99=20.55|rounds=20000
+RES|cpu_online=4
+RES|wakeup_rtt_spin4_p50=7.16|us|min=5.82|p99=24.63|spinners=4
+RES|wakeup_rtt_spin8_p50=7.14|us|min=5.86|p99=23.90|spinners=8
+RES|ctx_switch_voluntary=89807
+RES|ctx_switch_involuntary=31584
+RES|nice_note=CFS按权重分配CPU|nice每降一级权重约乘1.25|差异需>30秒才明显
+RES|sched_policy=CFS(SCHED_NORMAL)
+WALL 3956 ms

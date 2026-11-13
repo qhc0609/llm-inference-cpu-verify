@@ -1,0 +1,13 @@
+RES|cpu_online=4
+RES|affinity_run=threads:1|pin:0|wall_ms:28.6|invol_ctxsw:2
+RES|affinity_run=threads:1|pin:1|wall_ms:51.2|invol_ctxsw:3
+RES|single_thread_pin_effect=78.8|%|free=28.6ms|pinned=51.2ms
+RES|affinity_run=threads:4|pin:0|wall_ms:101.6|invol_ctxsw:35
+RES|affinity_run=threads:4|pin:1|wall_ms:73.4|invol_ctxsw:13
+RES|n_threads_free=101.6|ms|threads=4
+RES|n_threads_pinned=73.4|ms|threads=4
+RES|speedup_free=0.28|x|vs_single
+RES|speedup_pinned=0.70|x|vs_single
+RES|affinity_run=threads:8|pin:1|wall_ms:243.5|invol_ctxsw:69
+RES|oversub_pinned=243.5|ms|threads=8
+WALL 505 ms
