@@ -49,6 +49,8 @@ bash "$ROOT/02_c2arm64/build.sh" 2>&1 | tee "$OUT/02_c2arm64.txt"
 echo
 
 echo "================ 汇总所有 RES 行 ================"
-grep -h "^RES|" "$OUT"/*.txt 2>/dev/null | sort | tee "$OUT/summary.txt"
+# sort -u 而不是 sort：同一个实验可能在一个 .txt 里留下多份相同输出
+# （02 的 x86/ARM 两组、以及重复执行过的实验），去重后每行只出现一次。
+grep -h "^RES|" "$OUT"/*.txt 2>/dev/null | sort -u | tee "$OUT/summary.txt"
 echo
 echo "完成。结果目录: $OUT"
