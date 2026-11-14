@@ -29,3 +29,4 @@ __pycache__/
 
 # 运行时探针：perf 原始数据可重跑，不进仓库
 20_runtime_probe/results/*.data
+21_model_knobs/results/*.data

@@ -1,0 +1,7 @@
+| model                          |       size |     params | backend    | threads |            test |                  t/s |
+| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+| qwen2 1B Q4_K - Medium         | 462.96 MiB |   630.17 M | CPU        |       4 |           tg128 |         38.82 ± 2.18 |
+
+build: unknown (0)
+[ perf record: Woken up 5 times to write data ]
+[ perf record: Captured and wrote 1.422 MB /root/verify/21_model_knobs/results/rec_tg_t4.data (37024 samples) ]
