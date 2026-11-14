@@ -8,3 +8,5 @@
 # 二进制/产物不做转换
 *.o     binary
 *.rpm   binary
+*.json text eol=lf
+*.log  text eol=lf

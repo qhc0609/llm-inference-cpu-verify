@@ -1,0 +1,5 @@
+RES|corpus|bytes|120000|lines|2530|words|15186
+语料: /root/llm/results/corpus.txt  120000 字节 / 15186 词
+# Instructions for llama.cpp
+
+> [!IMPORTANT]

@@ -1,0 +1,20 @@
+模型 qwen2.5-0.5b-instruct-q4_k_m.gguf  468 MB
+RES|threads|pp512|th=1|p=512|n=0|d=0|tps=50.60|sd=0.17
+RES|threads|tg128|th=1|p=0|n=128|d=0|tps=18.14|sd=0.04
+RES|threads|pp512|th=2|p=512|n=0|d=0|tps=99.92|sd=0.08
+RES|threads|tg128|th=2|p=0|n=128|d=0|tps=32.83|sd=0.05
+RES|threads|pp512|th=4|p=512|n=0|d=0|tps=199.79|sd=0.43
+RES|threads|tg128|th=4|p=0|n=128|d=0|tps=50.32|sd=0.15
+RES|pp_scan|pp16|th=4|p=16|n=0|d=0|tps=175.08|sd=13.33
+RES|pp_scan|pp64|th=4|p=64|n=0|d=0|tps=185.98|sd=9.58
+RES|pp_scan|pp256|th=4|p=256|n=0|d=0|tps=200.79|sd=2.13
+RES|pp_scan|pp512|th=4|p=512|n=0|d=0|tps=166.26|sd=5.57
+RES|pp_scan|pp1024|th=4|p=1024|n=0|d=0|tps=190.45|sd=2.15
+RES|tg_scan|tg16|th=4|p=0|n=16|d=0|tps=46.49|sd=9.49
+RES|tg_scan|tg64|th=4|p=0|n=64|d=0|tps=51.84|sd=1.32
+RES|tg_scan|tg256|th=4|p=0|n=256|d=0|tps=49.72|sd=1.07
+RES|repack1|pp512|th=4|p=512|n=0|d=0|tps=197.83|sd=1.99
+RES|repack1|tg128|th=4|p=0|n=128|d=0|tps=50.24|sd=0.34
+RES|repack0|pp512|th=4|p=512|n=0|d=0|tps=195.63|sd=1.79
+RES|repack0|tg128|th=4|p=0|n=128|d=0|tps=50.33|sd=0.84
+--- 明细 /root/llm/results/bench_*.json ---

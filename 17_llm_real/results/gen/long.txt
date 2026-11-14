@@ -1,0 +1,37 @@
+
+
+Loading model... |-\|/-\| 
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b0-unknown
+model      : /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+ftype      : Q4_K - Medium
+modalities : text
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read <file>        add a text file
+  /glob <pattern>     add text files using globbing pattern
+
+
+
+> 下面这段是 llama.cpp 的说明。读完后只用一句话回答：它在 CPU 上靠什么把矩阵乘法加速？
+llama.cpp 的 ggml 后端会在启动时探测 CPU 支持的指令集。在 x86 上，如果检测到 AVX2 与 FMA，
+量化权重会在内存里被重新排布成适合向量化乘加的分块布局，每次用 8 个 float 一起做乘加；
+如果检测到 AVX512，则一次处理 16 个 float。在 ARM 上则使用 NEON 的 4 路 float 乘加。
+所有后端都遵循同一个 ... (truncated)
+它在 CPU 上靠重新排布成适合向量化乘加的分块布局。
+
+[ Prompt: 154.4 t/s | Generation: 37.7 t/s ]
+
+
+Exiting...

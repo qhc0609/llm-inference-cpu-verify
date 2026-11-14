@@ -20,3 +20,6 @@
 .ssh/
 deploy.log
 __pycache__/
+
+# 真模型实验：GGUF 权重太大，不进仓库
+*.gguf

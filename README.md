@@ -93,3 +93,29 @@ OE_PASS='<root 密码>' python deploy.py
 其中 `results/summary.txt` 是所有 `RES|` 行的汇总，`results/all.log` 是完整运行日志。
 
 `RES|` 行的格式是 `RES|键=值|单位|补充`，方便直接 grep 成表。
+
+## 追加：`17_llm_real/` —— 真的跑一次大模型
+
+上面 15 个实验都是手写 C 程序模拟大模型的某一段计算。`17_llm_real/` 是它的反面：
+用 llama.cpp 真的加载 Qwen2.5-0.5B-Instruct 的 GGUF 权重，真的算 token，真的让模型说话。
+
+```bash
+cd 17_llm_real
+bash 00_setup.sh          # 编译 llama.cpp + 下载 q2_k / q4_k_m / q8_0 三个 GGUF
+bash run_all.sh           # 全跑，结果写 /root/llm/results
+```
+
+六组结果（细节与边界见 [`17_llm_real/README.md`](17_llm_real/README.md)）：
+
+| 测什么 | 关键数字 |
+|---|---|
+| 线程 1→4，预填充 | 50.60 → 199.79 t/s（**3.95×**，接近线性） |
+| 线程 1→4，解码 | 18.14 → 50.32 t/s（**2.77×**，带宽受限） |
+| 量化三档（q2/q4/q8） | 解码 61.81 / 52.21 / 41.47 t/s；困惑度 16.10 / 15.37 / 14.97 |
+| mmap vs 读进堆 | 总内存都是 758 MB，但文件页 664 MB ↔ 匿名页 733 MB |
+| KV cache | 每 token 12 KiB；默认 32768 上下文 = **384 MiB** |
+| KV 深度 0→4096 | 解码 52.04 → 25.61 t/s（**−50.8%**） |
+
+还有一条必须先看的：同一配置独立跑 5 次，极差 **11%~15%**。
+本目录所有数字只在数量级上可信，不能用来比较 5% 的提升。
+

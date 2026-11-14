@@ -1,0 +1,20 @@
+模型 qwen2.5-0.5b-instruct-q8_0.gguf  644 MB  ctx=2048
+RES|load|lm_mmap_rp_1_cold_1|rssfile_mb=663.7|rssanon_mb=90.4|rss_mb=754.1|wall_s=1.512|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_1_hot_1|rssfile_mb=663.8|rssanon_mb=94.5|rss_mb=758.2|wall_s=1.023|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_0_cold_1|rssfile_mb=663.6|rssanon_mb=94.6|rss_mb=758.2|wall_s=1.515|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_0_hot_1|rssfile_mb=663.9|rssanon_mb=94.5|rss_mb=758.4|wall_s=1.109|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_none_rp_1_cold_1|rssfile_mb=25.0|rssanon_mb=733.3|rss_mb=758.3|wall_s=1.637|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_1_hot_1|rssfile_mb=25.2|rssanon_mb=733.2|rss_mb=758.4|wall_s=1.002|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_0_cold_1|rssfile_mb=25.0|rssanon_mb=733.3|rss_mb=758.2|wall_s=1.680|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_0_hot_1|rssfile_mb=24.9|rssanon_mb=733.3|rss_mb=758.2|wall_s=1.000|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_mmap_rp_1_cold_2|rssfile_mb=667.7|rssanon_mb=90.4|rss_mb=754.2|wall_s=1.540|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_1_hot_2|rssfile_mb=663.6|rssanon_mb=94.6|rss_mb=758.1|wall_s=1.066|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_0_cold_2|rssfile_mb=663.7|rssanon_mb=90.6|rss_mb=754.2|wall_s=1.477|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_mmap_rp_0_hot_2|rssfile_mb=663.8|rssanon_mb=90.5|rss_mb=754.2|wall_s=1.086|file_mb=644|mapped_mib=639|heap_mib=0|kvbuf_mib=24
+RES|load|lm_none_rp_1_cold_2|rssfile_mb=25.1|rssanon_mb=733.2|rss_mb=758.3|wall_s=1.677|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_1_hot_2|rssfile_mb=25.1|rssanon_mb=733.3|rss_mb=758.4|wall_s=1.021|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_0_cold_2|rssfile_mb=25.0|rssanon_mb=733.2|rss_mb=758.3|wall_s=1.726|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+RES|load|lm_none_rp_0_hot_2|rssfile_mb=25.1|rssanon_mb=733.2|rss_mb=758.3|wall_s=1.001|file_mb=644|mapped_mib=0|heap_mib=639|kvbuf_mib=24
+--- 原始日志在 /root/llm/results/load_lm_*.err ---
+CPU model buffer size =     0.00 MiB
+CPU_Mapped model buffer size =   638.74 MiB

@@ -1,0 +1,61 @@
+
+
+Loading model... |-\|/-\|/ 
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b0-unknown
+model      : /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+ftype      : Q4_K - Medium
+modalities : text
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read <file>        add a text file
+  /glob <pattern>     add text files using globbing pattern
+
+
+
+> 写一个 C 函数，计算两个 float 数组的点积。只给代码和一行注释。
+```c
+#include <stdio.h>
+#include <stdlib.h>
+
+// Function to calculate the dot product of two float arrays
+float calculateDotProduct(float *array1, int size1, float *array2, int size2) {
+    float dotProduct = 0.0;
+    for (int i = 0; i < size1; i++) {
+        dotProduct += array1[i] * array2[i];
+    }
+    return dotProduct;
+}
+
+int main() {
+    float array1[10];
+    int size1 = 10;
+    float array2[10];
+    int size2 = 10;
+
+    // Initialize the arrays with some values
+    for (int i = 0; i < size1; i++) {
+        array1[i] = i + 1.0;
+    }
+    for (int i = 0; i < size2; i++) {
+        array2[i] = i + 1.0;
+    }
+
+    // Calculate the dot product
+    float dotProduct = calculate
+
+[ Prompt: 166.6 t/s | Generation: 38.2 t/s ]
+
+
+Exiting...

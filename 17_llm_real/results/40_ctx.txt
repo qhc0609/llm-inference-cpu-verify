@@ -1,0 +1,17 @@
+模型 qwen2.5-0.5b-instruct-q4_k_m.gguf
+===== A. KV Cache 大小 vs 上下文上限 =====
+RES|kv_cache|ctx=512|kv_mib=6.00|cells=512|compute_buf_mib=37.77
+RES|kv_cache|ctx=1024|kv_mib=12.00|cells=1024|compute_buf_mib=38.27
+RES|kv_cache|ctx=2048|kv_mib=24.00|cells=2048|compute_buf_mib=39.27
+RES|kv_cache|ctx=4096|kv_mib=48.00|cells=4096|compute_buf_mib=41.27
+RES|kv_cache|ctx=32768|kv_mib=384.00|cells=32768|compute_buf_mib=69.27
+===== B. KV 深度 vs 解码速度 =====
+RES|depth|tg128|th=4|p=0|n=128|d=0|tps=52.04|sd=0.95
+RES|depth|tg128_d512|th=4|p=0|n=128|d=512|tps=42.95|sd=1.14
+RES|depth|tg128_d1024|th=4|p=0|n=128|d=1024|tps=41.23|sd=1.09
+RES|depth|tg128_d2048|th=4|p=0|n=128|d=2048|tps=35.12|sd=1.72
+RES|depth|tg128_d4096|th=4|p=0|n=128|d=4096|tps=25.61|sd=3.13
+===== C. 同一问题，短上下文 vs 长上下文 =====
+RES|gen_ctx|ctx=256|pp_tps=158.3|tg_tps=47.6
+RES|gen_ctx|ctx=4096|pp_tps=161.2|tg_tps=46.3
+--- 明细 /root/llm/results/ctx_* ---

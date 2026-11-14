@@ -1,0 +1,33 @@
+
+
+Loading model... |-\|/-\|/ 
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b0-unknown
+model      : /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+ftype      : Q4_K - Medium
+modalities : text
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read <file>        add a text file
+  /glob <pattern>     add text files using globbing pattern
+
+
+
+> 用两句话解释：CPU 的 L1 缓存和内存，谁快、快多少、为什么。
+L1 缓存和内存的性能差异主要体现在它们的缓存速度和访问速度上。L1 缓存是内存中的临时缓存，其速度通常比内存快。L1 缓存的访问速度比内存快，但其缓存速度有限，无法完全替代内存。内存的访问速度比 L1 缓存快，但其缓存速度有限，无法完全替代 L1 缓存。因此，L1 缓存和内存的性能差异主要体现在它们的缓存速度和访问速度上。
+
+[ Prompt: 147.0 t/s | Generation: 47.2 t/s ]
+
+
+Exiting...

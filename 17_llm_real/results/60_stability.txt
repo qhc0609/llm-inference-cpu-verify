@@ -1,0 +1,12 @@
+RES|stab_run1|pp512|th=4|p=512|n=0|d=0|tps=196.70|sd=6.76
+RES|stab_run1|tg128|th=4|p=0|n=128|d=0|tps=49.65|sd=0.62
+RES|stab_run2|pp512|th=4|p=512|n=0|d=0|tps=198.59|sd=1.22
+RES|stab_run2|tg128|th=4|p=0|n=128|d=0|tps=51.08|sd=1.12
+RES|stab_run3|pp512|th=4|p=512|n=0|d=0|tps=194.56|sd=1.39
+RES|stab_run3|tg128|th=4|p=0|n=128|d=0|tps=45.11|sd=5.51
+RES|stab_run4|pp512|th=4|p=512|n=0|d=0|tps=178.67|sd=16.36
+RES|stab_run4|tg128|th=4|p=0|n=128|d=0|tps=51.77|sd=0.89
+RES|stab_run5|pp512|th=4|p=512|n=0|d=0|tps=191.66|sd=1.58
+RES|stab_run5|tg128|th=4|p=0|n=128|d=0|tps=51.90|sd=0.61
+RES|stab|pp512|n=5|min=178.67|max=198.59|spread_pct=11.2
+RES|stab|tg128|n=5|min=45.11|max=51.90|spread_pct=15.1

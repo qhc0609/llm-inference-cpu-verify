@@ -1,0 +1,11 @@
+语料 120000 字节
+===== q2_k  395 MB =====
+RES|quant|q2_k|size_mb=395.9|pp512=297.15|tg128=61.81|ppl=16.1032|ppl_err=0.68411
+===== q4_k_m  468 MB =====
+RES|quant|q4_k_m|size_mb=468.6|pp512=193.51|tg128=52.21|ppl=15.3677|ppl_err=0.65309
+===== q8_0  644 MB =====
+RES|quant|q8_0|size_mb=644.4|pp512=220.96|tg128=41.47|ppl=14.9673|ppl_err=0.63466
+--- 明细 /root/llm/results/quant_* ---
+0.48.136.923 I Final estimate: PPL = 16.1032 +/- 0.68411
+1.05.098.373 I Final estimate: PPL = 15.3677 +/- 0.65309
+0.57.886.578 I Final estimate: PPL = 14.9673 +/- 0.63466

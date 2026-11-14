@@ -1,0 +1,13 @@
+RES|gen|fact|pp_tps=147.0|tg_tps=47.2|bytes=1505
+--- fact 完成 ---
+RES|gen|reason|pp_tps=176.3|tg_tps=48.0|bytes=1850
+--- reason 完成 ---
+RES|gen|code|pp_tps=166.6|tg_tps=38.2|bytes=1746
+--- code 完成 ---
+RES|gen|long|pp_tps=154.4|tg_tps=37.7|bytes=1558
+--- long 完成 ---
+===== 生成结果目录 =====
+                 1746 字节
+                 1505 字节
+                 1558 字节
+                 1850 字节

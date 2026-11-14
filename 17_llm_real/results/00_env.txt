@@ -1,0 +1,9 @@
+################ 00_env ################
+RES|env|cpu|Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+RES|env|vcpu|4
+RES|env|isa|avx2+f16c+fma+
+RES|env|mem_mb|7430
+RES|env|os|openEuler 24.03 (LTS-SP4)
+RES|env|kernel|6.12.0
+RES|env|gcc|12.3.1
+RES|env|llama|1.0.0-dev (build 0, commit unknown)

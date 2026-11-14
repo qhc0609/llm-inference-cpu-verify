@@ -1,0 +1,41 @@
+
+
+Loading model... |-\|/-\|/ 
+
+▄▄ ▄▄
+██ ██
+██ ██  ▀▀█▄ ███▄███▄  ▀▀█▄    ▄████ ████▄ ████▄
+██ ██ ▄█▀██ ██ ██ ██ ▄█▀██    ██    ██ ██ ██ ██
+██ ██ ▀█▄██ ██ ██ ██ ▀█▄██ ██ ▀████ ████▀ ████▀
+                                    ██    ██
+                                    ▀▀    ▀▀
+
+build      : b0-unknown
+model      : /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf
+ftype      : Q4_K - Medium
+modalities : text
+
+available commands:
+  /exit or Ctrl+C     stop or exit
+  /regen              regenerate the last response
+  /clear              clear the chat history
+  /read <file>        add a text file
+  /glob <pattern>     add text files using globbing pattern
+
+
+
+> 一个模型有 5 亿参数，用 4 位量化。请估算它的权重文件大约多大，并写出你的计算过程。
+要估算一个模型的权重文件大小，我们需要考虑以下几个因素：
+
+1. **模型的大小**：模型的大小通常以GB（吉字节）为单位，1GB=1024GB。5亿参数的模型，如果模型的大小是1GB，那么模型的大小为500GB。
+
+2. **模型的复杂度**：模型的复杂度通常用模型的深度和宽度来衡量。深度和宽度的乘积通常表示模型的复杂度。5亿参数的模型，如果模型的深度和宽度都是1000，那么模型的复杂度为5000000000000000000（1000的1000次方）。
+
+3. **模型的训练时间**：模型的训练时间通常以天为单位，1天=24小时。5亿参数的模型，如果模型的训练时间是1天，那么模型的训练时间是1000天。
+
+4. **模型的
+
+[ Prompt: 176.3 t/s | Generation: 48.0 t/s ]
+
+
+Exiting...
