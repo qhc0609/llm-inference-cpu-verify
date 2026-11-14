@@ -1,0 +1,32 @@
+RES|affinity|cfg=pin_cpu0|cpu=0|iters=40000000|min_ms=56.4|med_ms=57.0|max_ms=58.9|spread_pct=4.5
+RES|affinity|cfg=pin_cpu1|cpu=1|iters=40000000|min_ms=57.1|med_ms=57.5|max_ms=58.0|spread_pct=1.6
+RES|affinity|cfg=pin_cpu2|cpu=2|iters=40000000|min_ms=56.3|med_ms=59.0|max_ms=61.2|spread_pct=8.8
+RES|affinity|cfg=pin_cpu3|cpu=3|iters=40000000|min_ms=56.7|med_ms=57.0|max_ms=58.9|spread_pct=3.9
+RES|affinity|cfg=unpinned|cpu=-1|iters=40000000|min_ms=55.2|med_ms=56.5|max_ms=60.3|spread_pct=9.3
+RES|bw|size_kb=131072|iters=16|bw_min=26.25|bw_med=24.78|GBps|vs_prev_min_pct=6.0
+RES|bw|size_kb=2048|iters=1024|bw_min=41.72|bw_med=41.33|GBps|vs_prev_min_pct=-22.2
+RES|bw|size_kb=256|iters=8192|bw_min=53.61|bw_med=52.39|GBps|vs_prev_min_pct=-28.7
+RES|bw|size_kb=262144|iters=8|bw_min=26.00|bw_med=24.63|GBps|vs_prev_min_pct=-1.0
+RES|bw|size_kb=32768|iters=64|bw_min=24.75|bw_med=23.72|GBps|vs_prev_min_pct=-12.5
+RES|bw|size_kb=32|iters=65536|bw_min=75.16|bw_med=71.43|GBps|vs_prev_min_pct=0.0
+RES|bw|size_kb=8192|iters=256|bw_min=28.30|bw_med=27.77|GBps|vs_prev_min_pct=-32.2
+RES|fixed_per|threads=1|total_iters=20000000|min_ms=26.7|med_ms=27.0|tput_min=0.7
+RES|fixed_per|threads=2|total_iters=40000000|min_ms=28.4|med_ms=29.2|tput_min=1.4
+RES|fixed_per|threads=3|total_iters=60000000|min_ms=28.2|med_ms=28.9|tput_min=2.1
+RES|fixed_per|threads=4|total_iters=80000000|min_ms=27.2|med_ms=31.1|tput_min=2.9
+RES|fixed_total|threads=1|per_thread=80000000|min_ms=114.5|med_ms=116.7|mtput_min=0.7|mtput_med=0.7|speedup_min=1.00|speedup_med=1.00
+RES|fixed_total|threads=2|per_thread=40000000|min_ms=55.3|med_ms=57.2|mtput_min=1.4|mtput_med=1.4|speedup_min=2.07|speedup_med=2.04
+RES|fixed_total|threads=3|per_thread=26666666|min_ms=37.1|med_ms=37.8|mtput_min=2.2|mtput_med=2.1|speedup_min=3.08|speedup_med=3.08
+RES|fixed_total|threads=4|per_thread=20000000|min_ms=27.3|med_ms=29.8|mtput_min=2.9|mtput_med=2.7|speedup_min=4.20|speedup_med=3.92
+RES|note=若各核差异本身就有 20% 以上，说明是某个 vCPU 被宿主抢占，不是绑核这件事的错
+RES|note=B 组的墙钟时间不能拿来跨线程数比较：工作量随线程数线性增长
+RES|note=size 每翻 4 倍，若带宽仍出现回升，才是真的非单调；否则是测量噪声
+RES|pin_summary|worst_delta_pct=3.4|best_delta_pct=2.0|verdict=cores_uniform_within_noise
+RES|pin_vs_free|cpu=0|delta_min_pct=2.2
+RES|pin_vs_free|cpu=1|delta_min_pct=3.4
+RES|pin_vs_free|cpu=2|delta_min_pct=2.0
+RES|pin_vs_free|cpu=3|delta_min_pct=2.7
+RES|recheck|mode=fixed_per_thread|per_thread=20000000
+RES|recheck|mode=fixed_total_work|total_iters=80000000|reps=5|ncpu=4
+RES|recheck|what=affinity|iters=40000000|reps=5|ncpu=4
+RES|recheck|what=memcpy_bw|reps=5|target_bytes_per_size=2147483648

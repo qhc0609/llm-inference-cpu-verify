@@ -1,0 +1,9 @@
+RES|recheck|what=memcpy_bw|reps=5|target_bytes_per_size=2147483648
+RES|bw|size_kb=32|iters=65536|bw_min=75.16|bw_med=71.43|GBps|vs_prev_min_pct=0.0
+RES|bw|size_kb=256|iters=8192|bw_min=53.61|bw_med=52.39|GBps|vs_prev_min_pct=-28.7
+RES|bw|size_kb=2048|iters=1024|bw_min=41.72|bw_med=41.33|GBps|vs_prev_min_pct=-22.2
+RES|bw|size_kb=8192|iters=256|bw_min=28.30|bw_med=27.77|GBps|vs_prev_min_pct=-32.2
+RES|bw|size_kb=32768|iters=64|bw_min=24.75|bw_med=23.72|GBps|vs_prev_min_pct=-12.5
+RES|bw|size_kb=131072|iters=16|bw_min=26.25|bw_med=24.78|GBps|vs_prev_min_pct=6.0
+RES|bw|size_kb=262144|iters=8|bw_min=26.00|bw_med=24.63|GBps|vs_prev_min_pct=-1.0
+RES|note=size 每翻 4 倍，若带宽仍出现回升，才是真的非单调；否则是测量噪声

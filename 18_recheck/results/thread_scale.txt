@@ -1,0 +1,11 @@
+RES|recheck|mode=fixed_total_work|total_iters=80000000|reps=5|ncpu=4
+RES|fixed_total|threads=1|per_thread=80000000|min_ms=114.5|med_ms=116.7|mtput_min=0.7|mtput_med=0.7|speedup_min=1.00|speedup_med=1.00
+RES|fixed_total|threads=2|per_thread=40000000|min_ms=55.3|med_ms=57.2|mtput_min=1.4|mtput_med=1.4|speedup_min=2.07|speedup_med=2.04
+RES|fixed_total|threads=3|per_thread=26666666|min_ms=37.1|med_ms=37.8|mtput_min=2.2|mtput_med=2.1|speedup_min=3.08|speedup_med=3.08
+RES|fixed_total|threads=4|per_thread=20000000|min_ms=27.3|med_ms=29.8|mtput_min=2.9|mtput_med=2.7|speedup_min=4.20|speedup_med=3.92
+RES|recheck|mode=fixed_per_thread|per_thread=20000000
+RES|fixed_per|threads=1|total_iters=20000000|min_ms=26.7|med_ms=27.0|tput_min=0.7
+RES|fixed_per|threads=2|total_iters=40000000|min_ms=28.4|med_ms=29.2|tput_min=1.4
+RES|fixed_per|threads=3|total_iters=60000000|min_ms=28.2|med_ms=28.9|tput_min=2.1
+RES|fixed_per|threads=4|total_iters=80000000|min_ms=27.2|med_ms=31.1|tput_min=2.9
+RES|note=B 组的墙钟时间不能拿来跨线程数比较：工作量随线程数线性增长

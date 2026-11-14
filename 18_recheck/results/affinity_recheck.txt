@@ -1,0 +1,12 @@
+RES|recheck|what=affinity|iters=40000000|reps=5|ncpu=4
+RES|affinity|cfg=unpinned|cpu=-1|iters=40000000|min_ms=55.2|med_ms=56.5|max_ms=60.3|spread_pct=9.3
+RES|affinity|cfg=pin_cpu0|cpu=0|iters=40000000|min_ms=56.4|med_ms=57.0|max_ms=58.9|spread_pct=4.5
+RES|pin_vs_free|cpu=0|delta_min_pct=2.2
+RES|affinity|cfg=pin_cpu1|cpu=1|iters=40000000|min_ms=57.1|med_ms=57.5|max_ms=58.0|spread_pct=1.6
+RES|pin_vs_free|cpu=1|delta_min_pct=3.4
+RES|affinity|cfg=pin_cpu2|cpu=2|iters=40000000|min_ms=56.3|med_ms=59.0|max_ms=61.2|spread_pct=8.8
+RES|pin_vs_free|cpu=2|delta_min_pct=2.0
+RES|affinity|cfg=pin_cpu3|cpu=3|iters=40000000|min_ms=56.7|med_ms=57.0|max_ms=58.9|spread_pct=3.9
+RES|pin_vs_free|cpu=3|delta_min_pct=2.7
+RES|pin_summary|worst_delta_pct=3.4|best_delta_pct=2.0|verdict=cores_uniform_within_noise
+RES|note=若各核差异本身就有 20% 以上，说明是某个 vCPU 被宿主抢占，不是绑核这件事的错
