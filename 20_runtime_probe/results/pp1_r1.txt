@@ -1,0 +1,6 @@
+RES|{"tag": "pp1_r1", "cmd": "/root/llm/llama.cpp/build/bin/llama-bench -m /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf -t 1 -p 512 -n 0 -r 1 -o md", "exit": 0, "wall_ms": 20431.2, "sampled_wall_ms": 20410.1, "cpu_ms": 20100.0, "cpu_util": 0.98, "vol_cs": 0, "nonvol_cs": 183, "run_ms": 20109.0, "wait_ms": 83.0, "peak_rss_kb": 618500, "n_samples": 999}
+LOG|| model                          |       size |     params | backend    | threads |            test |                  t/s |
+LOG|| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+LOG|| qwen2 1B Q4_K - Medium         | 462.96 MiB |   630.17 M | CPU        |       1 |           pp512 |         51.16 ± 0.00 |
+LOG|
+LOG|build: unknown (0)

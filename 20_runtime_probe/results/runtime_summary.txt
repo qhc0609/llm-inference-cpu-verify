@@ -1,0 +1,15 @@
+prefill 512 / 4 线程
+    单次 CPU  13689.5 ms   每 token CPU  26.74 ms   每 token wall   9.26 ms   占用 2.89 核   108.0 t/s
+prefill 512 / 1 线程
+    单次 CPU   9935.3 ms   每 token CPU  19.40 ms   每 token wall  19.63 ms   占用 0.99 核   50.9 t/s
+decode 128 / 4 线程
+    单次 CPU  14816.6 ms   每 token CPU 115.75 ms   每 token wall  28.84 ms   占用 4.01 核   34.7 t/s
+decode 128 / 1 线程
+    单次 CPU   7051.8 ms   每 token CPU  55.09 ms   每 token wall  54.79 ms   占用 1.01 核   18.2 t/s
+
+prefill 4 线程 vs 1 线程：wall 加速 2.12×，CPU 成本 1.38×（1 线程 = 1.00）
+decode  4 线程 vs 1 线程：wall 加速 1.90×，CPU 成本 2.10×（1 线程 = 1.00）
+
+q2_k   ( 395.9 MiB)：每 token wall  25.67 ms，CPU 102.66 ms，占 4.00 核， 39.0 t/s，等效带宽  16.2 GB/s
+q8_0   ( 644.4 MiB)：每 token wall  31.65 ms，CPU 122.01 ms，占 3.86 核， 31.6 t/s，等效带宽  21.4 GB/s
+q4_k_m ( 463.0 MiB)：每 token wall  28.84 ms，CPU 115.75 ms，占 4.01 核， 34.7 t/s，等效带宽  16.8 GB/s

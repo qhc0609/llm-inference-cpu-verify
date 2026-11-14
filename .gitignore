@@ -26,3 +26,6 @@ __pycache__/
 18_recheck/thread_scale
 18_recheck/affinity_recheck
 18_recheck/memcpy_recheck
+
+# 运行时探针：perf 原始数据可重跑，不进仓库
+20_runtime_probe/results/*.data

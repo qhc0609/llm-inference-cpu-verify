@@ -1,0 +1,18 @@
+===== prefill 512 token / 4 线程（已解析符号合计 94.3%）=====
+ 57.17%  void (anonymous namespace)::tinyBLAS_Q0_AVX<block_q5_0, block_q8_0, float>::
+ 19.97%  libgomp：GOMP barrier / spin 等待
+  5.40%  ggml_gemm_q4_K_8x8_q8_K
+  4.72%  void tiled_run_microtile_avx2<16, false, 32, 1, true>(tiled_tile_src0 const&
+  3.81%  [内核] try_to_wake_up
+  3.18%  ggml_compute_forward_flash_attn_ext_tiled(ggml_compute_params const*, ggml_t
+
+===== decode 128 token / 4 线程（已解析符号合计 95.4%）=====
+ 40.42%  libgomp：GOMP barrier / spin 等待
+ 21.97%  ggml_vec_dot_q5_0_q8_0
+ 16.38%  ggml_vec_dot_q8_0_q8_0
+  6.86%  [内核] try_to_wake_up
+  4.45%  ggml_vec_dot_q6_K_q8_K
+  2.96%  ggml_gemv_q4_K_8x8_q8_K
+  2.24%  ggml_compute_forward_mul_mat
+  0.11%  [内核] do_syscall_64
+

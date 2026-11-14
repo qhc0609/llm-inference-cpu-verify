@@ -1,0 +1,6 @@
+RES|{"tag": "tg4_r5", "cmd": "/root/llm/llama.cpp/build/bin/llama-bench -m /root/llm/models/qwen2.5-0.5b-instruct-q4_k_m.gguf -t 4 -p 0 -n 128 -r 5 -o md", "exit": 0, "wall_ms": 18564.6, "sampled_wall_ms": 18543.1, "cpu_ms": 33640.0, "cpu_util": 1.81, "vol_cs": 1910, "nonvol_cs": 254, "run_ms": 33661.5, "wait_ms": 464.9, "peak_rss_kb": 579364, "n_samples": 875}
+LOG|| model                          |       size |     params | backend    | threads |            test |                  t/s |
+LOG|| ------------------------------ | ---------: | ---------: | ---------- | ------: | --------------: | -------------------: |
+LOG|| qwen2 1B Q4_K - Medium         | 462.96 MiB |   630.17 M | CPU        |       4 |           tg128 |         35.53 ± 2.00 |
+LOG|
+LOG|build: unknown (0)
