@@ -1,0 +1,8 @@
+RES|freq_est|round=0|ns_per_add=0.4913|ghz=2.035
+RES|freq_est|round=1|ns_per_add=0.4738|ghz=2.110
+RES|freq_est|round=2|ns_per_add=0.5031|ghz=1.988
+RES|freq_est|round=3|ns_per_add=0.4697|ghz=2.129
+RES|freq_est|round=4|ns_per_add=0.4962|ghz=2.015
+RES|noise|rounds=20|min_ms=23.13|p50_ms=23.96|p99_ms=26.65|max_ms=26.65|mean_ms=24.19
+RES|noise|spread_max_over_min_pct=15.21|spread_p99_over_min_pct=15.21
+RES|verdict|min_effect_to_claim_pct=15.2

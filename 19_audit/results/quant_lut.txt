@@ -1,0 +1,8 @@
+RES|quant|case=16MB_memory_bound|n=4194304|fp32_ms=3.453|gflops=2.43|eff_gbps=9.72
+RES|quant|case=16MB_memory_bound|int8_ms=0.638|vs_fp32=5.41x|eff_gbps=13.15
+RES|quant|case=16MB_memory_bound|int4_naive_ms=4.758|vs_fp32=0.73x
+RES|quant|case=16MB_memory_bound|int4_lut_ms=3.890|vs_fp32=0.89x|eff_gbps=1.08|vs_naive=1.22x
+RES|quant|case=1MB_cache_resident|n=262144|fp32_ms=0.172|gflops=3.05|eff_gbps=12.20
+RES|quant|case=1MB_cache_resident|int8_ms=0.031|vs_fp32=5.51x|eff_gbps=16.81
+RES|quant|case=1MB_cache_resident|int4_naive_ms=0.265|vs_fp32=0.65x
+RES|quant|case=1MB_cache_resident|int4_lut_ms=0.229|vs_fp32=0.75x|eff_gbps=1.15|vs_naive=1.16x

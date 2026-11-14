@@ -1,0 +1,5 @@
+RES|env|kernel=6.12.0|nproc=4|cpu=Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+RES|env|mhz=2496.002|thp=[always] madvise never
+RES|env|gcc=12|loadavg=0.18 0.14 0.53
+RES|env|steal=0|page_size=4096
+RES|env|mem_total_mb=7430

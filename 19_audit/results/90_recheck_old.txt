@@ -1,0 +1,4 @@
+RES|branch|random_ns=5.3872|sorted_ns=0.9151|speedup=5.89
+RES|branch|ilp_1chain_ms=293.9|ilp_4chain_ms=49.5|speedup=5.94
+RES|gemm|naive_ijk_ms=2871.4|ikj_ms=821.3|loop_order_speedup=3.50
+RES|gemm|best_block=256|gflops=3.22|vs_naive=4.30

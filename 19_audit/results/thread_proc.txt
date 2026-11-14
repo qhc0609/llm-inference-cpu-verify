@@ -1,0 +1,6 @@
+RES|thr_proc|case=small|rss_mb=0|thp=on|thread_us=82.9|fork_us=225.4|fork_over_thread=2.72
+RES|thr_proc|case=rss64|rss_mb=64|thp=on|thread_us=84.8|fork_us=282.3|fork_over_thread=3.33
+RES|thr_proc|case=rss512_thp_on|rss_mb=512|thp=on|thread_us=85.3|fork_us=509.8|fork_over_thread=5.97
+RES|thr_proc|case=rss512_thp_off|rss_mb=512|thp=off|thread_us=102.3|fork_us=12968.5|fork_over_thread=126.81
+RES|thr_proc|case=rss1024_thp_on|rss_mb=1024|thp=on|thread_us=90.4|fork_us=786.3|fork_over_thread=8.70
+RES|thr_proc|case=rss1024_thp_off|rss_mb=1024|thp=off|thread_us=89.9|fork_us=25083.6|fork_over_thread=278.93

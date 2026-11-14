@@ -1,0 +1,10 @@
+RES|pagecache|round=0|warm_ms=36.3|cold_ms=198.9|warm_gbps=7.40|cold_gbps=1.35
+RES|pagecache|round=1|warm_ms=47.1|cold_ms=247.6|warm_gbps=5.70|cold_gbps=1.08
+RES|pagecache|round=2|warm_ms=47.0|cold_ms=221.7|warm_gbps=5.71|cold_gbps=1.21
+RES|pagecache|round=3|warm_ms=46.8|cold_ms=225.8|warm_gbps=5.74|cold_gbps=1.19
+RES|pagecache|round=4|warm_ms=46.8|cold_ms=194.9|warm_gbps=5.74|cold_gbps=1.38
+RES|pagecache_result|warm_gbps=7.40|cold_gbps=1.38|ratio=0.19x
+RES|thp_memcpy|round=0|thp_on_gbps=27.42|thp_off_gbps=26.76
+RES|thp_memcpy|round=1|thp_on_gbps=26.62|thp_off_gbps=27.03
+RES|thp_memcpy|round=2|thp_on_gbps=26.60|thp_off_gbps=26.56
+RES|thp_memcpy_result|thp_on_gbps=27.42|thp_off_gbps=27.03|on_vs_off=1.01x

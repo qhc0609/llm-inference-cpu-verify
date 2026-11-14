@@ -1,0 +1,6 @@
+RES|attn|seq=64|ms=0.263|gflops=4.02|times_vs_prev=1.00|n2_cost_ratio=1.00
+RES|attn|seq=128|ms=1.262|gflops=3.35|times_vs_prev=4.80x|n2_cost_ratio=1.20
+RES|attn|seq=256|ms=5.267|gflops=3.21|times_vs_prev=4.17x|n2_cost_ratio=1.04
+RES|attn|seq=512|ms=20.871|gflops=3.24|times_vs_prev=3.96x|n2_cost_ratio=0.99
+RES|attn|seq=1024|ms=88.861|gflops=3.04|times_vs_prev=4.26x|n2_cost_ratio=1.06
+RES|attn|seq=2048|ms=396.944|gflops=2.73|times_vs_prev=4.47x|n2_cost_ratio=1.12
