@@ -27,3 +27,6 @@ $CC $OPT -fopenmp -o 15_openmp/omp_scale 15_openmp/omp_scale.c       -lm
 $CC $OPT -o 16_mmap_load/mmap_load      16_mmap_load/mmap_load.c     -lm
 
 echo "== 全部编译完成"
+
+# 22_cache_stride 单独编译：它需要 -O3 -march=native（08 例外，必须 -O2），
+# 由该目录自己的 run_all.sh 负责，这里不重复。

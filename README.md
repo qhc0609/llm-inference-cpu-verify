@@ -137,3 +137,29 @@ KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
 环境自证在 [`ohos/results/oh_env.txt`](ohos/results/oh_env.txt)。
 口径差异（没有 THP、没有 cpufreq、噪声地板 45.9%）见 [`ohos/README.md`](ohos/README.md)。
 
+
+## 追加：`22_cache_stride/` —— 步长、Cache 与访存优化（九个微基准）
+
+对应《同一段代码只把步长改大一点，为什么就慢了 8 倍？》那一篇。
+原稿的数据是在一台 Windows Server 上量的，这一套把它整体搬到本机 openEuler 虚拟机上重跑，
+**文章里的每一个数都出自这里的代码和原始日志**。
+
+| 测什么 | 关键数字 |
+|---|---|
+| 工作集 16 KB → 256 MB，只改数组大小 | 82.5 → 13.85 GB/s（**5.96×**），台阶在 1 MB 与 8 MB |
+| 步长 4 B → 64 B（800 万次访问固定） | 0.990 → 4.899 ns（**4.95×**） |
+| 64 MB 里随机指针追逐 vs 顺序读 | 118.4 vs 0.304 ns（**389.3×**） |
+| 组冲突：步长 4096 B vs 4160 B | 2.060 vs 1.136 ns（**1.81×**） |
+| AoS vs SoA（800 万条记录只读 key） | 9.70 vs 2.69 ms（**3.61×**），等效带宽却几乎一样 |
+| 1024³ fp32 矩阵乘分块 | 3,642 → 955 ms（**3.81×**，`-O2`） |
+| 手动预取（256 MB 质数步长） | 近距更慢：8 步慢 1.04×，32 步才快 1.06× |
+| 4 线程伪共享 / 聚合带宽 | 1.47×；带宽 12.5 → 20.3 GB/s 后见顶 |
+
+```bash
+cd 22_cache_stride
+bash run_all.sh    # 编译 + 逐项跑，结果写 results/
+python3 med.py     # 从原始 RES| 行算中位数，和文章里的数字逐项对得上
+```
+
+踩过的坑（加法器吃掉台阶、依赖链吃掉步长、冲突足迹要挑 256 KB、分块必须 i-k-j 且 `-O2`、
+预取在乱读上是负收益）写在 [`22_cache_stride/README.md`](22_cache_stride/README.md)。

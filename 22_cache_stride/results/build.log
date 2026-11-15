@@ -1,0 +1,90 @@
+== compiler ==
+gcc (GCC) 12.3.1 (openEuler 12.3.1-110.oe2403sp4)
+== kernel ==
+Linux 6.12.0 x86_64
+== caches ==
+index0 level=1 Data size=32K ways=8 line=64 sets=64 shared=0
+index1 level=1 Instruction size=32K ways=8 line=64 sets=64 shared=0
+index2 level=2 Unified size=256K ways=4 line=64 sets=1024 shared=0
+index3 level=3 Unified size=6144K ways=12 line=64 sets=8192 shared=0-3
+== build 01_workset.c ==
+== build 02_stride.c ==
+== build 03_locality.c ==
+== build 04_conflict.c ==
+== build 05_chase.c ==
+== build 06_prefetch.c ==
+== build 07_layout.c ==
+== build 08_gemm.c ==
+== build 09_threads.c ==
+== run 01_workset ==
+RES|workset|16384|16384|3.46|77.63|0.0515
+RES|workset|16384|8192|1.61|83.29|0.0480
+RES|workset|16384|4096|0.82|81.88|0.0489
+RES|workset|16384|2048|0.40|84.74|0.0472
+RES|workset|16384|1024|0.19|86.78|0.0461
+RES|workset|16384|512|0.10|86.57|0.0462
+RES|workset|1048576|256|7.21|37.25|0.1074
+RES|workset|2097152|128|68.32|3.93|1.0181
+RES|workset|4194304|64|16.07|16.71|0.2394
+RES|workset|8388608|32|34.03|7.89|0.5071
+RES|workset|16777216|16|22.55|11.91|0.3360
+RES|workset|33554432|8|17.31|15.51|0.2579
+RES|workset|67108864|4|18.49|14.52|0.2755
+RES|workset|134217728|3|26.30|15.31|0.2612
+RES|workset|268435456|3|54.00|14.91|0.2682
+== run 02_stride ==
+RES|stride|4|0.954
+RES|stride|8|1.162
+RES|stride|16|1.346
+RES|stride|32|2.378
+RES|stride|64|4.442
+RES|stride|128|6.995
+RES|stride|256|8.254
+RES|stride|512|9.280
+RES|stride|1024|9.832
+RES|stride|2048|9.658
+RES|stride|4096|10.512
+== run 03_locality ==
+RES|locality|small_32k|0.904
+RES|locality|big_seq_128m|0.973
+RES|locality|big_prime_128m|16.234
+== run 04_conflict ==
+RES|conflict|1024|1.334
+RES|conflict|2048|1.337
+RES|conflict|3968|1.448
+RES|conflict|4096|1.894
+RES|conflict|4160|0.975
+RES|conflict|4224|1.409
+RES|conflict|8192|1.099
+== run 05_chase ==
+RES|chase|2|39.82|0.153|261.1
+RES|chase|16|100.00|0.289|345.7
+RES|chase|64|128.15|0.337|380.0
+RES|chase|256|175.42|0.415|422.5
+== run 06_prefetch ==
+RES|prefetch|0|14.965
+RES|prefetch|1|13.907
+RES|prefetch|2|13.785
+RES|prefetch|4|14.474
+RES|prefetch|8|17.831
+RES|prefetch|16|12.886
+RES|prefetch|32|15.290
+RES|prefetch|64|13.126
+== run 07_layout ==
+RES|layout|aos|128000000|10.40|12.31
+RES|layout|soa|32000000|3.44|9.31
+== run 08_gemm ==
+RES|gemm|naive|0|4503.80|0.48
+RES|gemm|blocked|16|1143.26|1.88
+RES|gemm|blocked|32|1505.66|1.43
+RES|gemm|blocked|64|1031.49|2.08
+RES|gemm|blocked|128|1102.12|1.95
+== run 09_threads ==
+RES|false_share|1|28.39|27.10|1.05
+RES|false_share|2|39.92|26.97|1.48
+RES|false_share|4|50.58|45.13|1.12
+RES|agg_bw|1|11.64
+RES|agg_bw|2|15.15
+RES|agg_bw|3|16.18
+RES|agg_bw|4|16.66
+== done ==
