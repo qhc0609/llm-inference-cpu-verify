@@ -1,12 +1,22 @@
 # ohos · 在 OpenHarmony 上跑同一套微基准
 
 上面 01~19 那套代码是在 openEuler 24.03（glibc、gcc 12.3）上跑的。这个目录是同一批 `.c` 文件，
-换到 **OpenHarmony 5.0.3（EduDist `x86_64_virt`、musl、OH NDK clang 15）** 上再跑一遍。
+换到 **OpenHarmony（musl、OH NDK clang 15）** 上再跑一遍。
 
-## 为什么是「内核直启」而不是完整镜像
+一共跑了两轮，用的是两种环境：
+
+| 轮次 | 环境 | 内核 | 目录 |
+|---|---|---|---|
+| 一 | 自编内核 + 自带 initramfs（无用户态） | 6.6.62 | `results/oh_summary.txt` |
+| 二 | **完整镜像，launcher / systemui / samgr 常驻** | 6.6.101 | `results/oh7_full_image.txt` |
+
+两轮跑的是同一批二进制、同一台机器、同一个 QEMU/KVM 位置，所以两轮之间能直接相减，
+差值就是「用户态在不在」的代价。对照见文末。
+
+## 第一轮：内核直启
 
 `x86_64_virt` 的完整系统镜像在官方渠道下不到（教育版预编译包已过期，`ci.openharmony.cn` 不可用），
-只能自己编。全量编译要几小时，为了先拿到数据，这里用的是**已经编好的内核 + 自带 initramfs**：
+自己编要十几小时，为了先拿到数据，这里用的是**已经编好的内核 + 自带 initramfs**：
 
 ```
 qemu-kvm -kernel bzImage -initrd initrd.img -append "console=ttyS0 rdinit=/init"
@@ -79,3 +89,77 @@ KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
 
 结论：cgroup 记账改不了这两个数；真正被镜像改变的是文件 IO，而且方向和想象相反——
 不是「完整镜像更慢」，是**之前那个 18.97 GB/s 压根不是磁盘**。
+
+## 第二轮：完整镜像跑通了
+
+`x86_64_virt` 的完整包其实有现成的：`harmony-contrib/ohos-qemu` 的 GitHub Release 提供
+OpenHarmony 7.0-Release / `x86_64_virt` / phone 的整套镜像（643 MB tar.gz，解开 4.7 GB）。
+
+```bash
+# 直连 GitHub 只有 16 KB/s，加代理前缀后 2 MB/s
+curl -L -o oh.tar.gz "https://gh-proxy.com/https://github.com/harmony-contrib/ohos-qemu/\
+releases/download/v20260919/openharmony-qemu-x86_64-x86_64_virt-phone.tar.gz"
+tar xzf oh.tar.gz && cd openharmony-qemu-x86_64-x86_64_virt-phone
+
+# 必须显式指定 qemu 路径，qemu-system-x86_64 不在 PATH 里
+setsid ./launch/linux.sh --headless --serial-port 4444 \
+    -m 6G -s 4 -q /usr/libexec/qemu-kvm -a kvm > boot.log 2>&1 &
+
+# 进系统（root）
+HDC=/path/to/ohos-sdk/linux/15/toolchains/hdc
+$HDC tconn 127.0.0.1:5555 && $HDC shell
+```
+
+进到系统里是这样：
+
+```
+Linux localhost 6.6.101 #1 SMP PREEMPT_DYNAMIC x86_64 Toybox
+uid=0(root)
+THP: [always] madvise never
+launcher / systemui / appspawn / samgr 常驻，锁屏界面已渲染
+```
+
+第一轮编的 24 个静态二进制**直接推上去就能跑**，不用重编（同为 `x86_64-linux-ohos`）。
+
+### 两轮对照：哪些数会变
+
+111 项可比，按差异幅度分四档：
+
+| 差异 | 项数 | 代表 |
+|---|---|---|
+| ±10% | 53 | GEMM 分块、attention 各序列长度、量化误差、依赖链、ILP、`cpu_count` |
+| 10~30% | 26 | `thread_create_us` +29%、`memcpy_32KB` +17%、`gemm_loop_ikj` +15% |
+| 30~100% | 27 | `fork_us` +115%、`wakeup_rtt_idle_p50` −72%、`memcpy_256MB` +63% |
+| >100% | 5 | `fork_us`、`omp_memory_threads4`、`memcpy_2MB`、线程数上限 |
+
+关键几条：
+
+| 指标 | initramfs（6.6.62） | 完整镜像（6.6.101） | 说明 |
+|---|---|---|---|
+| `fork_us` | 232.8 µs | **500.4 µs** | 系统常驻几十个进程，页表与调度实体都变多 |
+| `thread_create_us` | 117.0 µs | **151.2 µs** | 同上，+29% |
+| `wakeup_rtt_idle_p50` | 232.86 µs | **66.13 µs** | 服务常驻让 CPU 进不了深 C-state，唤醒反而**变快** 3.5 倍 |
+| `fork 1GB thp_on` | 测不出 | **1220.8 µs** | 完整镜像 THP=always 生效 |
+| `fork 1GB thp_off` | 10683 µs | **22911 µs** | — |
+| THP on/off 差 | 1.0 倍（无 THP） | **18.8 倍** | 第一轮那条「THP 结论不成立」在这里被补上 |
+
+### 缓存曲线：只用第二轮这版
+
+第一轮那版在 128 KB 处出现 22.34 ns 的坏点（比 256 KB 的 10.72 ns 还高），单调性被破坏，
+采样不足或受了干扰。完整镜像这版是干净的：
+
+```
+8K 1.65 → 16K 1.62 → 32K 1.64 │ 64K 2.80 → 128K 3.81 → 256K 5.95 → 512K 12.96
+→ 1M 15.50 → 2M 22.22 │ 4M 41.00 → 8M 76.05 │ 16M 98.61 → 32M 110.70 → 256M 124.86
+```
+
+三个拐点正好落在硬件规格上：**32 KB（L1d）、4 MB（L2）、16 MB（L3）**。
+512 KB 那个台阶是二级 TLB / 预取边界，不是缓存容量边界。
+
+### 结论怎么用
+
+- 纯硬件与纯算力项（53 项 ±10%）两轮可以互换，写哪个都对。
+- 涉及进程、线程、唤醒、内存管理器的项，**必须用第二轮**，第一轮只能当上界/下界参考。
+- `memcpy` 全系第二轮高 49~141%，同时大工作集延迟低 12~32%：这两件事同源——THP 让大页多了，
+  TLB 缺页少了，带宽和延迟一起改善。第一轮没有 THP，所以两头都吃亏。
+
