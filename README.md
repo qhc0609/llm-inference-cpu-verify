@@ -119,3 +119,21 @@ bash run_all.sh           # 全跑，结果写 /root/llm/results
 还有一条必须先看的：同一配置独立跑 5 次，极差 **11%~15%**。
 本目录所有数字只在数量级上可信，不能用来比较 5% 的提升。
 
+## 追加：`ohos/` —— 同一套代码换到 OpenHarmony 上再跑一遍
+
+上面所有的数字都来自 openEuler 24.03（glibc + gcc 12.3）。`ohos/` 把同一批 `.c` 文件用
+**OpenHarmony 5.0.3 的 NDK（clang 15 + musl）** 交叉编译成 `x86_64-linux-ohos` 静态程序，
+在 QEMU 里用 **OpenHarmony 自己编的内核**（Linux 6.6.62，`x86_64_virt`）直启一个自带 initramfs 跑完 24 组。
+
+```bash
+OH_SDK=/path/to/ohos-sdk/linux/15/native OUT=./bin bash ohos/build_oh.sh
+$OH_SDK/llvm/bin/clang --target=x86_64-linux-ohos --sysroot=$OH_SDK/sysroot \
+    -static -O2 -o ./init ohos/initramfs/init.c
+BIN=./bin INIT=./init bash ohos/mk_initrd.sh ./initrd.img
+KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
+```
+
+结果在 [`ohos/results/oh_summary.txt`](ohos/results/oh_summary.txt)（282 条 `RES|`），
+环境自证在 [`ohos/results/oh_env.txt`](ohos/results/oh_env.txt)。
+口径差异（没有 THP、没有 cpufreq、噪声地板 45.9%）见 [`ohos/README.md`](ohos/README.md)。
+
