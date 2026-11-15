@@ -54,3 +54,28 @@ KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
    两组因此跑成一样的数（10683 vs 10443 µs），那组结论在 openEuler 上是 25 倍差异，在这里不成立。
 2. **没有 cpufreq**：`scaling_governor` 不存在，频率不受 governor 控制，但宿主仍有热节流，
    `noise_floor` 实测 20 次极差 45.9%，比 openEuler 那台的 15.2% 大三倍。小于这个数的差异不要当结论。
+
+## 补测：把「完整镜像才有的那一层」单独造出来
+
+全镜像和内核直启的差别只有四件事：进程/负载、cgroup、动态链接、真实块设备。前三件能被已有数据框住
+（唤醒延迟的空闲端 232 µs 和有核忙的 5.5 µs 就是负载两端），只有第四件必须额外搭。
+
+`initramfs/init_disk.c`：给 QEMU 挂一块 2 GB 的 ext4（`-drive if=virtio,cache=none`），
+256 MB 文件由宿主机 loop 挂载写进去、guest 只读，`echo 3 > drop_caches` 后连读三次，
+再在不丢缓存的情况下连读三次，最后用 mmap 逐页碰一遍。这样「冷」和「热」不再互相污染。
+
+`initramfs/init_cgroup.c`：mount cgroup2，建 `memory.max=768MB` 的组，把 init 自己写进
+`cgroup.procs`（子进程自动继承），再跑 `thread_cost`。
+
+结果（`results/oh_disk.txt`）：
+
+| 口径 | 数字 |
+|---|---|
+| 真盘冷读 256 MB | 235 / 368 ms → **0.7~1.1 GB/s** |
+| 真盘页缓存热读 | 42.5 ms → **6.3 GB/s** |
+| mmap 逐页冷 / 热 | 567 ms → 0.7 ms，**818 倍** |
+| initramfs（全在内存）冷读 | 28.3 ms / 512 MB = **18.97 GB/s（虚高 20 倍）** |
+| 768 MB cgroup 内 fork / 建线程 | 187.1 / 113.6 µs（组外 232.8 / 117.0，**在噪声内**） |
+
+结论：cgroup 记账改不了这两个数；真正被镜像改变的是文件 IO，而且方向和想象相反——
+不是「完整镜像更慢」，是**之前那个 18.97 GB/s 压根不是磁盘**。
