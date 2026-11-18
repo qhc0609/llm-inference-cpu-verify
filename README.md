@@ -168,3 +168,29 @@ python3 med.py     # 从原始 RES| 行算中位数，和文章里的数字逐�
 预取在乱读上是负收益、探针表墓碑导致 miss 模型退化）写在
 [`22_cache_stride/README.md`](22_cache_stride/README.md)，
 完整数据与结论见 [`22_cache_stride/REPORT.md`](22_cache_stride/REPORT.md)。
+
+## 追加：`23_membw/` —— 内存带宽与 CPU 瓶颈（五个实验 + 屋顶线）
+
+对应《同样四个核，为什么「一个字一个字往外吐」时只剩 1/93 的算力？》。
+上一篇量「一次访问多贵」，这一篇量「一秒能搬多少」和「算力有几斤」，然后把两者画成屋顶线。
+
+| 测什么 | 关键数字 |
+|---|---|
+| read / copy / scale / triad，1–4 线程 | 单线程 read **15.89 GB/s**（纸面 38.4 的 41%）；copy 13.57；4 线程 23.17 < 2 线程 24.50 |
+| 128 MiB 随机环，1–32 条指针链 | 延迟 109.7 → 134.4 ns 几乎不变，带宽 0.58 → 3.81 GB/s（**6.52×**） |
+| 峰值算力：1 vs 8 累加器、1 vs 4 线程 | 10.65 / 87.21 / 345.66 GFLOPS，ILP 收益 8.19× |
+| 算术强度 0.5 → 64 扫描 | 7.81 → 82.02 GFLOPS，实测弯折在 AI 8–32 |
+| batch 1 → 256（64 MB 权重） | 每 token 9.06 → **1.11 ms**（8.16×），AI 0.5 → 113.8 |
+
+由 13 与 15 得到这台机器的两条边：单线程 `min(87.21, 15.89×AI)`，屋脊点 **AI = 5.49**；
+四线程 `min(345.66, 23.17×AI)`，屋脊点 **AI = 14.92**。fp32 的 decode 在 AI = 0.5，离屋脊 11 倍。
+
+```bash
+cd 23_membw
+bash run_bw.sh      # 编译 + 逐项跑，结果写 results/
+python3 med_bw.py   # 从原始 RES| 行复算每个数字，含屋顶占比
+```
+
+分析报告：[`23_membw/REPORT.md`](23_membw/REPORT.md)。踩过的坑（R 与 reps 搞混算出 222 GFLOPS、
+batch 循环顺序两版全错、随机链撞的是 DRAM 行激活而不是 TLB）写在
+[`23_membw/README.md`](23_membw/README.md)。
