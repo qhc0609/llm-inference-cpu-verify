@@ -14,6 +14,7 @@
 import glob
 import json
 import os
+import re
 import statistics as st
 import sys
 from collections import defaultdict
@@ -24,10 +25,13 @@ RES = os.path.join(HERE, "results")
 ROUNDS = sorted(glob.glob(os.path.join(RES, "s[1-5].txt")))
 GEMM_O2 = os.path.join(RES, "gemm_o2.txt")
 THREADS = os.path.join(RES, "threads_5rounds.txt")
+MISS = os.path.join(RES, "10_missrate.txt")
+DEC_REU = os.path.join(RES, "11_12_3rounds.txt")
 
 
 NKEY = {"workset": 2, "stride": 1, "locality": 1, "conflict": 1, "chase": 1,
-        "prefetch": 1, "layout": 1, "gemm": 2, "false_share": 1, "agg_bw": 1}
+        "prefetch": 1, "layout": 1, "gemm": 2, "false_share": 1, "agg_bw": 1,
+        "missrate": 1, "miss3c": 1, "decode": 1, "reuse": 1}
 
 
 def collect(files, prefix):
@@ -38,9 +42,10 @@ def collect(files, prefix):
         if not os.path.exists(f):
             continue
         for ln in open(f, encoding="utf-8", errors="ignore"):
+            ln = re.sub(r"^r\d+\s+", "", ln.strip())   # 11/12 的结果带轮次前缀
             if not ln.startswith("RES|" + prefix + "|"):
                 continue
-            p = ln.strip().split("|")[2:]
+            p = ln.split("|")[2:]
             out[tuple(p[:n])].append(tuple(float(x) for x in p[n:]))
     return out
 
@@ -59,6 +64,11 @@ for name in ("workset", "stride", "locality", "conflict", "chase", "prefetch", "
 data["gemm"] = medcols(collect([GEMM_O2], "gemm"))
 data["false_share"] = medcols(collect(ROUNDS + [THREADS], "false_share"))
 data["agg_bw"] = medcols(collect(ROUNDS + [THREADS], "agg_bw"))
+# 10~12：10 是确定性模型（单次即可），11/12 各跑三轮取中位数
+data["missrate"] = medcols(collect([MISS], "missrate"))
+data["miss3c"] = medcols(collect([MISS], "miss3c"))
+data["decode"] = medcols(collect([DEC_REU], "decode"))
+data["reuse"] = medcols(collect([DEC_REU], "reuse"))
 
 if "--json" in sys.argv:
     print(json.dumps({k: {"|".join(kk): vv for kk, vv in v.items()} for k, v in data.items()},
@@ -109,3 +119,20 @@ for k, v in sorted(data["false_share"].items(), key=lambda kv: int(kv[0][0])):
 print("\n⑩ 聚合带宽（每线程 128 MB 私有数组）")
 for k, v in sorted(data["agg_bw"].items(), key=lambda kv: int(kv[0][0])):
     print(f"   {k[0]} 线程  {v[0]:>6.2f} GB/s")
+
+print("\n⑪ 软件 miss 计数（模型：L1 32K/8、L2 256K/4、L3 6M/12，行 64 B）")
+for k, v in data["missrate"].items():
+    print(f"   {k[0]:<15} 访问 {int(v[0]):>12,}  L1 缺失 {v[1]:>6.2f}%  "
+          f"L2 {v[2]:>6.2f}%  L3 {v[3]:>6.2f}%  DRAM {v[4]:>6.1f} MiB")
+
+print("\n⑫ 缺失三分类（全相联等价）")
+for k, v in data["miss3c"].items():
+    print(f"   {k[0]:<15} 强制 {int(v[0]):>9,}  容量 {int(v[1]):>9,}  冲突 {int(v[2]):>9,}")
+
+print("\n⑬ decode 字节账（638.7 MiB 权重，每 token 过一遍）")
+for k, v in data["decode"].items():
+    print(f"   {k[0]:<12} {v[0]:>7.1f} MiB  {v[1]:>7.2f} ms  {v[2]:>8.1f} 字/秒  {v[3]:>6.2f} GB/s")
+
+print("\n⑭ 时间局部性（每次请求都是 32 MiB）")
+for k, v in data["reuse"].items():
+    print(f"   {k[0]:<13} {v[1]:>6.2f} ms  {v[2]:>6.2f} GB/s")

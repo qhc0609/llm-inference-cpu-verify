@@ -1,0 +1,15 @@
+RES|missrate_meta|line=64|l1=32K/8way|L2=256K/4way|L3=6M/12way
+RES|missrate|seq_1MiB_x8|2097152|6.25|100.00|12.50|1.0
+RES|miss3c|seq_1MiB_x8|16384|114688|0
+RES|missrate|seq_64MiB_x1|16777216|6.25|100.00|100.00|64.0
+RES|miss3c|seq_64MiB_x1|1048576|0|0
+RES|missrate|stride_64B|8000000|100.00|100.00|100.00|488.3
+RES|miss3c|stride_64B|1048576|6951424|0
+RES|missrate|aos_key_8M|8000000|25.00|100.00|100.00|122.1
+RES|miss3c|aos_key_8M|2000000|0|0
+RES|missrate|soa_key_8M|8000000|6.25|100.00|100.00|30.5
+RES|miss3c|soa_key_8M|500000|0|0
+RES|missrate|gemm_ijk_256|33554432|50.22|2.07|2.35|0.5
+RES|miss3c|gemm_ijk_256|8192|1044480|15797248
+RES|missrate|gemm_tiled_256|17039360|6.25|1.92|40.00|0.5
+RES|miss3c|gemm_tiled_256|8192|24528|1032240

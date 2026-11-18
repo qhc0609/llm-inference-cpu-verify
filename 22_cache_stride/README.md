@@ -1,4 +1,4 @@
-# 22 · 步长、Cache 与访存优化：九个微基准
+# 22 · 步长、Cache 与访存优化：十二个实验
 
 对应文章：《同一段代码只把步长改大一点，为什么就慢了 8 倍？》（CPU Cache 与访存优化）
 
@@ -27,15 +27,22 @@ for i in 0 1 2 3; do d=/sys/devices/system/cpu/cpu0/cache/index$i;
 ```
 
 `perf` 装了，但这台虚拟机的 vPMU 没开，`perf stat -e cache-misses` 一律返回
-`<not supported>`。所以本目录里**没有任何一个数是硬件计数器数出来的**，
-全部是耗时与带宽的等价观测。这一点文章里逐处标注过，不混用。
+`<not supported>`（原始输出见 `results/perf_hw.txt`）。所以：
+
+- 01~09、11、12 全部是**耗时与带宽的等价观测**，不掺任何计数器读数；
+- 10 用**软件模型**补上缺失计数：地址序列照原样喂进一个 LRU 集相联模型
+  （L1 32 KB/8 路、L2 256 KB/4 路、L3 6 MB/12 路，行 64 B），口径和 `cache-misses` 一致，
+  但数它的是我们自己。模型不含硬件预取器，对循环扫描偏悲观，边界写在报告里。
+
+完整的实验报告：[`REPORT.md`](REPORT.md)。
 
 ## 跑起来
 
 ```bash
 cd 22_cache_stride
-bash run_all.sh            # 编译 + 逐项运行，结果写 results/
-python3 med.py             # 从 results/ 的原始 RES| 行算出中位数总表
+bash run_all.sh            # 01~09：编译 + 逐项运行，结果写 results/
+bash run_new.sh            # 10~12：miss 计数模型 / decode 字节账 / 时间局部性
+python3 med.py             # 从 results/ 的原始 RES| 行算出全部中位数
 ```
 
 单跑一个也行：
@@ -60,7 +67,10 @@ gcc -O3 -march=native -std=gnu11 02_stride.c -o 02_stride -lm && ./02_stride
 | `06_prefetch.c` | 256 MB 质数步长下插 `__builtin_prefetch` | 第 06 节、图 ④ | 近距更慢（8 步 1.04×），32 步才快 1.06× |
 | `07_layout.c` | 800 万条记录只读 key：AoS vs SoA | 第 05 节、图 ⑤ | **3.61×**，而两种摆法的等效带宽几乎一样 |
 | `08_gemm.c` | 1024³ fp32 矩阵乘，只改分块 | 第 05 节、图 ⑤ | 3,642 → 955 ms，**3.81×** |
-| `09_threads.c` | 伪共享（相邻 8 B vs 隔开 128 B）与聚合带宽 | 第 07 节、图 ⑥ | 4 线程伪共享只 **1.47×**；带宽 12.5→20.3 GB/s 见顶 |
+| `09_threads.c` | 伪共享（相邻 8 B vs 隔开 128 B）与聚合带宽 | 验证 7、图 ⑥ | 4 线程伪共享只 **1.47×**；带宽 12.5→20.3 GB/s 见顶 |
+| `10_missrate.c` | 软件模型数 L1/L2/L3 缺失率与三分类 | 验证 8 | 步长 64 B：L1 缺失 100%，每次访问搬 **64.0 B**；AoS 25% vs SoA 6.25%；分块让冲突缺失降 **15.3×** |
+| `11_decode.c` | 638.7 MiB 权重每 token 过一遍，fp32/int8/int4 | 第四节 | 52.24 / 13.23 / 6.45 ms → **19.1 / 75.6 / 155.0 字/秒**，带宽却都是 12.8 GB/s 上下 |
+| `12_reuse.c` | 同样请求 32 MiB，换四种复用块大小 | 2.3 节 | 30.23 → 13.13 GB/s，**2.30×** 全来自时间局部性 |
 
 ## 口径
 
@@ -78,6 +88,10 @@ python3 med.py --json   # 输出 JSON（文章生成脚本读的就是它）
 
 ## 五个坑（都是真踩出来的）
 
+0. **软件 miss 模型跑了七分钟不出结果**。线性探测表在大量淘汰后全是墓碑，
+   一次未命中查找要扫描整张表，8M 次访问就退化到几十分钟。改成墓碑超过 2/3 时重建探测表，
+   14 秒跑完。另一个坑：矩阵乘的 A 和 B 一开始用了同一段地址空间，缺失统计直接对不上，
+   给 B 加矩阵偏移才正常。
 1. **工作集台阶被加法器吃掉**。第一版用 64 位累加、4 个累加器，结果带宽只有 13 GB/s
    且没有台阶——瓶颈是整数加法，不是访存。改成 32 位累加（无符号回绕有定义，
    编译器敢向量化）并开 `-O3 -march=native`，台阶才出来（82.5 → 13.9 GB/s）。
@@ -121,4 +135,6 @@ python3 med.py --json   # 输出 JSON（文章生成脚本读的就是它）
 - `diag/` —— 两个诊断程序：`diag_ws.c` 定工作集台阶的写法，`diag_conflict.c` 挑冲突足迹。
   它们不产出文章里的数，只用来决定实验参数该取多少。
 - `results/build.log` —— 一次完整编译的输出（编译器版本、内核、四级 Cache 参数）。
-- `results/s*.txt`、`gemm_o2.txt`、`threads_5rounds.txt` —— 原始 `RES|` 行，一行一个测点。
+- `results/s*.txt`、`gemm_o2.txt`、`threads_5rounds.txt`、`10_missrate.txt`、`11_12_3rounds.txt`
+  —— 原始 `RES|` 行，一行一个测点。
+- `results/perf_hw.txt` / `perf_sw.txt` —— `perf stat` 的原样输出，证明硬件计数器确实读不出来。

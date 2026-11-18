@@ -138,7 +138,7 @@ KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
 口径差异（没有 THP、没有 cpufreq、噪声地板 45.9%）见 [`ohos/README.md`](ohos/README.md)。
 
 
-## 追加：`22_cache_stride/` —— 步长、Cache 与访存优化（九个微基准）
+## 追加：`22_cache_stride/` —— 步长、Cache 与访存优化（十二个实验）
 
 对应《同一段代码只把步长改大一点，为什么就慢了 8 倍？》那一篇。
 原稿的数据是在一台 Windows Server 上量的，这一套把它整体搬到本机 openEuler 虚拟机上重跑，
@@ -154,6 +154,9 @@ KERNEL=/path/to/bzImage INITRD=./initrd.img BIN=./bin bash ohos/qemu_boot.sh
 | 1024³ fp32 矩阵乘分块 | 3,642 → 955 ms（**3.81×**，`-O2`） |
 | 手动预取（256 MB 质数步长） | 近距更慢：8 步慢 1.04×，32 步才快 1.06× |
 | 4 线程伪共享 / 聚合带宽 | 1.47×；带宽 12.5 → 20.3 GB/s 后见顶 |
+| 638.7 MiB 权重每 token 过一遍（decode） | 52.24 ms → 19.1 字/秒；int8 / int4 为 75.6 / 155.0 字/秒 |
+| 同样请求 32 MiB，复用块 32 KiB / 256 KiB / 4 MiB / 32 MiB | 30.23 / 29.22 / 20.50 / 13.13 GB/s（2.30×） |
+| 软件模型数 miss（perf 的 vPMU 不可用） | 步长 64 B 每次访问搬 64 B；分块让冲突缺失降 15.3× |
 
 ```bash
 cd 22_cache_stride
@@ -162,4 +165,6 @@ python3 med.py     # 从原始 RES| 行算中位数，和文章里的数字逐�
 ```
 
 踩过的坑（加法器吃掉台阶、依赖链吃掉步长、冲突足迹要挑 256 KB、分块必须 i-k-j 且 `-O2`、
-预取在乱读上是负收益）写在 [`22_cache_stride/README.md`](22_cache_stride/README.md)。
+预取在乱读上是负收益、探针表墓碑导致 miss 模型退化）写在
+[`22_cache_stride/README.md`](22_cache_stride/README.md)，
+完整数据与结论见 [`22_cache_stride/REPORT.md`](22_cache_stride/REPORT.md)。
