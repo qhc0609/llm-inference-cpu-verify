@@ -1,0 +1,41 @@
+== uname ==
+Linux bogon 6.12.0 #1 SMP Sun Oct 25 14:07:46 CST 2026 x86_64 x86_64 x86_64 GNU/Linux
+== numactl --hardware ==
+available: 2 nodes (0-1)
+node 0 cpus: 0 1
+node 0 size: 7444 MB
+node 0 free: 6027 MB
+node 1 cpus: 2 3
+node 1 size: 8062 MB
+node 1 free: 2409 MB
+node distances:
+node   0   1 
+  0:  10  20 
+  1:  20  10 
+== per-node sysfs ==
+RES|node|0|cpulist|0-1
+RES|node|0|distance|10 20
+RES|node|0|memtotal_kb|7622904
+RES|node|0|memfree_kb|6171324
+RES|node|1|cpulist|2-3
+RES|node|1|distance|20 10
+RES|node|1|memtotal_kb|8256000
+RES|node|1|memfree_kb|2467512
+== node count ==
+RES|nodes|2
+== pages ==
+RES|page_kb|4
+RES|thp|[always] madvise never
+== cpu -> node ==
+RES|cpu|0|node|0
+RES|cpu|1|node|0
+RES|cpu|2|node|1
+RES|cpu|3|node|1
+== numastat ==
+                           node0           node1
+numa_hit                 2052487         3571272
+numa_miss                      0               0
+numa_foreign                   0               0
+interleave_hit             15758           15812
+local_node               2020130         3496862
+other_node                 32357           74410

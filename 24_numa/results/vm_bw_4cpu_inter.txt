@@ -1,0 +1,7 @@
+RES|bw|read|1|13.51
+RES|bw|read|2|18.16
+RES|bw|read|3|15.49
+RES|bw|read|4|18.75
+RES|bw|copy|1|12.27
+RES|bw|scale|1|12.75
+RES|bw|triad|1|13.83

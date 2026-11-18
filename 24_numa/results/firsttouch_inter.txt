@@ -1,0 +1,13 @@
+RES|ft|setup|nodes|2|workers|4
+RES|ft|worker|0|cpu|0|node|0
+RES|ft|worker|1|cpu|1|node|0
+RES|ft|worker|2|cpu|2|node|1
+RES|ft|worker|3|cpu|3|node|1
+RES|ft|own|pages|33224|32814
+RES|ft|own|gbps|4.37
+RES|ft|cross|pages|33224|32814
+RES|ft|cross|gbps|8.24
+RES|ft|single|pages|33224|32814
+RES|ft|single|gbps|10.01
+RES|ft|untouched|pages|456|46
+RES|ft|untouched|gbps|15.57
