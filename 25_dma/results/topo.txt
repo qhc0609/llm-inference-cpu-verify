@@ -1,0 +1,48 @@
+== kernel
+Linux 192.168.17.132 6.12.0 #1 SMP Sun Oct 25 14:07:46 CST 2026 x86_64 x86_64 x86_64 GNU/Linux
+RES|topo|kernel|6.12.0
+== iommu
+[    2.902732] iommu: Default domain type: Passthrough
+RES|topo|iommu_domain|Passthrough
+== iommu groups
+0
+RES|topo|iommu_groups|0
+== dmabuf core
+RES|topo|CONFIG_DMA_SHARED_BUFFER|CONFIG_DMA_SHARED_BUFFER=y
+RES|topo|CONFIG_UDMABUF|unset
+RES|topo|CONFIG_DMABUF_SYSFS_STATS|unset
+RES|topo|dma_heap|no
+RES|topo|udmabuf|no
+RES|topo|dmabuf_sysfs|no
+== drm
+RES|topo|drm|device|DRIVER=vmwgfx
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|drm|device|
+RES|topo|render_nodes|1
+RES|topo|vmwgfx_ver|2.20.0.0
+== cpu
+RES|topo|cacheline|64
+RES|topo|l1d|32768
+RES|topo|clflush|yes
+RES|topo|clflushopt|yes
+RES|topo|clwb|no
+RES|topo|cpus|4
+== memory
+RES|topo|memtotal_mb|15506
+RES|topo|thp|[always] madvise never
+RES|topo|pagesize|4096
+== numa
+available: 2 nodes (0-1)
+node 0 cpus: 0 1
+node 0 size: 7486 MB
+node 0 free: 6006 MB
+node 1 cpus: 2 3
+node 1 size: 8020 MB
+node 1 free: 4063 MB
+node distances:

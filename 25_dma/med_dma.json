@@ -1,0 +1,169 @@
+{
+ "topo": {
+  "kernel": "6.12.0",
+  "iommu_domain": "Passthrough",
+  "iommu_groups": "0",
+  "CONFIG_DMA_SHARED_BUFFER": "CONFIG_DMA_SHARED_BUFFER=y",
+  "CONFIG_UDMABUF": "unset",
+  "CONFIG_DMABUF_SYSFS_STATS": "unset",
+  "dma_heap": "no",
+  "udmabuf": "no",
+  "dmabuf_sysfs": "no",
+  "drm": "device",
+  "render_nodes": "1",
+  "vmwgfx_ver": "2.20.0.0",
+  "cacheline": "64",
+  "l1d": "32768",
+  "clflush": "yes",
+  "clflushopt": "yes",
+  "clwb": "no",
+  "cpus": "4",
+  "memtotal_mb": "15506",
+  "thp": "[always] madvise never",
+  "pagesize": "4096"
+ },
+ "copy": {
+  "memcpy1": 12.8,
+  "memcpy2": 13.63,
+  "memcpy4": 14.4,
+  "read1": 11.58,
+  "read4": 23.11,
+  "write1": 23.31,
+  "write4": 33.63
+ },
+ "cache": {
+  "clflush_ns_line": 21.4,
+  "clflush_gbps": 3.0,
+  "clflushopt_ns_line": 2.0,
+  "clflushopt_gbps": 31.24,
+  "memset_gbps": 30.98,
+  "roundtrip_ns": 23.3,
+  "read_warm": 15.95,
+  "mb": 64
+ },
+ "pin": {
+  "mlock_ms": 256.0,
+  "ns_page_4k": 2.5,
+  "pages_4k": 65537,
+  "ns_page_2m": 323.5,
+  "pages_2m": 131073,
+  "chunk64k_ns": 5238.0,
+  "chunk2m_ns": 3052.0,
+  "mb": 256
+ },
+ "path": {
+  "pipe": {
+   "copies": 2,
+   "gbps": 3.71,
+   "ms": 18.1,
+   "cpu_ns_byte": 0.25
+  },
+  "unixsock": {
+   "copies": 2,
+   "gbps": 6.23,
+   "ms": 10.8,
+   "cpu_ns_byte": 0.14
+  },
+  "memfd_shared": {
+   "copies": 0,
+   "gbps": 12.43,
+   "ms": 5.4,
+   "cpu_ns_byte": 0.08
+  },
+  "sendfile": {
+   "copies": 1,
+   "gbps": 4.66,
+   "ms": 14.4,
+   "cpu_ns_byte": 0.21
+  },
+  "splice": {
+   "copies": 0,
+   "gbps": 5.61,
+   "ms": 12.0,
+   "cpu_ns_byte": 0.18
+  },
+  "vmsplice": {
+   "copies": 0,
+   "gbps": 5.89,
+   "ms": 11.4,
+   "cpu_ns_byte": 0.13
+  }
+ },
+ "dmabuf": {
+  "write_gbps": 32.95,
+  "first_write_ms": 17.7,
+  "read_line_gbps": 15.09,
+  "read_dense_gbps": 9.4,
+  "sync_pair_ns": 1965.0,
+  "mmap_native_ns": 6055.0,
+  "mmap_dmabuf_ns": 12547.0,
+  "coherent_bad_pages": 0,
+  "coherent_pages": 16384,
+  "mb": 64
+ },
+ "direct": {
+  "odirect_4096": {
+   "gbps": 0.02,
+   "cpu_ns_byte": 30.605
+  },
+  "odirect_16384": {
+   "gbps": 0.06,
+   "cpu_ns_byte": 8.048
+  },
+  "odirect_65536": {
+   "gbps": 0.27,
+   "cpu_ns_byte": 1.775
+  },
+  "odirect_262144": {
+   "gbps": 0.47,
+   "cpu_ns_byte": 1.218
+  },
+  "odirect_1048576": {
+   "gbps": 0.65,
+   "cpu_ns_byte": 1.165
+  },
+  "buffered_262144": {
+   "gbps": 0.53,
+   "cpu_ns_byte": 1.743
+  },
+  "read_plus_copy_262144": {
+   "gbps": 0.64,
+   "cpu_ns_byte": 1.449
+  }
+ },
+ "v": {
+  "tile_mb": 64,
+  "memcpy1": 12.8,
+  "tile_copy_ms": 5.24288,
+  "tile_flush_clflush_ms": 22.4395264,
+  "tile_flush_clflushopt_ms": 2.097152,
+  "flush_over_copy": 4.279999999999999,
+  "flushopt_over_copy": 0.39999999999999997,
+  "ns_byte_memcpy": 0.078125,
+  "ns_byte_flush": 0.334375,
+  "ns_byte_flushopt": 0.03125,
+  "ns_byte_roundtrip": 0.3640625,
+  "memcpy_scale_4": 1.125,
+  "read_scale_4": 1.9956822107081174,
+  "map64k_us": 5.238,
+  "copy64k_us": 5.12,
+  "map_over_copy": 1.0230468750000001,
+  "memfd_over_pipe": 3.3504043126684637,
+  "cpu_pipe": 0.25,
+  "cpu_memfd": 0.08,
+  "cpu_ratio": 3.125,
+  "dma_4k_gbps": 0.02,
+  "dma_1m_gbps": 0.65,
+  "dma_size_gain": 32.5,
+  "dma_4k_cpu": 30.605,
+  "dma_1m_cpu": 1.165,
+  "buffered_cpu": 1.743,
+  "odirect_cpu": 1.218,
+  "dma_cpu_gain": 1.4310344827586208,
+  "eff_read4": 0.6018229166666667,
+  "eff_read1": 0.3015625,
+  "rk_bw_1t": 10.28328125,
+  "rk_bw_4t": 20.522161458333333,
+  "rk_tile_copy_ms": 3.2700680255465704
+ }
+}
