@@ -151,12 +151,12 @@ def fig_flame():
 
 
 def fig_cmp():
-    D = json.load(open(os.path.join(HERE, "med_perf.json"), encoding="utf-8"))
+    D = json.load(open(os.path.join(HERE, "med_perf2.json"), encoding="utf-8"))
     L, B, T = D["loads"], D["branch"], D["threads"]
     W, H = 1760, 700
     im, d = canvas(W, H)
-    d.text((64 * S, 40 * S), "三把尺子量同一颗核：延迟、分支、线程", font=F(34 * S, True), fill=INK)
-    d.text((64 * S, 92 * S), "openEuler 24.03 虚拟机实测 · 4 vCPU（i5-7300HQ 2.5 GHz）· L3 6 MiB",
+    d.text((64 * S, 40 * S), "三把尺子量同一颗核：依赖、分支、几个核在干活", font=F(34 * S, True), fill=INK)
+    d.text((64 * S, 92 * S), "openEuler 24.03 虚拟机实测 · 4 vCPU（i5-7300HQ 2.5 GHz）· L3 6 MiB · 每档 7 轮",
            font=F(18 * S), fill=MUTED)
 
     base, top = 560, 250
@@ -168,51 +168,55 @@ def fig_cmp():
         d.text(((x + w / 2) * S, (base - h - 12) * S), label, font=F(18 * S, True), fill=color, anchor="ms")
         d.text(((x + w / 2) * S, (base + 14) * S), sub, font=F(15 * S), fill=MUTED, anchor="ma")
 
-    # A
+    # A. 依赖链 vs 四路并行（中位）
     px = 64
     d.text((px * S, 158 * S), "A. 同样的乘法：依赖链 vs 四路并行", font=F(21 * S, True), fill=INK)
-    d.text((px * S, 190 * S), "纵轴：执行一次 FMA 花的周期（越小越快）", font=F(15 * S), fill=MUTED)
-    dep = L["dep"]["cyc_per_iter"]["min"]
-    par = L["par4"]["cyc_per_iter"]["min"] / 4.0
-    mx = max(dep, par) * 1.35
-    bar(px + 70, 130, dep, mx, RED, "%.2f" % dep, "依赖链")
-    bar(px + 250, 130, par, mx, GREEN, "%.2f" % par, "四路并行")
-    d.text(((px + 70 + 130 / 2) * S, (base + 44) * S), "每迭代 1 次", font=F(14 * S), fill=MUTED, anchor="ma")
-    d.text(((px + 250 + 65) * S, (base + 44) * S), "每迭代 4 次", font=F(14 * S), fill=MUTED, anchor="ma")
+    d.text((px * S, 190 * S), "纵轴：执行一次 FMA 的周期（中位，越小越快）", font=F(15 * S), fill=MUTED)
+    dep = L["dep"]["cyc_per_fma_med"]
+    par = L["par4"]["cyc_per_fma_med"]
+    mx = max(dep, par) * 1.32
+    bar(px + 60, 130, dep, mx, RED, "%.2f" % dep, "依赖链")
+    bar(px + 240, 130, par, mx, GREEN, "%.2f" % par, "四路并行")
+    d.text(((px + 60 + 65) * S, (base + 44) * S), "每迭代 1 次", font=F(14 * S), fill=MUTED, anchor="ma")
+    d.text(((px + 240 + 65) * S, (base + 44) * S), "每迭代 4 次", font=F(14 * S), fill=MUTED, anchor="ma")
     d.text((px * S, (base + 84) * S), "相差 %.1f 倍：芯片没变，只是把等待藏起来了" % (dep / par),
            font=F(16 * S, True), fill=INK)
 
-    # B
-    px = 620
+    # B. 分支
+    px = 600
     d.text((px * S, 158 * S), "B. 同一批数据：排不排序", font=F(21 * S, True), fill=INK)
     d.text((px * S, 190 * S), "纵轴：处理每个元素的周期", font=F(15 * S), fill=MUTED)
     sv = B["sorted"]["cyc_per_elem"]["min"]
     rv = B["random"]["cyc_per_elem"]["min"]
     mx = max(sv, rv) * 1.2
-    bar(px + 70, 130, sv, mx, GREEN, "%.2f" % sv, "已排序")
-    bar(px + 250, 130, rv, mx, RED, "%.2f" % rv, "随机")
-    d.text(((px + 70 + 65) * S, (base + 44) * S), "分支可预测", font=F(14 * S), fill=MUTED, anchor="ma")
-    d.text(((px + 250 + 65) * S, (base + 44) * S), "半数猜错", font=F(14 * S), fill=MUTED, anchor="ma")
+    bar(px + 60, 130, sv, mx, GREEN, "%.2f" % sv, "已排序")
+    bar(px + 240, 130, rv, mx, RED, "%.2f" % rv, "随机")
+    d.text(((px + 60 + 65) * S, (base + 44) * S), "分支可预测", font=F(14 * S), fill=MUTED, anchor="ma")
+    d.text(((px + 240 + 65) * S, (base + 44) * S), "半数猜错", font=F(14 * S), fill=MUTED, anchor="ma")
     d.text((px * S, (base + 84) * S), "相差 %.1f 倍：每次猜错要赔上十几个周期" % (rv / sv),
            font=F(16 * S, True), fill=INK)
 
-    # C
-    px = 1150
-    d.text((px * S, 158 * S), "C. 线程加上去，会更快吗", font=F(21 * S, True), fill=INK)
-    d.text((px * S, 190 * S), "纵轴：相对单线程的加速比", font=F(15 * S), fill=MUTED)
-    t0 = T[0]["ns"]
-    sp = [(x["threads"], t0 / x["ns"]) for x in T]
-    mx = max(v for _, v in sp) * 1.22
-    bw, gap = 52, 20
-    for i, (t, v) in enumerate(sp):
-        x = px + 24 + i * (bw + gap)
-        c = GREEN if t <= 3 else (ORANGE if t < 12 else RED)
+    # C. 有效并行度
+    px = 1112
+    d.text((px * S, 158 * S), "C. 加到 8 线程，几个核在干活", font=F(21 * S, True), fill=INK)
+    d.text((px * S, 190 * S), "纵轴：有效并行度 = CPU 时间 ÷ 墙钟", font=F(15 * S), fill=MUTED)
+    mx = 4.65
+    y4 = base - span * 4.0 / mx
+    for xx in range(int(px * S), int((px + 6 * 70) * S), 26):
+        d.line([xx, y4 * S, xx + 16, y4 * S], fill=RED, width=3)
+    d.text(((px + 6 * 70 - 4) * S, (y4 - 12) * S), "4 个 vCPU", font=F(13 * S, True), fill=RED, anchor="rs")
+    bw, gap = 52, 18
+    for i, th in enumerate(T):
+        v = th["para_max"]
+        t = th["threads"]
+        x = px + i * (bw + gap)
+        c = BLUE if v >= 3.0 else GREEN
         h = span * v / mx
         d.rectangle([x * S, (base - h) * S, (x + bw) * S, base * S], fill=c)
-        d.text(((x + bw / 2) * S, (base - h - 10) * S), "%.1f×" % v, font=F(14 * S, True), fill=c, anchor="ms")
+        d.text(((x + bw / 2) * S, (base - h - 10) * S), "%.1f" % v, font=F(14 * S, True), fill=c, anchor="ms")
         d.text(((x + bw / 2) * S, (base + 14) * S), "%d" % t, font=F(15 * S), fill=INK, anchor="ma")
-    d.text(((px + 24) * S, (base + 44) * S), "线程数（个）", font=F(14 * S), fill=MUTED)
-    d.text((px * S, (base + 84) * S), "3 线程见顶，第 4 个线程反而掉下来",
+    d.text((px * S, (base + 44) * S), "线程数（个）", font=F(14 * S), fill=MUTED)
+    d.text((px * S, (base + 84) * S), "8 线程，仍然只有 3.5 个核在干活",
            font=F(16 * S, True), fill=INK)
 
     im = im.resize((W, H), Image.LANCZOS)

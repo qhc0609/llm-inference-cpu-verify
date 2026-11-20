@@ -18,6 +18,12 @@ static double now_ns(void) {
     struct timespec ts; clock_gettime(CLOCK_MONOTONIC, &ts);
     return ts.tv_sec * 1e9 + ts.tv_nsec;
 }
+/* 整个进程累计占用 CPU 的时间：墙钟被挂起时它不涨，
+ * 用它除以墙钟就是"实际有幾個核在干活"（有效并行度）。 */
+static double now_cpu(void) {
+    struct timespec ts; clock_gettime(CLOCK_PROCESS_CPUTIME_ID, &ts);
+    return ts.tv_sec * 1e9 + ts.tv_nsec;
+}
 
 typedef struct { double *w; long n; long iters; double out; } arg_t;
 
@@ -57,18 +63,21 @@ int main(int argc, char **argv) {
     long per = total_iters / nt; if (per < 1) per = 1;
 
     long c0 = ctxt();
-    uint64_t t0c = rdtsc(); double t0 = now_ns();
+    uint64_t t0c = rdtsc(); double t0 = now_ns(); double u0 = now_cpu();
     for (int i = 0; i < nt; i++) {
         a[i].w = w; a[i].n = n; a[i].iters = per; a[i].out = 0;
         pthread_create(&th[i], NULL, worker, &a[i]);
     }
     double sum = 0;
     for (int i = 0; i < nt; i++) { pthread_join(th[i], NULL); sum += a[i].out; }
-    double t1 = now_ns(); uint64_t t1c = rdtsc();
+    double t1 = now_ns(); uint64_t t1c = rdtsc(); double u1 = now_cpu();
     long c1 = ctxt();
 
-    printf("THREADS=%d\nWORK=%.0f_MAC\nNS=%.0f\nCYCLES=%llu\nCTXT_SWITCHES=%ld\nPER_THREAD_SW=%.1f\nSINK=%.0f\n",
-           nt, (double)per * nt * n, t1 - t0, (unsigned long long)(t1c - t0c),
+    double wall = t1 - t0, cpu = u1 - u0;
+    printf("THREADS=%d\nWORK=%.0f_MAC\nNS=%.0f\nCYCLES=%llu\nCPUS=%.0f\nPARALLEL=%.2f\n"
+           "CTXT_SWITCHES=%ld\nPER_THREAD_SW=%.1f\nSINK=%.0f\n",
+           nt, (double)per * nt * n, wall, (unsigned long long)(t1c - t0c), cpu,
+           wall > 0 ? cpu / wall : 0.0,
            c1 - c0, (double)(c1 - c0) / nt, sum);
     free(w);
     return 0;

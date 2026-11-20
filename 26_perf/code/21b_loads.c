@@ -22,6 +22,14 @@ static double now_ns(void) {
     return ts.tv_sec * 1e9 + ts.tv_nsec;
 }
 
+/* 只计本线程真正占用 CPU 的时间。vCPU 被宿主 deschedule 时不累加，
+ * 所以它不受宿主争抢影响，是虚拟化里唯一能站住的计时基准。 */
+static double now_cpu(void) {
+    struct timespec ts;
+    clock_gettime(CLOCK_THREAD_CPUTIME_ID, &ts);
+    return ts.tv_sec * 1e9 + ts.tv_nsec;
+}
+
 #define ITERS 60000000L
 
 __attribute__((noinline)) double load_dep(long n) {
@@ -85,26 +93,29 @@ int main(int argc, char **argv) {
         /* 热身 */
         if (!strcmp(mode, "dep")) sink = load_dep(n / 20);
         else sink = load_par4(n / 20);
-        uint64_t c0 = rdtsc(); double t0 = now_ns();
+        uint64_t c0 = rdtsc(); double t0 = now_ns(); double u0 = now_cpu();
         double r = !strcmp(mode, "dep") ? load_dep(n) : load_par4(n);
-        double t1 = now_ns(); uint64_t c1 = rdtsc();
+        double t1 = now_ns(); uint64_t c1 = rdtsc(); double u1 = now_cpu();
         sink = r;
-        printf("MODE=%s\nITERS=%ld\nNS=%.0f\nCYCLES=%llu\nCYC_PER_ITER=%.4f\nNS_PER_ITER=%.4f\n",
-               mode, n, t1 - t0, (unsigned long long)(c1 - c0),
-               (double)(c1 - c0) / n, (t1 - t0) / n);
+        printf("MODE=%s\nITERS=%ld\nNS=%.0f\nCYCLES=%llu\nCPUS=%.0f\n"
+               "CYC_PER_ITER=%.4f\nNS_PER_ITER=%.4f\nCPU_PER_ITER=%.4f\nWALL_CPU=%.3f\n",
+               mode, n, t1 - t0, (unsigned long long)(c1 - c0), u1 - u0,
+               (double)(c1 - c0) / n, (t1 - t0) / n, (u1 - u0) / n,
+               (u1 - u0) > 0 ? (t1 - t0) / (u1 - u0) : 0.0);
     } else if (!strcmp(mode, "chase")) {
         size_t bytes = argc > 3 ? (size_t)atol(argv[3]) : (32u << 20);
         long stride = argc > 4 ? atol(argv[4]) : 8;   /* 8 elems = 64 B = 一行 */
         uint64_t *buf = make_ring(bytes, stride);
         /* 热身：走 1/20 */
         load_chase(buf, n / 20, stride);
-        uint64_t c0 = rdtsc(); double t0 = now_ns();
+        uint64_t c0 = rdtsc(); double t0 = now_ns(); double u0 = now_cpu();
         uint64_t s = load_chase(buf, n, stride);
-        double t1 = now_ns(); uint64_t c1 = rdtsc();
+        double t1 = now_ns(); uint64_t c1 = rdtsc(); double u1 = now_cpu();
         sink = (double)s;
-        printf("MODE=chase\nITERS=%ld\nBYTES=%zu\nSTRIDE=%ld\nNS=%.0f\nCYCLES=%llu\nCYC_PER_ITER=%.4f\nNS_PER_ITER=%.4f\n",
-               n, bytes, stride, t1 - t0, (unsigned long long)(c1 - c0),
-               (double)(c1 - c0) / n, (t1 - t0) / n);
+        printf("MODE=chase\nITERS=%ld\nBYTES=%zu\nSTRIDE=%ld\nNS=%.0f\nCYCLES=%llu\nCPUS=%.0f\n"
+               "CYC_PER_ITER=%.4f\nNS_PER_ITER=%.4f\nCPU_PER_ITER=%.4f\n",
+               n, bytes, stride, t1 - t0, (unsigned long long)(c1 - c0), u1 - u0,
+               (double)(c1 - c0) / n, (t1 - t0) / n, (u1 - u0) / n);
         free(buf);
     } else {
         fprintf(stderr, "usage: %s dep|par4|chase [iters] [bytes] [stride_elems]\n", argv[0]);

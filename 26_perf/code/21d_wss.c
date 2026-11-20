@@ -56,18 +56,21 @@ int main(int argc, char **argv) {
         double *p = aligned_alloc(64, n * 8);
         for (size_t i = 0; i < n; i++) p[i] = 1.0;
         double warm = seq_sum(p, n / 8); fsink = warm;
-        /* 读三遍取总和，摊掉启动开销 */
+
+        /* 单遍太短（4 MiB 约 0.3 ms），必然受宿主抢占影响。
+         * 跑 10 轮取最快的一轮：干扰只会让某轮变慢，不会让某轮变快，
+         * 所以最小值最接近"没有干扰时"的真实带宽。
+         * 注意 best 是一遍的耗时，带宽直接除，不能再乘任何倍数。 */
         double best = 1e30;
-        for (int r = 0; r < 3; r++) {
+        for (int r = 0; r < 10; r++) {
             double t0 = now_ns();
             double s = seq_sum(p, n);
             double t1 = now_ns();
             fsink = s;
             if (t1 - t0 < best) best = t1 - t0;
         }
-        double gb = (double)bytes * 3 / best;   /* 3 遍 */
         printf("MODE=seq\nBYTES=%zu\nNS=%.0f\nGBPS=%.2f\nNS_PER_LINE=%.3f\n",
-               bytes, best, gb, best / (double)(n / 8) * 3);
+               bytes, best, (double)bytes / best, best / (double)(n / 8));
         free(p);
     } else {
         uint64_t *perm = make_perm(n, 88172645463325252ull);
