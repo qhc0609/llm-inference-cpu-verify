@@ -1,0 +1,16 @@
+
+ Performance counter stats for 'true':
+
+   <not supported>      cycles                                                                
+   <not supported>      instructions                                                          
+   <not supported>      cache-misses                                                          
+   <not supported>      branch-misses                                                         
+                 0      L1-dcache-load-misses                                                 
+   <not supported>      LLC-load-misses                                                       
+
+       0.002565087 seconds time elapsed
+
+       0.000000000 seconds user
+       0.000000000 seconds sys
+
+

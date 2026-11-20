@@ -1,0 +1,242 @@
+{
+ "env": {
+  "kernel": "6.6.0-159.4.3.154.oe2403sp4.x86_64"
+ },
+ "pmu": {
+  "PMU": false,
+  "CACHE": false,
+  "BRANCH": false
+ },
+ "loads": {
+  "dep": {
+   "cyc_per_iter": {
+    "med": 8.7849,
+    "min": 4.8884,
+    "n": 9
+   },
+   "ns_per_iter": {
+    "med": 3.519,
+    "min": 1.9575,
+    "n": 9
+   }
+  },
+  "par4": {
+   "cyc_per_iter": {
+    "med": 3.8638,
+    "min": 3.3669,
+    "n": 9
+   },
+   "ns_per_iter": {
+    "med": 1.5478,
+    "min": 1.3488,
+    "n": 9
+   }
+  },
+  "chase": {
+   "cyc_per_iter": {
+    "med": 545.7428,
+    "min": 505.8552,
+    "n": 9
+   },
+   "ns_per_iter": {
+    "med": 218.6374,
+    "min": 202.6668,
+    "n": 9
+   }
+  }
+ },
+ "branch": {
+  "sorted": {
+   "ns_per_elem": {
+    "med": 0.895,
+    "min": 0.8108
+   },
+   "cyc_per_elem": {
+    "med": 2.2762,
+    "min": 2.0614
+   }
+  },
+  "random": {
+   "ns_per_elem": {
+    "med": 6.9791,
+    "min": 6.4193
+   },
+   "cyc_per_elem": {
+    "med": 17.47,
+    "min": 16.0645
+   }
+  }
+ },
+ "wss": {
+  "seq": [
+   {
+    "bytes": 16384,
+    "gbps": 71.96,
+    "gbps_med": 71.86,
+    "ns_per_line": 8.016
+   },
+   {
+    "bytes": 65536,
+    "gbps": 73.77,
+    "gbps_med": 73.5,
+    "ns_per_line": 7.837
+   },
+   {
+    "bytes": 262144,
+    "gbps": 73.77,
+    "gbps_med": 73.22,
+    "ns_per_line": 7.866
+   },
+   {
+    "bytes": 1048576,
+    "gbps": 68.49,
+    "gbps_med": 61.83,
+    "ns_per_line": 9.315
+   },
+   {
+    "bytes": 4194304,
+    "gbps": 58.63,
+    "gbps_med": 50.74,
+    "ns_per_line": 11.351
+   },
+   {
+    "bytes": 16777216,
+    "gbps": 47.58,
+    "gbps_med": 47.55,
+    "ns_per_line": 12.114
+   },
+   {
+    "bytes": 67108864,
+    "gbps": 17.48,
+    "gbps_med": 16.36,
+    "ns_per_line": 35.215
+   },
+   {
+    "bytes": 268435456,
+    "gbps": 50.3,
+    "gbps_med": 49.53,
+    "ns_per_line": 11.629
+   }
+  ],
+  "rnd": [
+   {
+    "bytes": 16384,
+    "ns": 4.16,
+    "ns_med": 4.29
+   },
+   {
+    "bytes": 65536,
+    "ns": 7.67,
+    "ns_med": 8.42
+   },
+   {
+    "bytes": 262144,
+    "ns": 4.68,
+    "ns_med": 5.99
+   },
+   {
+    "bytes": 1048576,
+    "ns": 6.67,
+    "ns_med": 6.77
+   },
+   {
+    "bytes": 4194304,
+    "ns": 19.34,
+    "ns_med": 26.51
+   },
+   {
+    "bytes": 16777216,
+    "ns": 77.46,
+    "ns_med": 78.14
+   },
+   {
+    "bytes": 67108864,
+    "ns": 124.54,
+    "ns_med": 159.45
+   },
+   {
+    "bytes": 268435456,
+    "ns": 268.18,
+    "ns_med": 268.34
+   }
+  ]
+ },
+ "wss_pmu": [],
+ "threads": [
+  {
+   "threads": 1,
+   "ns": 981282010.0,
+   "ns_med": 1928731148.0,
+   "switches": 1.0
+  },
+  {
+   "threads": 2,
+   "ns": 350733514.0,
+   "ns_med": 772611392.0,
+   "switches": 2.0
+  },
+  {
+   "threads": 3,
+   "ns": 241162421.0,
+   "ns_med": 439314440.0,
+   "switches": 2.0
+  },
+  {
+   "threads": 4,
+   "ns": 370325604.0,
+   "ns_med": 544830982.0,
+   "switches": 3.0
+  },
+  {
+   "threads": 6,
+   "ns": 233510844.0,
+   "ns_med": 312436961.0,
+   "switches": 4.0
+  },
+  {
+   "threads": 8,
+   "ns": 250469169.0,
+   "ns_med": 289051092.0,
+   "switches": 3.0
+  },
+  {
+   "threads": 12,
+   "ns": 286489940.0,
+   "ns_med": 331650081.0,
+   "switches": 5.0
+  }
+ ],
+ "ftrace": {
+  "TOTAL": "145",
+  "PREEMPT": "115",
+  "TO_SELF": "118",
+  "count": 182
+ },
+ "gemv": {
+  "TOKENS": 40.0,
+  "LAYERS": 24.0,
+  "WEIGHT_MB": 471.1,
+  "NS": 5975283674.0,
+  "MS_PER_TOKEN": 149.38,
+  "TOK_PER_SEC": 6.69,
+  "BANDWIDTH_GBPS": 3.31,
+  "CHECKSUM": -1184706.875
+ },
+ "hot": [
+  {
+   "pct": 96.11,
+   "comm": "21f_gemv",
+   "dso": "21f_gemv",
+   "sym": "gemv_q8_0"
+  },
+  {
+   "pct": 1.81,
+   "comm": "21f_gemv",
+   "dso": "21f_gemv",
+   "sym": "attention.constprop.0"
+  }
+ ],
+ "cpu_util": 24.4,
+ "top_busy": "top - 09:51:06 up 24 min,  1 user,  load average: 1.64, 1.11, 0.86\nTasks: 136 total,   3 running, 133 sleeping,   0 stopped,   0 zombie\n%Cpu(s): 23.9 us,  2.2 sy,  0.0 ni, 71.7 id,  0.0 wa,  2.2 hi,  0.0 si,  0.0 st \nMiB Mem :   7431.0 total,   6219.8 free,    643.2 used,    814.2 buff/cache     \nMiB Swap:   6144.0 total,   6144.0 free,      0.0 used.   6787.8 avail Mem \n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n   8357 root      20   0  170764 169312   1628 R 100.0   2.2   0:02.12 21f_gemv\n   8359 root      20   0   26888  11340   9212 R  18.2   0.1   0:00.02 top\n      1 root      20   0   24552  15888  10244 S   0.0   0.2   0:08.89 systemd\n      2 root      20   0       0      0      0 S   0.0   0.0   0:00.21 kthreadd\n      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+\n",
+ "top_idle": "top - 09:51:04 up 24 min,  1 user,  load average: 1.70, 1.11, 0.86\nTasks: 135 total,   1 running, 134 sleeping,   0 stopped,   0 zombie\n%Cpu(s):  1.7 us,  5.0 sy,  0.0 ni, 90.0 id,  0.0 wa,  1.7 hi,  1.7 si,  0.0 st \nMiB Mem :   7431.0 total,   6379.4 free,    483.6 used,    814.2 buff/cache     \nMiB Swap:   6144.0 total,   6144.0 free,      0.0 used.   6947.3 avail Mem \n\n    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND\n   8354 root      20   0   26888  11344   9212 R   6.7   0.1   0:00.05 top\n      1 root      20   0   24552  15888  10244 S   0.0   0.2   0:08.89 systemd\n      2 root      20   0       0      0      0 S   0.0   0.0   0:00.21 kthreadd\n      3 root      20   0       0      0      0 S   0.0   0.0   0:00.00 pool_wo+\n      4 root       0 -20       0      0      0 I   0.0   0.0   0:00.00 kworker+\n"
+}

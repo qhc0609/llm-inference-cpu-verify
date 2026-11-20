@@ -1,0 +1,36 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 8K of event 'cpu-clock'
+# Event count (approx.): 4134000000
+#
+# Overhead  Command   Shared Object      Symbol                                       
+# ........  ........  .................  .............................................
+#
+    96.11%  21f_gemv  21f_gemv           [.] gemv_q8_0
+            |
+            ---gemv_q8_0
+               |          
+               |--69.18%--llama_build_graph
+               |          graph_compute
+               |          main
+               |          0x7fd7acb2aad0
+               |          
+                --26.91%--main
+                          0x7fd7acb2aad0
+
+     1.81%  21f_gemv  21f_gemv           [.] attention.constprop.0
+            |
+            ---attention.constprop.0
+               llama_build_graph
+               graph_compute
+               main
+               0x7fd7acb2aad0
+
+
+
+#
+# (Tip: Skip collecting build-id when recording: perf record -B)
+#
