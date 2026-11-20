@@ -8,7 +8,8 @@
 ```bash
 bash run21.sh results21      # 首轮：六组实验
 bash 21h_retest.sh 7         # 复核：每档 7 轮交叉轮转（关键）
-python3 build_med2.py        # -> med_perf2.json
+taskset -c 2 ./21d_wss seq <bytes>   # 带宽复测：8 档 × 5 轮 -> results21c/wss_retest.txt
+python3 build_med2.py        # -> med_perf2.json（全部数字从原始文件解析）
 python3 flame.py results21/perf.script flame.svg
 python3 make_fig21.py        # -> fig21_flame.png / fig21_cmp.png
 ```
@@ -33,28 +34,43 @@ python3 make_fig21.py        # -> fig21_flame.png / fig21_cmp.png
 
 | 文件 | 实验 | 关键结果 |
 |---|---|---|
-| `21b_loads.c` | 依赖链 / 四路并行 / 随机置换环 | 每次 FMA 10.40 → 1.97 周期（中位 5.3×，各轮 2.8–8.0）；随机访存 505 周期 |
-| `21c_branch.c` | 排序 vs 随机分支 | 2.06 → 16.06 周期/元素（7.8×） |
-| `21d_wss.c` | 16 KiB→256 MiB 工作集 | 顺序读 24.0→15.6 GB/s；随机 4.2→268.2 ns |
-| `21e_threads.c` | 1→8 线程 | 有效并行度 1.0→3.4（4 线程），6/8 线程停在 3.5 |
+| `21b_loads.c` | 依赖链 / 四路并行 / 随机置换环 | 每次 FMA 10.40 → 1.97 周期（逐轮中位 4.3×，各轮 2.8–8.0）；随机访存 505 周期 |
+| `21c_branch.c` | 排序 vs 随机分支 | 2.06 → 16.06 周期/元素（9 轮最快值；同轮配对中位 7.7×） |
+| `21d_wss.c` | 16 KiB→256 MiB 工作集 | 顺序读 23.9→15.8 GB/s；随机 4.2→268.2 ns |
+| `21e_threads.c` | 1→8 线程 | 有效并行度 0.95→3.47（8 线程峰值），3~4 线程后墙钟不再下降 |
 | `run21.sh` | ftrace sched_switch | 0.25 s 内 145 次切换，79% 是被抢占 |
-| `21f_gemv.c` | Qwen2.5-0.5B Decode 复刻 | 149.7 ms/token（5 轮 143.6–159.4），3.15 GB/s，`gemv_q8_0` 占 96.1% |
+| `21f_gemv.c` | Qwen2.5-0.5B Decode 复刻 | 149.7 ms/token（5 轮 143.6–159.4），3.30 GB/s，`gemv_q8_0` 占 96.1% |
+
+## llama.cpp 对照（第九节）
+
+```bash
+# 模型：ModelScope / Qwen/Qwen2.5-0.5B-Instruct-GGUF (q8_0, 638.74 MiB)
+# 源码：GitHub master tarball，经 gh-proxy.com 下载；GCC 12.3.1
+cmake -B build -DCMAKE_BUILD_TYPE=Release -DGGML_NATIVE=ON -DLLAMA_CURL=OFF
+cmake --build build -j4 --target llama-bench
+systemctl isolate multi-user.target          # 关桌面
+./llama-bench -m q8.gguf -p 0 -n 64 -t 1,2,3,4 -r 5 -o md
+```
+
+结果（3 轮中位）：1 线程 16.80 token/s（59.5 ms）、2 线程 31.33、3 线程 **38.75**（25.8 ms）、
+4 线程 29.60（**比 3 线程慢 24%**，轮间标准差 3.43）。
+`ggml_vec_dot_q8_0_q8_0` 占 77.85%。原始数据见 `results/llama_bench_r3.md`、`results/llama_top.txt`。
 
 详细分析见 [REPORT.md](REPORT.md)。
 
 ## 结论
 
-算力不是瓶颈（4 核只用到 24%），DRAM 带宽也不是（15.6 GB/s 里只吃到 20%）。
+算力不是瓶颈（4 核只用到 24%），DRAM 带宽也不是（单线程 15.8 GB/s 里只吃到 3.30，21%）。
 瓶颈在 `gemv_q8_0` 内核内的 int8 解包：每周期只处理 1.3 字节，而理论上限是 5–8 字节。
-4 个线程就能用满物理核，再往上加只是排队；真正的收益来自重写内核
-（`maddubs` 整数点积 + 多行并行）。
+换成 llama.cpp 本体，同一个模型单线程 59.5 ms、3 线程 25.8 ms，是复刻版的 2.5 / 5.8 倍——
+差的全在 kernel 实现上。
 
 ## 第二版修正了什么
 
 | 第一版 | 真因 | 第二版 |
 |---|---|---|
-| 顺序读 72 GB/s（比 DDR4 理论值高 3 倍） | 把「一遍耗时」当「三遍总量」算带宽 | 24.0 / 15.6 GB/s |
+| 顺序读 72 GB/s（比 DDR4 理论值高 3 倍） | 把「一遍耗时」当「三遍总量」算带宽 | 23.9 / 15.8 GB/s |
 | 4 核 6.7× 加速比 | 分母撞上低频被抬高 | 改用有效并行度 3.4 |
-| 「3 线程见顶、第 4 线程掉下来」 | 同一批脏数据推出的假象 | 4 线程用满物理核，之后不再增长 |
-| 5.8×（单点值） | TSC 按固定 2.5 GHz 换算，频率在变 | 5.3×（范围 2.8–8.0） |
-| 3.31 GB/s / 15% | 用旧耗时算的带宽 | 3.15 GB/s / 20% |
+| 「3 线程见顶、第 4 线程掉下来」 | 同一批脏数据推出的假象 | 3~4 线程后墙钟不再下降 |
+| 5.8×（单点值） | TSC 按固定 2.5 GHz 换算，频率在变 | 4.3×（逐轮中位，范围 2.8–8.0） |
+| 3.31 GB/s / 15% | 用旧耗时、且把 MiB 当 MB | 3.30 GB/s / 21% |

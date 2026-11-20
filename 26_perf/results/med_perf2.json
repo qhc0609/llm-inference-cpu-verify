@@ -596,7 +596,7 @@
   "NS": 5975283674.0,
   "MS_PER_TOKEN": 149.73,
   "TOK_PER_SEC": 6.68,
-  "BANDWIDTH_GBPS": 3.146,
+  "BANDWIDTH_GBPS": 3.299,
   "CHECKSUM": -1184706.875,
   "ms_runs": [
    159.4,
@@ -606,6 +606,7 @@
    154.38
   ],
   "ms_min": 143.55,
-  "ms_max": 159.4
+  "ms_max": 159.4,
+  "WEIGHT_MB_DEC": 494.0
  }
 }
