@@ -1,0 +1,13 @@
+### F 同一条 decode 步骤，优化前（朴素标量、单线程）vs 优化后（AVX2×4 + 4 线程）
+## before
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=428.64 gbs=1.57 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=373.68 gbs=1.80 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=443.46 gbs=1.51 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=359.49 gbs=1.87 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=478.49 gbs=1.40 checksum=-15573.6523
+## after
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=204.76 gbs=3.28 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=88.22 gbs=7.61 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=144.37 gbs=4.65 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=63.74 gbs=10.53 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=90.76 gbs=7.39 checksum=-15572.8916

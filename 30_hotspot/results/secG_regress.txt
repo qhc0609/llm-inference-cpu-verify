@@ -1,0 +1,15 @@
+### G 回归：同一配置连跑 10 次，看 checksum 是否一致、时间离散度
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=62.51 gbs=10.74 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=66.56 gbs=10.08 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=66.50 gbs=10.09 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=68.02 gbs=9.87 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=53.87 gbs=12.46 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=73.33 gbs=9.15 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=57.29 gbs=11.71 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=61.99 gbs=10.83 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=65.57 gbs=10.23 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=55.36 gbs=12.12 checksum=-15572.8926
+## GEMM 一致性（block 与 naive 的 checksum 必须相同）
+GEMM variant=naive n=256 ms=44.5 gflops=0.75 checksum=166069.790
+GEMM variant=block:64 n=256 ms=26.6 gflops=1.26 checksum=166069.790
+GEMM variant=mt:4 n=256 ms=31.3 gflops=1.07 checksum=166069.790

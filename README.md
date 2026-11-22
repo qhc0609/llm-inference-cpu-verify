@@ -247,3 +247,69 @@ python3 code/build_med23.py results > results/summary.txt
 饥饿实验口径全错、CRLF 造出 `results\r` 目录）写在
 [`28_sched_qos/README.md`](28_sched_qos/README.md)，
 完整数据见 [`28_sched_qos/REPORT.md`](28_sched_qos/REPORT.md)。
+
+## 追加：`29_power_thermal/` —— CPU 功耗与温控优化：怎么让模型连续跑八小时不掉速
+
+对应第 24 篇《CPU 功耗与温控优化：如何让大模型持续稳定运行？》。
+
+这一篇的前提很别扭：实验机上 **cpufreq 目录不存在、thermal zone 一个都没有、powercap 是空的、
+MSR 0x198 四核读出 0、perf 报 not supported**。频率、温度、功耗三个数一个都读不到。
+所以它讲的不只是原理，是一套「读不到也能判」的方法：
+
+- 用 `getrusage(RUSAGE_THREAD)` 逐 token 采样，取窗口内 **p10** 当频率代理（`p10 ∝ 1/f`）；
+- 判别表：吞吐↓ + p10 不变 = 被抢 CPU；吞吐↓ + p10↑ = 真降频；
+- 用 cgroup `cpu.max` 做对照实验（只减时间份额、不改硬件状态），验证「吞吐腰斩而 p10 不变」确实会发生。
+
+七组数据里最值得看的两条：
+
+1. **单线程 240 秒 vs 四线程 180 秒，p10 中位 16100 与 15953 μs——几乎一样。**
+   四线程吞吐抖了 3 倍（45.6~136.8 token/s），但那不是降频，是宿主机在抢；
+   同一时刻 PSI 常年 12~36（单线程只有 0~6），把话说得很清楚。
+2. **配额 100% → 50% → 25%，吞吐 47.2 → 26.1 → 14.0 token/s 近似线性下降，
+   而每 token 的 CPU 时间 20.1 → 18.2 → 17.3 ms 反而不升反降。**
+   方向与降频的预测正好相反——这组数据是整个方法的地基。
+
+诚实标注：这套结论里「未观察到降频」是**被环境决定的**（这台机器连降频通道都没有），
+不可外推为「真机不会降频」。间歇组观察到逐轮劣化（92.4→99.3→86.5→74.8 token/s），
+但没有温度证据，只写「观察到」，不写「因为热」。
+
+```bash
+cd 29_power_thermal
+gcc -O2 -o pow24 code/pow24.c -lpthread
+sudo bash code/run24.sh > /tmp/run24_all.txt 2>&1   # A–G 七组
+```
+
+数据见 [`29_power_thermal/REPORT.md`](29_power_thermal/REPORT.md)，
+踩过的坑（`cpu.max` 被 `tee` 写成 1、`tokens` 被编译器留在寄存器、线程每轮重建把缓存冲掉）
+写在 [`29_power_thermal/README.md`](29_power_thermal/README.md)。
+
+## 追加：`30_hotspot/` —— 计算热点与内存瓶颈定位：一次 6 倍的优化，和一次白干的优化
+
+对应第 25 篇《CPU 计算热点与内存瓶颈定位》。
+
+四个手段逐个上称：向量化、绑核、分块、限频。两个结论正好相反：
+
+1. **decode 的 GEMV：向量化 6.0 倍（1.87 → 11.27 GB/s），多线程一分没加**（中位 9.41，不如单线程）。
+2. **prefill 的 GEMM：分块 2.2 倍，再加 4 线程累计 7.4 倍**（n=512 从 0.59 到 4.38 GFLOPS）。
+
+同样叫「优化 CPU 上的推理」，一条流水线该做的事和另一条完全不同——因为算术强度差 500 倍。
+
+还有一条反直觉的绑核结论：**4 个线程钉在 1 颗核上（10.14 GB/s，离散 1.18×）
+比散在 4 颗核上（7.72，离散 3.74×）快 31%、稳得多**。
+第 23 篇（`28_sched_qos`，纯算力受限）的结论是「4 线程钉 4 核快 14%」——两个都对，
+因为它们回答的是不同的问题：先问瓶颈，再问绑法。
+
+本目录特意留了一份**修复前**的输出。GEMM 的 n=384 mt:4 checksum 曾报 `700705.291`（naive 是 `560548.199`，差 25%），
+根因是分块内层写 `i < n`（全局边长）而不是 `i < t->to`（本线程行上界），
+最后那个不满 64 行的块把下一线程的行又算了一遍。为什么只有 384 出错：384/4 = 96 = 64 + 32，不整除；
+256/4 = 64、512/4 = 128 都整除。**只测一个尺寸永远发现不了。**
+
+```bash
+cd 30_hotspot
+gcc -O2 -mavx2 -mfma -o hot25 code/hot25.c -lpthread
+bash code/run25.sh > /tmp/run25_all.txt 2>&1       # A–G 七组
+```
+
+数据见 [`30_hotspot/REPORT.md`](30_hotspot/REPORT.md)，
+踩过的坑（`stream read` 卡在浮点加法依赖链、GEMV 重复调用被 CSE 合并成 83 GB/s、
+`chase` 第二参数含义、GEMM 越界）写在 [`30_hotspot/README.md`](30_hotspot/README.md)。

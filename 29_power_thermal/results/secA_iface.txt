@@ -1,0 +1,48 @@
+### A 这台机器到底能读到什么（2026-11-22）
+$ uname -r
+6.8.0-149-generic
+
+$ ls /sys/devices/system/cpu/cpu0/cpufreq
+ls: 无法访问 '/sys/devices/system/cpu/cpu0/cpufreq': 没有那个文件或目录
+
+$ ls -d /sys/class/thermal/thermal_zone*
+ls: 无法访问 '/sys/class/thermal/thermal_zone*': 没有那个文件或目录
+
+$ cat /sys/class/thermal/cooling_device*/type
+Processor
+Processor
+Processor
+Processor
+
+$ ls /sys/class/powercap
+
+$ grep MHz /proc/cpuinfo  连续 5 次
+cpu MHz		: 2496.005
+cpu MHz		: 2496.005
+cpu MHz		: 2496.005
+cpu MHz		: 2496.005
+cpu MHz		: 2496.005
+
+$ MSR 0x198 (IA32_PERF_STATUS)
+cpu0 raw=0x0 ratio=0 MHz=0
+cpu1 raw=0x0 ratio=0 MHz=0
+cpu2 raw=0x0 ratio=0 MHz=0
+cpu3 raw=0x0 ratio=0 MHz=0
+
+$ perf stat -e cycles,instructions -- true
+       0.001371224 seconds time elapsed
+
+       0.000000000 seconds user
+       0.001437000 seconds sys
+
+
+
+$ dmidecode -t processor
+	Version: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+	Max Speed: 30000 MHz
+	Current Speed: 2500 MHz
+	Core Count: 2
+	Version: Intel(R) Core(TM) i5-7300HQ CPU @ 2.50GHz
+	Max Speed: 30000 MHz
+	Current Speed: 2500 MHz
+	Core Count: 2

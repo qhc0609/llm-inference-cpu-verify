@@ -1,0 +1,19 @@
+### B 顺序读 / 写 / 拷贝，8 MB 与 128 MB 两档
+STREAM mb=8 mode=read mt=1 ms=15.1 gbs=5.55 checksum=31877099560.0
+STREAM mb=8 mode=read mt=1 ms=18.3 gbs=4.59 checksum=31877099560.0
+STREAM mb=8 mode=read mt=1 ms=16.2 gbs=5.19 checksum=31877099560.0
+STREAM mb=8 mode=write mt=1 ms=13.4 gbs=6.26 checksum=9.0
+STREAM mb=8 mode=write mt=1 ms=13.1 gbs=6.40 checksum=9.0
+STREAM mb=8 mode=write mt=1 ms=12.1 gbs=6.94 checksum=9.0
+STREAM mb=8 mode=copy mt=1 ms=10.0 gbs=16.78 checksum=0.0
+STREAM mb=8 mode=copy mt=1 ms=8.3 gbs=20.10 checksum=0.0
+STREAM mb=8 mode=copy mt=1 ms=8.4 gbs=20.09 checksum=0.0
+STREAM mb=128 mode=read mt=1 ms=240.5 gbs=5.58 checksum=12761943920.0
+STREAM mb=128 mode=read mt=1 ms=254.0 gbs=5.28 checksum=12761943920.0
+STREAM mb=128 mode=read mt=1 ms=241.3 gbs=5.56 checksum=12761943920.0
+STREAM mb=128 mode=write mt=1 ms=294.0 gbs=4.57 checksum=9.0
+STREAM mb=128 mode=write mt=1 ms=215.1 gbs=6.24 checksum=9.0
+STREAM mb=128 mode=write mt=1 ms=211.3 gbs=6.35 checksum=9.0
+STREAM mb=128 mode=copy mt=1 ms=169.4 gbs=15.85 checksum=0.0
+STREAM mb=128 mode=copy mt=1 ms=151.7 gbs=17.69 checksum=0.0
+STREAM mb=128 mode=copy mt=1 ms=150.7 gbs=17.81 checksum=0.0

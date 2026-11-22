@@ -1,0 +1,31 @@
+### B 五次 10 秒短测，单线程，32 MB 权重（看噪声有多大）
+## round 1
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.2,5.2,182,35.3,26923.2,94.9,0.00,16.29
+10.4,5.3,172,32.6,29881.3,97.4,0.00,11.58
+### done
+## round 2
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,143,28.5,35044.7,100.0,0.00,10.95
+10.0,5.0,157,31.3,30569.9,95.8,0.00,9.56
+### done
+## round 3
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.1,5.1,155,30.6,32357.5,99.1,0.00,6.85
+10.6,5.6,142,25.5,39076.9,99.6,0.00,5.10
+### done
+## round 4
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,200,39.6,24213.7,95.9,0.00,5.38
+10.0,5.0,188,37.6,26276.8,98.8,0.00,3.31
+### done
+## round 5
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.3,5.3,172,32.3,28544.0,92.3,0.00,7.87
+10.4,5.1,203,39.9,24921.8,99.4,0.00,10.33
+### done

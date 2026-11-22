@@ -1,0 +1,17 @@
+### A 随机指针追逐：工作集从 4 KB 涨到 64 MB
+# kb n reps ns_per_access；L1 32K / L2 256K / L3 6M 是 i5-7300HQ 的规格
+# 第二个参数是总访问次数（3000 万次），内部按规模折算圈数
+CHASE kb=4 n=512 reps=58593 ns_per_access=2.275 checksum=258
+CHASE kb=16 n=2048 reps=14648 ns_per_access=2.357 checksum=1701
+CHASE kb=32 n=4096 reps=7324 ns_per_access=2.367 checksum=1229
+CHASE kb=64 n=8192 reps=3662 ns_per_access=5.509 checksum=187
+CHASE kb=128 n=16384 reps=1831 ns_per_access=5.427 checksum=10381
+CHASE kb=256 n=32768 reps=915 ns_per_access=8.769 checksum=31477
+CHASE kb=512 n=65536 reps=457 ns_per_access=15.340 checksum=45401
+CHASE kb=1024 n=131072 reps=228 ns_per_access=27.758 checksum=5898
+CHASE kb=2048 n=262144 reps=114 ns_per_access=47.285 checksum=176030
+CHASE kb=4096 n=524288 reps=57 ns_per_access=84.668 checksum=161662
+CHASE kb=8192 n=1048576 reps=28 ns_per_access=100.966 checksum=484762
+CHASE kb=16384 n=2097152 reps=14 ns_per_access=122.217 checksum=209504
+CHASE kb=32768 n=4194304 reps=7 ns_per_access=144.090 checksum=3959572
+CHASE kb=65536 n=8388608 reps=3 ns_per_access=138.379 checksum=4457641

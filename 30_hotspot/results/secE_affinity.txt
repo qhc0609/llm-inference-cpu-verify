@@ -1,0 +1,19 @@
+### E 绑核：同样的多线程 GEMV，钉 1 颗核 vs 钉 4 颗核 vs 不钉
+## 钉 1 颗核
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=72.14 gbs=9.30 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=65.46 gbs=10.25 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=74.07 gbs=9.06 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=62.62 gbs=10.72 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=66.20 gbs=10.14 checksum=-15572.8916
+## 钉 4 颗核
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=210.15 gbs=3.19 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=147.88 gbs=4.54 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=78.95 gbs=8.50 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=86.98 gbs=7.72 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=56.19 gbs=11.94 checksum=-15572.8916
+## 不钉
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=64.78 gbs=10.36 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=86.05 gbs=7.80 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=102.83 gbs=6.53 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=44.76 gbs=14.99 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=144.42 gbs=4.65 checksum=-15572.8916
