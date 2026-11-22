@@ -313,3 +313,34 @@ bash code/run25.sh > /tmp/run25_all.txt 2>&1       # A–G 七组
 数据见 [`30_hotspot/REPORT.md`](30_hotspot/REPORT.md)，
 踩过的坑（`stream read` 卡在浮点加法依赖链、GEMV 重复调用被 CSE 合并成 83 GB/s、
 `chase` 第二参数含义、GEMM 越界）写在 [`30_hotspot/README.md`](30_hotspot/README.md)。
+
+## 追加：`31_gpu_arch/` —— GPU 篇 01：一块 A10 的微架构，全部实测
+
+对应 GPU 系列第 01 篇《GPU 微架构基础：GPU 究竟是如何执行 AI 计算的？》。
+
+CPU 系列讲的是「没有 GPU 时怎么榨干 CPU」，从这一篇开始换到 GPU。
+第一篇不写模型、不调参，只做一件事：把一块 **NVIDIA A10（Ampere, 24 GB）**
+的参数从 `nvidia-smi` 和 CUDA 运行时里读出来，再用六个微基准跑一遍，
+让纸面参数和实测数字对上——对不上的地方更有意思。
+
+| 纸面 | 实测 | 差在哪 |
+|---|---|---|
+| FP32 峰值 31.2 TFLOPS @1695 MHz | 25.7 TFLOPS | 功耗墙把 SM 压到 1395 MHz，达成率 100% |
+| 显存带宽 600 GB/s | copy 内核 474 GB/s（79%）、decode 397 GB/s | 带宽是 decode 的天花板 |
+| PCIe Gen4 ×16 | H2D 12.1 GB/s | 比显存慢 50 倍，权重必须常驻 |
+| Tensor Core | FP16 比 FP32 快 5.9 倍（83.5 vs 14.2） | 换指令，不是多算 |
+| 72 个 SM | 72 个 block 正好填满，再多只是排队 | SM 是独立调度单位 |
+| warp 32 线程 | 分歧切法正好慢 2.00 倍 | 锁步执行，慢的路径决定全员 |
+
+同机对照（同一台机器、同一份 PyTorch）：GEMM **18.7 倍**、decode **9.5 倍**、
+GEMV **3.1 倍**——差距最大的是算力受限的 GEMM，最小的是带宽受限的 GEMV。
+
+```bash
+cd 31_gpu_arch/code
+bash run.sh          # 六组微基准 + 四组 PyTorch 实测
+```
+
+数据见 [`31_gpu_arch/REPORT.md`](31_gpu_arch/REPORT.md)，
+踩过的坑（CUDA 13 删了 `clockRate`、`cudaMemcpy` 不补同步测出 183 TB/s、
+谓词执行测不出 warp 分歧、H2D/D2H 参数写反）写在
+[`31_gpu_arch/README.md`](31_gpu_arch/README.md)。

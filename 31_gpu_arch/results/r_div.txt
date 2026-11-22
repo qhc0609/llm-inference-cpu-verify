@@ -1,0 +1,2 @@
+mode=0 warp内均匀	0.54 ms
+mode=1 warp内分歧(半数2倍)	1.08 ms

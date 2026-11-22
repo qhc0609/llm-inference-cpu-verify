@@ -1,0 +1,10 @@
+### cpu
+model name	: Intel(R) Xeon(R) Platinum 8369B CPU @ 2.90GHz
+nproc=16
+### flags
+avx2
+avx512f
+### img
+PRETTY_NAME="Ubuntu 22.04.5 LTS"
+NAME="Ubuntu"
+threads 8

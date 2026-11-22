@@ -1,0 +1,10 @@
+cuda                           8.6
+params_M                       100.7
+first_load_MB                  201
+first_load_ms                  110
+first_load_GBs                 1.8
+steady_tokens_per_s            1972
+steady_weight_GBs              397
+cpu_busy_pct_mean              4.8
+cpu_busy_pct_max               6.9
+cpu_samples                    3

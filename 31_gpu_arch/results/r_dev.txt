@@ -1,0 +1,32 @@
+device_count 1
+name                     NVIDIA A10
+compute_capability       8.6
+multiProcessorCount      72
+maxThreadsPerMultiProc   1536
+maxThreadsPerBlock       1024
+warpSize                 32
+regsPerMultiprocessor    65536
+regsPerBlock             65536
+sharedMemPerMultiprocessor 102400
+sharedMemPerBlock        49152
+sharedMemPerBlockOptin   101376
+l2CacheSize              6291456
+persistingL2CacheMaxSize 4325376
+memoryBusWidth           384
+memoryClockRate_kHz      6251000
+memory_bandwidth_GBs     600.1
+globalMemTotal_MiB       22597
+clockRate_kHz            1695000
+smCount*128(FP32 lanes)  9216
+asyncEngineCount         2
+concurrentKernels        1
+unifiedAddressing        1
+managedMemory            1
+pageableMemoryAccess     0
+pciBusID                 0000:00:03.0
+pciDeviceID              3
+tccDriver                0
+maxBlocksPerSM           16
+attr_sharedPerSM         102400
+attr_l2                  6291456
+attr_clock_kHz           1695000

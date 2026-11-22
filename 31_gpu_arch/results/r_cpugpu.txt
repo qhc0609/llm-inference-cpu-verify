@@ -1,0 +1,13 @@
+cpu_threads                  8
+cpu_gemm2048_GFLOPS          894.9
+gpu_gemm2048_GFLOPS          16749.3
+cpu_gemv_GBs                 123.4
+cpu_gemv_us                  544.0
+gpu_gemv_fp16_GBs            381.1
+gpu_gemv_us                  88.1
+cpu_model_M                  100.7
+cpu_tokens_per_s             206.02
+cpu_weight_GBs               83.01
+gpu_tokens_per_s             1957
+gpu_weight_GBs               789
+speedup_decode               10x

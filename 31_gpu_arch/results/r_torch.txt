@@ -1,0 +1,19 @@
+torch                              2.13.0+cu130
+cuda                               13.0
+device                             NVIDIA A10
+capability                         8.6
+gemm_fp32_notf32_TFLOPS            14.2
+gemm_tf32_TFLOPS                   35.4
+gemm_fp16_TFLOPS                   83.5
+gemm_bf16_TFLOPS                   87.9
+gemv_b1_GBs                        426.9
+gemv_b1_us_per_call                78.6
+gemv_b8_GBs                        436.7
+gemv_b8_us_per_call                76.8
+gemv_b32_GBs                       426.4
+gemv_b32_us_per_call               78.7
+launch_us_per_kernel               7.65
+launch_kernels_per_s               130734.9
+model_params_M                     100.7
+decode_tokens_per_s                2001.8
+decode_GBs_from_weight             403.3
