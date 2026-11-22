@@ -1,0 +1,19 @@
+[sudo] user 的密码： ### B1 空闲基线（两线程同核 ping-pong）
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=8000 p50=9745 p99=12488 p999=256563 max=3285868 unit=ns
+### B2 其它核加 2/4 个自旋
+PP policy=SCHED_OTHER prio=50 spin=2 same=0 cpu=0 n=6000 p50=12165 p99=13220 p999=103711 max=129092399 unit=ns
+PP policy=SCHED_OTHER prio=50 spin=4 same=0 cpu=0 n=6000 p50=8281 p99=12533 p999=1411501 max=12537658 unit=ns
+### B3 同核抢（自旋也挤在 cpu0）
+PP policy=SCHED_OTHER prio=50 spin=2 same=1 cpu=0 n=6000 p50=12057 p99=12945 p999=137267 max=13686962 unit=ns
+PP policy=SCHED_OTHER prio=50 spin=3 same=1 cpu=0 n=6000 p50=11232 p99=21077 p999=17297377 max=41612475 unit=ns
+### B4 策略对比：空闲
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=6000 p50=12006 p99=13615 p999=291620 max=3857769 unit=ns
+PP policy=SCHED_BATCH prio=50 spin=0 same=0 cpu=0 n=6000 p50=11992 p99=13297 p999=305467 max=1153462 unit=ns
+PP policy=SCHED_IDLE prio=50 spin=0 same=0 cpu=0 n=6000 p50=10906 p99=12702 p999=256965 max=11104402 unit=ns
+PP policy=SCHED_FIFO prio=50 spin=0 same=0 cpu=0 n=6000 p50=9258 p99=10350 p999=385122 max=6611065 unit=ns
+PP policy=SCHED_RR prio=50 spin=0 same=0 cpu=0 n=6000 p50=9213 p99=10372 p999=460888 max=5190940 unit=ns
+### B5 策略对比：同核 3 个自旋
+PP policy=SCHED_OTHER prio=50 spin=3 same=1 cpu=0 n=6000 p50=11541 p99=53939 p999=23361608 max=78087919 unit=ns
+PP policy=SCHED_BATCH prio=50 spin=3 same=1 cpu=0 n=6000 p50=10773 p99=91278 p999=14376375 max=61305829 unit=ns
+PP policy=SCHED_FIFO prio=50 spin=3 same=1 cpu=0 n=6000 p50=9298 p99=10736 p999=105113 max=362549 unit=ns
+PP policy=SCHED_RR prio=50 spin=3 same=1 cpu=0 n=6000 p50=9243 p99=10095 p999=98806 max=15501927 unit=ns

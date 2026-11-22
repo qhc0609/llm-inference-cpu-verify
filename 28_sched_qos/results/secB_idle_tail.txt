@@ -1,0 +1,5 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:26:39 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+[sudo] user 的密码： PP policy=SCHED_IDLE prio=50 spin=3 same=1 cpu=0 n=6000 p50=10953 p99=345336693 p999=1291448357 max=5685369067 unit=ns
+PP policy=SCHED_IDLE prio=50 spin=3 same=1 cpu=0 n=6000 p50=11056 p99=345026832 p999=1225725862 max=5830598717 unit=ns

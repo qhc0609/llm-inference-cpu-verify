@@ -1,0 +1,13 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:21:37 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+内核 RT 预算 sched_rt_runtime_us=950000 period=1000000
+CONFIG_RT_GROUP_SCHED=0
+### H1 普通进程独占 cpu3（基线）
+CPUPROBE policy=SCHED_OTHER wall_ms=6000.0 cpu_ms=5997.2 cpu_pct=99.95 unit=pct
+### H2 同一颗核上压一个 SCHED_FIFO 纯自旋
+CPUPROBE policy=SCHED_OTHER wall_ms=6021.6 cpu_ms=334.3 cpu_pct=5.55 unit=pct
+### H3 重复 H2
+CPUPROBE policy=SCHED_OTHER wall_ms=6017.1 cpu_ms=306.4 cpu_pct=5.09 unit=pct
+### H4 反过来：把普通进程提到 FIFO 高优先级，两个 RT 抢
+CPUPROBE policy=SCHED_FIFO wall_ms=6000.0 cpu_ms=5703.3 cpu_pct=95.05 unit=pct

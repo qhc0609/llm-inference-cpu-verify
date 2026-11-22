@@ -1,0 +1,9 @@
+[sudo] user 的密码： ### K 综合：同一套 AI 负载，四种配置
+### K1 什么都不做（默认策略、不绑核、不隔离）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15563400 p99=209215859 p999=214145041 max=214145041 mean=24456472.0 total_ms=2934.8 runq_wait_ms=10.0 exec_ms=2917.9 wait_pct=0.34 slices=50 unit=ns sink=128974125.5
+### K2 只绑核（AI 任务钉到 cpu3）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15459630 p99=203076818 p999=210503032 max=210503032 mean=25241556.3 total_ms=3029.0 runq_wait_ms=7.0 exec_ms=3021.9 wait_pct=0.23 slices=76 unit=ns sink=128974125.5
+### K3 只隔离（cpuset 独占 cpu2-3）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15467587 p99=219147768 p999=454709955 max=454709955 mean=26841275.7 total_ms=3221.0 runq_wait_ms=7.0 exec_ms=3223.5 wait_pct=0.22 slices=75 unit=ns sink=128974125.5
+### K4 隔离 + 实时优先级
+DEC policy=SCHED_FIFO tokens=120 wmb=32 p50=15448879 p99=236128363 p999=241741745 max=241741745 mean=29725898.8 total_ms=3567.1 runq_wait_ms=79.8 exec_ms=3490.3 wait_pct=2.23 slices=31 unit=ns sink=128974125.5

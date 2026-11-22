@@ -1,0 +1,8 @@
+[sudo] user 的密码： ### A 延迟分解（32MB 权重，单线程，无竞争）
+DEC policy=SCHED_OTHER tokens=150 wmb=8 p50=3800599 p99=17628101 p999=18076325 max=18076325 mean=4241823.0 total_ms=636.3 runq_wait_ms=1.5 exec_ms=630.4 wait_pct=0.23 slices=16 unit=ns sink=40107300.4
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15506398 p99=95045817 p999=111582406 max=111582406 mean=17857271.6 total_ms=2678.6 runq_wait_ms=0.7 exec_ms=2672.0 wait_pct=0.03 slices=18 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=96 p50=46991604 p99=217463761 p999=238189701 max=238189701 mean=53756681.2 total_ms=8063.5 runq_wait_ms=58.5 exec_ms=8007.5 wait_pct=0.73 slices=26 unit=ns sink=481295509.7
+### A 同上，但每档重复 3 次看波动
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15584626 p99=95829403 p999=151248956 max=151248956 mean=17839183.7 total_ms=2675.9 runq_wait_ms=0.2 exec_ms=2691.0 wait_pct=0.01 slices=9 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15890124 p99=39336106 p999=101546844 max=101546844 mean=17246291.1 total_ms=2586.9 runq_wait_ms=1.4 exec_ms=2586.4 wait_pct=0.05 slices=31 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15940973 p99=65720622 p999=81190128 max=81190128 mean=17844690.6 total_ms=2676.7 runq_wait_ms=0.1 exec_ms=2684.4 wait_pct=0.00 slices=6 unit=ns sink=160431229.3

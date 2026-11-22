@@ -1,0 +1,22 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:13:06 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+--- cpu.max = max 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=16036313 p99=20177836 p999=30386945 max=30386945 mean=16415301.7 total_ms=1969.8 runq_wait_ms=2.1 exec_ms=1973.2 wait_pct=0.10 slices=22 unit=ns sink=128974125.5
+--- cpu.max = 100000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15670690 p99=44316605 p999=52970701 max=52970701 mean=16812573.5 total_ms=2017.5 runq_wait_ms=0.6 exec_ms=2021.9 wait_pct=0.03 slices=16 unit=ns sink=128974125.5
+--- cpu.max = 50000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=16390628 p99=110546787 p999=201611797 max=201611797 mean=34287052.3 total_ms=4114.4 runq_wait_ms=2093.8 exec_ms=2026.8 wait_pct=50.81 slices=59 unit=ns sink=128974125.5
+--- cpu.max = 25000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=82743493 p99=170376342 p999=187450759 max=187450759 mean=69184363.2 total_ms=8302.1 runq_wait_ms=6226.7 exec_ms=2070.6 wait_pct=75.04 slices=111 unit=ns sink=128974125.5
+--- cpu.max = 10000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=191430739 p99=1391354508 p999=2321075307 max=2321075307 mean=242454714.0 total_ms=29094.6 runq_wait_ms=26372.9 exec_ms=2714.0 wait_pct=90.67 slices=171 unit=ns sink=128974125.5
+### E 配额下的吞吐（2 线程固定工作量）
+--- cpu.max = max 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=389.912 unit=ms
+--- cpu.max = 200000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=555.936 unit=ms
+--- cpu.max = 100000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=545.015 unit=ms
+--- cpu.max = 50000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=1444.206 unit=ms

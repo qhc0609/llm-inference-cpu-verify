@@ -1,0 +1,11 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:15:01 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+--- 后台 decode nice=0 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=8122 p99=12344 p999=288861 max=7775394 unit=ns
+--- 后台 decode nice=10 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=11156 p99=12725 p999=9167699 max=14657593 unit=ns
+--- 后台 decode nice=19 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=12148 p99=12891 p999=2773002 max=17306899 unit=ns
+### G SCHED_IDLE 做后台（对前台几乎无影响）
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=11209 p99=20765 p999=15560901 max=27953824 unit=ns

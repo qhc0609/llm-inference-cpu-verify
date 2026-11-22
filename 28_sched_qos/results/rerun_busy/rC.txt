@@ -1,0 +1,23 @@
+[sudo] user 的密码： ### C1 固定每线程工作量，1/2/4 线程，不绑核（调度器自由迁移）
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=374.494 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=444.002 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=723.182 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=532.232 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=666.610 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1246.635 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=435.076 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=624.871 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=823.827 unit=ms
+### C2 同上，每线程钉到不同核
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=383.884 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=520.343 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=751.389 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=474.850 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=554.911 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1206.181 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=411.727 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=417.238 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1001.071 unit=ms
+### C3 4 线程全部挤在 cpu0（反面案例，4 线程分 1 核）
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1804.726 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1740.873 unit=ms

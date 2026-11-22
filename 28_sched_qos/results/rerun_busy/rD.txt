@@ -1,0 +1,14 @@
+[sudo] user 的密码： ### D cpuset 隔离
+root subtree: cpuset cpu memory pids
+wbexp subtree: cpuset cpu
+shared.effective=0-3 iso.effective=2-3
+### D1 共享 cpuset 0-3，无背景负载
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15836405 p99=101253182 p999=141456264 max=141456264 mean=20607294.8 total_ms=2472.9 runq_wait_ms=5.2 exec_ms=2464.0 wait_pct=0.21 slices=50 unit=ns sink=128974125.5
+### D2 共享 cpuset 0-3 + cpu0-1 上 2 个背景自旋
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=16206768 p99=329269938 p999=452587242 max=452587242 mean=41780630.9 total_ms=5013.7 runq_wait_ms=231.9 exec_ms=4780.1 wait_pct=4.63 slices=47 unit=ns sink=128974125.5
+### D3 隔离到 cpu2-3 + cpu0-1 上同样的 2 个背景自旋
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15659599 p99=307626398 p999=494640073 max=494640073 mean=31364143.3 total_ms=3763.7 runq_wait_ms=3.0 exec_ms=3753.5 wait_pct=0.08 slices=31 unit=ns sink=128974125.5
+### D4 隔离到 cpu2-3，但在同一个 cpuset 里再加一个竞争者
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15717493 p99=173412525 p999=319892015 max=319892015 mean=23501855.5 total_ms=2820.2 runq_wait_ms=370.4 exec_ms=2454.6 wait_pct=13.11 slices=78 unit=ns sink=128974125.5
+### D5 重复 D3 一次，看稳定性
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15563018 p99=240197267 p999=623324036 max=623324036 mean=30573918.1 total_ms=3668.9 runq_wait_ms=611.8 exec_ms=3054.0 wait_pct=16.69 slices=43 unit=ns sink=128974125.5

@@ -1,0 +1,20 @@
+[sudo] user 的密码： ### E cgroup cpu.max 配额（单线程 decode）
+--- cpu.max = max 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15425910 p99=189674081 p999=214187497 max=214187497 mean=20859883.5 total_ms=2503.2 runq_wait_ms=21.3 exec_ms=2482.1 wait_pct=0.85 slices=35 unit=ns sink=128974125.5
+--- cpu.max = 100000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=16360236 p99=75587996 p999=83166337 max=83166337 mean=20513003.3 total_ms=2461.6 runq_wait_ms=84.2 exec_ms=2374.6 wait_pct=3.42 slices=31 unit=ns sink=128974125.5
+--- cpu.max = 50000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=16115644 p99=530037798 p999=607748058 max=607748058 mean=47456992.9 total_ms=5694.8 runq_wait_ms=3347.3 exec_ms=2353.4 wait_pct=58.72 slices=57 unit=ns sink=128974125.5
+--- cpu.max = 25000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=79978855 p99=189778048 p999=330080545 max=330080545 mean=69637513.9 total_ms=8356.5 runq_wait_ms=6368.1 exec_ms=1989.4 wait_pct=76.20 slices=98 unit=ns sink=128974125.5
+--- cpu.max = 10000 100000 ---
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=189319581 p99=371352032 p999=454260170 max=454260170 mean=176137623.4 total_ms=21136.5 runq_wait_ms=19118.8 exec_ms=2019.4 wait_pct=90.45 slices=189 unit=ns sink=128974125.5
+### E 配额下的吞吐（2 线程固定工作量）
+--- cpu.max = max 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=476.685 unit=ms
+--- cpu.max = 200000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=250.596 unit=ms
+--- cpu.max = 100000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=625.025 unit=ms
+--- cpu.max = 50000 100000 ---
+WORK policy=SCHED_OTHER threads=2 iters_per=60000 total_iters=120000 wall_ms=910.389 unit=ms

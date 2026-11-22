@@ -1,0 +1,22 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:06:17 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+### B1 空闲基线（两线程同核 ping-pong）
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=8000 p50=11951 p99=12922 p999=29358 max=11387843 unit=ns
+### B2 其它核加 2/4 个自旋
+PP policy=SCHED_OTHER prio=50 spin=2 same=0 cpu=0 n=6000 p50=12002 p99=12844 p999=157953 max=588042 unit=ns
+PP policy=SCHED_OTHER prio=50 spin=4 same=0 cpu=0 n=6000 p50=12005 p99=12793 p999=203963 max=70280298 unit=ns
+### B3 同核抢（自旋也挤在 cpu0）
+PP policy=SCHED_OTHER prio=50 spin=2 same=1 cpu=0 n=6000 p50=11616 p99=12813 p999=12239790 max=43586612 unit=ns
+PP policy=SCHED_OTHER prio=50 spin=3 same=1 cpu=0 n=6000 p50=11255 p99=12797 p999=14187455 max=70160264 unit=ns
+### B4 策略对比：空闲
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=6000 p50=12133 p99=13225 p999=14449 max=202648 unit=ns
+PP policy=SCHED_BATCH prio=50 spin=0 same=0 cpu=0 n=6000 p50=12101 p99=13614 p999=147073 max=539195 unit=ns
+PP policy=SCHED_IDLE prio=50 spin=0 same=0 cpu=0 n=6000 p50=11634 p99=13357 p999=129273 max=84448362 unit=ns
+PP policy=SCHED_FIFO prio=50 spin=0 same=0 cpu=0 n=6000 p50=9242 p99=9599 p999=10657 max=1244878 unit=ns
+PP policy=SCHED_RR prio=50 spin=0 same=0 cpu=0 n=6000 p50=9240 p99=9823 p999=35918 max=438895 unit=ns
+### B5 策略对比：同核 3 个自旋
+PP policy=SCHED_OTHER prio=50 spin=3 same=1 cpu=0 n=6000 p50=11630 p99=18721 p999=11322625 max=45610441 unit=ns
+PP policy=SCHED_BATCH prio=50 spin=3 same=1 cpu=0 n=6000 p50=11162 p99=21946 p999=15216193 max=93735087 unit=ns
+PP policy=SCHED_FIFO prio=50 spin=3 same=1 cpu=0 n=6000 p50=9211 p99=9860 p999=11121 max=152285 unit=ns
+PP policy=SCHED_RR prio=50 spin=3 same=1 cpu=0 n=6000 p50=9336 p99=10184 p999=58029 max=1678439 unit=ns

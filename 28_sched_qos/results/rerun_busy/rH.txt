@@ -1,0 +1,11 @@
+[sudo] user 的密码： ### H 饥饿：SCHED_FIFO 纯自旋压住 cpu3，普通进程还能拿到多少 CPU
+内核 RT 预算 sched_rt_runtime_us=950000 period=1000000
+CONFIG_RT_GROUP_SCHED=0
+### H1 普通进程独占 cpu3（基线）
+CPUPROBE policy=SCHED_OTHER wall_ms=6000.0 cpu_ms=5994.7 cpu_pct=99.91 unit=pct
+### H2 同一颗核上压一个 SCHED_FIFO 纯自旋
+CPUPROBE policy=SCHED_OTHER wall_ms=6564.3 cpu_ms=605.1 cpu_pct=9.22 unit=pct
+### H3 重复 H2
+CPUPROBE policy=SCHED_OTHER wall_ms=6031.5 cpu_ms=710.4 cpu_pct=11.78 unit=pct
+### H4 反过来：把普通进程提到 FIFO 高优先级，两个 RT 抢
+CPUPROBE policy=SCHED_FIFO wall_ms=6023.0 cpu_ms=5692.1 cpu_pct=94.51 unit=pct

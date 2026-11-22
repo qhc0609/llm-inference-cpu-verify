@@ -1,0 +1,12 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:14:16 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+wa.cpus=3 wb.cpus=3
+### F1 权重 100 : 300
+WEIGHT wa=100 wb=300 wa_usec=1702802 wb_usec=4566956 ratio_wb_over_wa=2.682 unit=ratio
+### F2 权重 100 : 100（对照）
+WEIGHT wa=100 wb=100 wa_usec=3017442 wb_usec=3003388 ratio_wb_over_wa=0.995 unit=ratio
+### F3 权重 100 : 10（悬殊）
+WEIGHT wa=100 wb=10 wa_usec=5453172 wb_usec=557683 ratio_wb_over_wa=0.102 unit=ratio
+### F4 重复 100 : 300
+WEIGHT wa=100 wb=300 wa_usec=1598537 wb_usec=4397722 ratio_wb_over_wa=2.751 unit=ratio

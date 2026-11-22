@@ -1,0 +1,11 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:05:02 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+### A 延迟分解（8/32/96MB 权重，单线程，无竞争）
+DEC policy=SCHED_OTHER tokens=150 wmb=8 p50=3935368 p99=20479763 p999=47410098 max=47410098 mean=4459095.3 total_ms=668.9 runq_wait_ms=0.5 exec_ms=659.3 wait_pct=0.07 slices=6 unit=ns sink=40107300.4
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15744439 p99=40421767 p999=43570961 max=43570961 mean=16446163.4 total_ms=2466.9 runq_wait_ms=0.6 exec_ms=2465.9 wait_pct=0.02 slices=15 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=96 p50=47937337 p99=93065709 p999=94581061 max=94581061 mean=50958673.0 total_ms=7643.8 runq_wait_ms=5.2 exec_ms=7640.2 wait_pct=0.07 slices=33 unit=ns sink=481295509.7
+### A 同上，但每档重复 3 次看波动
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15790079 p99=67638260 p999=84840989 max=84840989 mean=17055430.2 total_ms=2558.3 runq_wait_ms=1.4 exec_ms=2567.7 wait_pct=0.05 slices=25 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=15829446 p99=21323350 p999=36250216 max=36250216 mean=16366075.9 total_ms=2454.9 runq_wait_ms=0.3 exec_ms=2449.6 wait_pct=0.01 slices=12 unit=ns sink=160431229.3
+DEC policy=SCHED_OTHER tokens=150 wmb=32 p50=16082804 p99=62724551 p999=63207686 max=63207686 mean=17701497.6 total_ms=2655.2 runq_wait_ms=0.2 exec_ms=2654.6 wait_pct=0.01 slices=12 unit=ns sink=160431229.3

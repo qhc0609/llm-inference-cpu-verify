@@ -1,0 +1,25 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:10:06 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=417.837 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=541.694 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=880.687 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=441.490 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=655.910 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1033.386 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=532.751 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=538.509 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=961.091 unit=ms
+### C2 同上，每线程钉到不同核
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=396.331 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=573.533 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=756.159 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=497.665 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=534.342 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=975.373 unit=ms
+WORK policy=SCHED_OTHER threads=1 iters_per=100000 total_iters=100000 wall_ms=544.563 unit=ms
+WORK policy=SCHED_OTHER threads=2 iters_per=100000 total_iters=200000 wall_ms=630.260 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=896.187 unit=ms
+### C3 4 线程全部挤在 cpu0（反面案例，4 线程分 1 核）
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1545.489 unit=ms
+WORK policy=SCHED_OTHER threads=4 iters_per=100000 total_iters=400000 wall_ms=1891.711 unit=ms

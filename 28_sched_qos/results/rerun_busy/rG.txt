@@ -1,0 +1,9 @@
+[sudo] user 的密码： ### G 前台交互延迟，后台压着 AI 任务（不同 nice）
+--- 后台 decode nice=0 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=8112 p99=12578 p999=2695012 max=12801958 unit=ns
+--- 后台 decode nice=10 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=11673 p99=13145 p999=536788 max=12208156 unit=ns
+--- 后台 decode nice=19 ---
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=11783 p99=70325 p999=2781571 max=22597065 unit=ns
+### G SCHED_IDLE 做后台（对前台几乎无影响）
+PP policy=SCHED_OTHER prio=50 spin=0 same=0 cpu=0 n=4000 p50=10878 p99=22638 p999=28672117 max=62729254 unit=ns

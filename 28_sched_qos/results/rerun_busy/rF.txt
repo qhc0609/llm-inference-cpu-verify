@@ -1,0 +1,10 @@
+[sudo] user 的密码： ### F cpu.weight 权重份额（两个 cgroup 同时压同一颗核，读 cpu.stat）
+wa.cpus=3 wb.cpus=3
+### F1 权重 100 : 300
+WEIGHT wa=100 wb=300 wa_usec=1509701 wb_usec=4654202 ratio_wb_over_wa=3.083 unit=ratio
+### F2 权重 100 : 100（对照）
+WEIGHT wa=100 wb=100 wa_usec=3016639 wb_usec=3032495 ratio_wb_over_wa=1.005 unit=ratio
+### F3 权重 100 : 10（悬殊）
+WEIGHT wa=100 wb=10 wa_usec=5447503 wb_usec=570459 ratio_wb_over_wa=0.105 unit=ratio
+### F4 重复 100 : 300
+WEIGHT wa=100 wb=300 wa_usec=1468497 wb_usec=4516608 ratio_wb_over_wa=3.076 unit=ratio

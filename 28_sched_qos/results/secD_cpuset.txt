@@ -1,0 +1,16 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:11:55 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+root subtree: cpuset cpu memory pids
+wbexp subtree: cpuset cpu
+shared.effective=0-3 iso.effective=2-3
+### D1 共享 cpuset 0-3，无背景负载
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15880424 p99=47366529 p999=114214243 max=114214243 mean=17479758.9 total_ms=2097.6 runq_wait_ms=1.6 exec_ms=2099.6 wait_pct=0.08 slices=12 unit=ns sink=128974125.5
+### D2 共享 cpuset 0-3 + cpu0-1 上 2 个背景自旋
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15849990 p99=119563775 p999=134159841 max=134159841 mean=21223202.2 total_ms=2546.8 runq_wait_ms=100.9 exec_ms=2447.1 wait_pct=3.96 slices=52 unit=ns sink=128974125.5
+### D3 隔离到 cpu2-3 + cpu0-1 上同样的 2 个背景自旋
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15393210 p99=158410289 p999=174952379 max=174952379 mean=19501944.2 total_ms=2340.2 runq_wait_ms=2.2 exec_ms=2335.1 wait_pct=0.09 slices=36 unit=ns sink=128974125.5
+### D4 隔离到 cpu2-3，但在同一个 cpuset 里再加一个竞争者
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15366538 p99=167534408 p999=204212858 max=204212858 mean=22925099.6 total_ms=2751.0 runq_wait_ms=149.9 exec_ms=2601.4 wait_pct=5.45 slices=47 unit=ns sink=128974125.5
+### D5 重复 D3 一次，看稳定性
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15394936 p99=46741562 p999=206782297 max=206782297 mean=18247996.6 total_ms=2189.8 runq_wait_ms=3.9 exec_ms=2177.2 wait_pct=0.18 slices=28 unit=ns sink=128974125.5

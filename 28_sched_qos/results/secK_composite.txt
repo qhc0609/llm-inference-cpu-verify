@@ -1,0 +1,11 @@
+# 第23篇原始运行输出（未经修改，仅去掉会话外壳）
+# 采集：2026-11-22 10:22:16 UTC+8 · Ubuntu 24.04.5 / 6.8.0-149 / 4 vCPU
+# 由 sched23 + run23.sh 产生，字段见 code/build_med23.py
+### K1 什么都不做（默认策略、不绑核、不隔离）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15825148 p99=233457798 p999=256117080 max=256117080 mean=27810889.8 total_ms=3337.3 runq_wait_ms=494.7 exec_ms=2850.8 wait_pct=14.79 slices=44 unit=ns sink=128974125.5
+### K2 只绑核（AI 任务钉到 cpu3）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15638945 p99=174564195 p999=212811407 max=212811407 mean=25533253.3 total_ms=3064.0 runq_wait_ms=0.5 exec_ms=3076.7 wait_pct=0.02 slices=17 unit=ns sink=128974125.5
+### K3 只隔离（cpuset 独占 cpu2-3）
+DEC policy=SCHED_OTHER tokens=120 wmb=32 p50=15584945 p99=126487957 p999=212910125 max=212910125 mean=20005871.8 total_ms=2400.7 runq_wait_ms=4.7 exec_ms=2392.0 wait_pct=0.20 slices=55 unit=ns sink=128974125.5
+### K4 隔离 + 实时优先级
+DEC policy=SCHED_FIFO tokens=120 wmb=32 p50=15856026 p99=220381495 p999=220465919 max=220465919 mean=31488186.8 total_ms=3778.6 runq_wait_ms=0.3 exec_ms=3781.3 wait_pct=0.01 slices=14 unit=ns sink=128974125.5
