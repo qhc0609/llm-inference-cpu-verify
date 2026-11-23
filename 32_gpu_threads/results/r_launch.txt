@@ -1,0 +1,7 @@
+=== gpu02 mode=launch ===
+WARM|ms=400|rounds=2638
+LAUNCH|grid=1|blockDim=32|us_per_launch=2.16|ns_per_block=2155.52
+LAUNCH|grid=100|blockDim=32|us_per_launch=2.24|ns_per_block=22.37
+LAUNCH|grid=10000|blockDim=32|us_per_launch=9.45|ns_per_block=0.95
+LAUNCH|grid=1000000|blockDim=32|us_per_launch=726.21|ns_per_block=0.73
+=== done ===

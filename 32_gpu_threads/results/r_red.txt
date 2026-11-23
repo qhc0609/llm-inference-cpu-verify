@@ -1,0 +1,5 @@
+=== gpu02 mode=red ===
+WARM|ms=400|rounds=2644
+RED|impl=warp_shfl|blockDim=256|gridDim=288|ns_per_block_reduce=8.5|sum_expect=32640|sum_got=32640
+RED|impl=shared_mem|blockDim=256|gridDim=288|ns_per_block_reduce=11.0|sum_expect=32640|sum_got=32640
+=== done ===

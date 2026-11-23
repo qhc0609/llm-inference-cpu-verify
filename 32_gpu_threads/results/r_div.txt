@@ -1,0 +1,7 @@
+=== gpu02 mode=div ===
+WARM|ms=400|rounds=2653
+DIV|mode=uniform|iters=2000|warp_cycles_median=9159|warp_cycles_min=9137|warp_cycles_max=9181|warp_cycles_avg=9159|ms_per_rep=0.0080|ratio_vs_base=1.00
+DIV|mode=half_warp_2x|iters=2000|warp_cycles_median=18047|warp_cycles_min=18025|warp_cycles_max=18069|warp_cycles_avg=18047|ms_per_rep=0.0138|ratio_vs_base=1.97
+DIV|mode=per_lane_small|iters=2000|warp_cycles_median=9452|warp_cycles_min=9429|warp_cycles_max=9473|warp_cycles_avg=9451|ms_per_rep=0.0082|ratio_vs_base=1.03
+DIV|mode=four_groups_4x|iters=2000|warp_cycles_median=35823|warp_cycles_min=35801|warp_cycles_max=35845|warp_cycles_avg=35823|ms_per_rep=0.0254|ratio_vs_base=3.91
+=== done ===

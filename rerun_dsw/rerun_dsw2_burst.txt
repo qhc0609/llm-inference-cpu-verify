@@ -1,0 +1,6 @@
+### burst threads=4 on=40 off=20 cycles=4 wmb=32  (taskset -c 0,2,4,6, Xeon 8369B)
+cycle,on_s,tokens,tokens_per_s,cpu_us_per_token
+1,40.0,15937,398.3,9993.7
+2,40.0,15940,398.3,9991.0
+3,40.0,15951,398.7,9985.9
+4,40.0,15947,398.6,9987.8

@@ -1,0 +1,30 @@
+## round 1
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,492,98.4,10111.3,99.5,0.00,-1.00
+10.0,5.0,493,98.6,10093.3,99.5,0.00,-1.00
+### done
+## round 2
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,492,98.4,10113.5,99.5,0.00,-1.00
+10.0,5.0,493,98.6,10091.8,99.5,0.00,-1.00
+### done
+## round 3
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,492,98.4,10111.8,99.5,0.00,-1.00
+10.0,5.0,493,98.6,10091.1,99.5,0.00,-1.00
+### done
+## round 4
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,492,98.4,10110.9,99.5,0.00,-1.00
+10.0,5.0,503,100.6,9892.3,99.5,0.00,-1.00
+### done
+## round 5
+### sustain threads=1 seconds=10 wmb=32 window=5
+t_s,win_s,tokens,tokens_per_s,cpu_us_per_token,cpu_pct,steal_pct,psi10
+5.0,5.0,509,101.8,9774.4,99.5,0.00,-1.00
+10.0,5.0,510,102.0,9757.8,99.5,0.00,-1.00
+### done

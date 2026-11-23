@@ -344,3 +344,34 @@ bash run.sh          # 六组微基准 + 四组 PyTorch 实测
 踩过的坑（CUDA 13 删了 `clockRate`、`cudaMemcpy` 不补同步测出 183 TB/s、
 谓词执行测不出 warp 分歧、H2D/D2H 参数写反）写在
 [`31_gpu_arch/README.md`](31_gpu_arch/README.md)。
+
+---
+
+## 追加：`32_gpu_threads/` —— GPU 篇 02：Thread / Warp / Block / Grid
+
+对应 GPU 系列第 02 篇《GPU 线程执行机制：Thread、Warp、Block、Grid 究竟是什么？》。
+
+第 01 篇把 A10 当一台整体机器看，这一篇把它拆到调度器那一层：
+一个 kernel 从 `<<<grid, block>>>` 到真正落在一颗 SM 的某个 warp slot 上，
+中间经过哪几步，每一步的粒度是多少。
+
+十一组微基准全部在 A10 上跑出来，几个能直接对上号的结论：
+
+| 问题 | 实测答案 |
+|---|---|
+| 一个 warp 多少线程 | 32；一维 256 线程的 block = 8 个 warp，`warp = gtid/32` |
+| 二维 block 怎么切 | `blockDim=(16,16)` 时 `threadIdx.x` 只有 0~15，**一个 warp 横跨两行** |
+| block 分到哪颗 SM | 72 块时先偶数号后奇数号：block 0→SM0、1→SM2、36→SM1 |
+| 每 SM 住多少线程 | 顶到 1536（48 warp）不动；blockDim=1024 只能住 1 块，空 512 个位置 |
+| grid 要不要凑整 | 一个 wave = 432 块；**433 块比 432 块慢 16%** |
+| 多给 warp 有用吗 | 1→8 warp：时间只多 2%，吞吐涨 7.8 倍；13 个之后被功耗墙截断 |
+| 分支发散代价 | 半 warp 分叉 = **1.97 倍**；四组不同循环次数 = 3.91 倍；掩码 0x0000ffff / 0xffff0000 |
+
+```bash
+cd 32_gpu_threads/code
+bash run.sh              # 十一组，输出落到 raw/
+```
+
+数据见 [`32_gpu_threads/REPORT.md`](32_gpu_threads/REPORT.md)。
+测量上的两个坑（空闲频率没拉起来就计时、功耗墙导致频率掉档）
+写在 [`32_gpu_threads/README.md`](32_gpu_threads/README.md)。

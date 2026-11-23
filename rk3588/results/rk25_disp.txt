@@ -1,0 +1,11 @@
+### DDR governor=performance
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=92.87 gbs=14.45 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=96.54 gbs=13.90 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=93.88 gbs=14.30 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=93.23 gbs=14.40 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=92.72 gbs=14.48 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=92.67 gbs=14.48 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=93.06 gbs=14.42 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=92.40 gbs=14.53 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=92.67 gbs=14.48 checksum=-29926.3164
+GEMV variant=neonx4 mb=64 n=16777216 reps=20 ms=93.93 gbs=14.29 checksum=-29926.3164

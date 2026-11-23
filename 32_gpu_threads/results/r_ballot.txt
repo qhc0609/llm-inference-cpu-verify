@@ -1,0 +1,5 @@
+=== gpu02 mode=ballot ===
+BALLOT|blockDim=32|gridDim=2
+BLK|bid=0|full_mask=0xffffffff|branch_low_mask=0x0000ffff|branch_high_mask=0xffff0000|ballot_lane_lt16=0x0000ffff
+BLK|bid=1|full_mask=0xffffffff|branch_low_mask=0x0000ffff|branch_high_mask=0xffff0000|ballot_lane_lt16=0x0000ffff
+=== done ===

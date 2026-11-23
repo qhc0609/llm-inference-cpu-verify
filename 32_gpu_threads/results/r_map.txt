@@ -1,0 +1,47 @@
+=== gpu02 mode=map ===
+MAP|blockDim=(16,16,1)|gridDim=(2,2,1)|threadsPerBlock=256|totalThreads=1024|warpsPerBlock=8|totalWarps=32
+BLK|bid=(0,0,0)|first_gid=0|last_gid=255|first_tid=(0,0,0)|last_tid=(15,15,0)
+BLK|bid=(1,0,0)|first_gid=256|last_gid=511|first_tid=(0,0,0)|last_tid=(15,15,0)
+BLK|bid=(0,1,0)|first_gid=512|last_gid=767|first_tid=(0,0,0)|last_tid=(15,15,0)
+BLK|bid=(1,1,0)|first_gid=768|last_gid=1023|first_tid=(0,0,0)|last_tid=(15,15,0)
+THR|gid=0|block=(0,0,0)|thread=(0,0,0)|warp=0|lane= 0
+THR|gid=1|block=(0,0,0)|thread=(1,0,0)|warp=0|lane= 1
+THR|gid=2|block=(0,0,0)|thread=(2,0,0)|warp=0|lane= 2
+THR|gid=3|block=(0,0,0)|thread=(3,0,0)|warp=0|lane= 3
+THR|gid=4|block=(0,0,0)|thread=(4,0,0)|warp=0|lane= 4
+THR|gid=5|block=(0,0,0)|thread=(5,0,0)|warp=0|lane= 5
+THR|gid=6|block=(0,0,0)|thread=(6,0,0)|warp=0|lane= 6
+THR|gid=7|block=(0,0,0)|thread=(7,0,0)|warp=0|lane= 7
+THR|gid=8|block=(0,0,0)|thread=(8,0,0)|warp=0|lane= 8
+THR|gid=9|block=(0,0,0)|thread=(9,0,0)|warp=0|lane= 9
+THR|gid=10|block=(0,0,0)|thread=(10,0,0)|warp=0|lane=10
+THR|gid=11|block=(0,0,0)|thread=(11,0,0)|warp=0|lane=11
+THR|gid=12|block=(0,0,0)|thread=(12,0,0)|warp=0|lane=12
+THR|gid=13|block=(0,0,0)|thread=(13,0,0)|warp=0|lane=13
+THR|gid=14|block=(0,0,0)|thread=(14,0,0)|warp=0|lane=14
+THR|gid=15|block=(0,0,0)|thread=(15,0,0)|warp=0|lane=15
+THR|gid=16|block=(0,0,0)|thread=(0,1,0)|warp=0|lane=16
+THR|gid=17|block=(0,0,0)|thread=(1,1,0)|warp=0|lane=17
+THR|gid=18|block=(0,0,0)|thread=(2,1,0)|warp=0|lane=18
+THR|gid=19|block=(0,0,0)|thread=(3,1,0)|warp=0|lane=19
+THR|gid=20|block=(0,0,0)|thread=(4,1,0)|warp=0|lane=20
+THR|gid=21|block=(0,0,0)|thread=(5,1,0)|warp=0|lane=21
+THR|gid=22|block=(0,0,0)|thread=(6,1,0)|warp=0|lane=22
+THR|gid=23|block=(0,0,0)|thread=(7,1,0)|warp=0|lane=23
+THR|gid=24|block=(0,0,0)|thread=(8,1,0)|warp=0|lane=24
+THR|gid=25|block=(0,0,0)|thread=(9,1,0)|warp=0|lane=25
+THR|gid=26|block=(0,0,0)|thread=(10,1,0)|warp=0|lane=26
+THR|gid=27|block=(0,0,0)|thread=(11,1,0)|warp=0|lane=27
+THR|gid=28|block=(0,0,0)|thread=(12,1,0)|warp=0|lane=28
+THR|gid=29|block=(0,0,0)|thread=(13,1,0)|warp=0|lane=29
+THR|gid=30|block=(0,0,0)|thread=(14,1,0)|warp=0|lane=30
+THR|gid=31|block=(0,0,0)|thread=(15,1,0)|warp=0|lane=31
+THR|gid=32|block=(0,0,0)|thread=(0,2,0)|warp=1|lane= 0
+THR|gid=33|block=(0,0,0)|thread=(1,2,0)|warp=1|lane= 1
+THR|gid=34|block=(0,0,0)|thread=(2,2,0)|warp=1|lane= 2
+THR|gid=35|block=(0,0,0)|thread=(3,2,0)|warp=1|lane= 3
+THR|gid=36|block=(0,0,0)|thread=(4,2,0)|warp=1|lane= 4
+THR|gid=37|block=(0,0,0)|thread=(5,2,0)|warp=1|lane= 5
+THR|gid=38|block=(0,0,0)|thread=(6,2,0)|warp=1|lane= 6
+THR|gid=39|block=(0,0,0)|thread=(7,2,0)|warp=1|lane= 7
+=== done ===

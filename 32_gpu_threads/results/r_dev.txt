@@ -1,0 +1,4 @@
+=== gpu02 mode=dev ===
+DEV|idx=0|name=NVIDIA A10|cc=8.6|sm=72|thr_per_sm=1536|warps_per_sm=48|blocks_per_sm=16|regs_per_sm=65536|smem_per_sm=102400|shared_per_block=49152|warpSize=32|clk_mhz=1695.000|l2=6291456|mem_bus=384|mem_clk_mhz=6251.0
+DEV|idx=0|maxThreadsPerBlock=1024|maxBlockDimX=1024|regsPerBlock=65536
+=== done ===

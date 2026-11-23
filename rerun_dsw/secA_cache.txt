@@ -1,0 +1,14 @@
+CHASE kb=4 n=512 reps=58593 ns_per_access=1.447 checksum=258
+CHASE kb=16 n=2048 reps=14648 ns_per_access=1.449 checksum=1701
+CHASE kb=32 n=4096 reps=7324 ns_per_access=1.451 checksum=1229
+CHASE kb=64 n=8192 reps=3662 ns_per_access=2.233 checksum=187
+CHASE kb=128 n=16384 reps=1831 ns_per_access=3.191 checksum=10381
+CHASE kb=256 n=32768 reps=915 ns_per_access=3.619 checksum=31477
+CHASE kb=512 n=65536 reps=457 ns_per_access=4.853 checksum=45401
+CHASE kb=1024 n=131072 reps=228 ns_per_access=5.834 checksum=5898
+CHASE kb=2048 n=262144 reps=114 ns_per_access=15.039 checksum=176030
+CHASE kb=4096 n=524288 reps=57 ns_per_access=20.960 checksum=161662
+CHASE kb=8192 n=1048576 reps=28 ns_per_access=26.019 checksum=484762
+CHASE kb=16384 n=2097152 reps=14 ns_per_access=33.574 checksum=209504
+CHASE kb=32768 n=4194304 reps=7 ns_per_access=49.554 checksum=3959572
+CHASE kb=65536 n=8388608 reps=3 ns_per_access=81.129 checksum=4457641

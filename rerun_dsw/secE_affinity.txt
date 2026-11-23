@@ -1,0 +1,24 @@
+## 4 线程全钉 1 个物理核（0）
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=27.96 gbs=24.00 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=27.97 gbs=23.99 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=27.33 gbs=24.56 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=27.06 gbs=24.80 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=27.68 gbs=24.24 checksum=-15572.8916
+## 4 线程钉 4 个物理核（0,2,4,6）
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.16 gbs=82.24 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.17 gbs=82.12 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.51 gbs=78.83 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.29 gbs=80.95 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.10 gbs=82.83 checksum=-15572.8916
+## 4 线程钉 0-3（=2 物理核 + 超线程）
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=12.55 gbs=53.47 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=12.62 gbs=53.18 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=15.53 gbs=43.22 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=13.13 gbs=51.12 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=12.61 gbs=53.21 checksum=-15572.8916
+## 4 线程不钉核（64 逻辑核）
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.07 gbs=83.20 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=7.92 gbs=84.74 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=7.50 gbs=89.44 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.95 gbs=74.96 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=7.52 gbs=89.23 checksum=-15572.8916

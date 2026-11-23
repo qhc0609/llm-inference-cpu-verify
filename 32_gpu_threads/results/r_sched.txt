@@ -1,0 +1,19 @@
+=== gpu02 mode=sched ===
+WARM|ms=400|rounds=2654
+SCHED|warps_per_sm=1|gridDim=72|blockDim=32|ms_per_rep=0.0601|GFLOPS=1533.2|speedup_vs_1warp=1.00|pct_of_best=100.0|warp_cycles=89170|eff_clk_mhz=1483|fma_per_warp_cycle=0.224
+SCHED|warps_per_sm=2|gridDim=144|blockDim=32|ms_per_rep=0.0601|GFLOPS=3064.5|speedup_vs_1warp=1.00|pct_of_best=100.0|warp_cycles=89175|eff_clk_mhz=1483|fma_per_warp_cycle=0.224
+SCHED|warps_per_sm=3|gridDim=216|blockDim=32|ms_per_rep=0.0603|GFLOPS=4587.9|speedup_vs_1warp=1.00|pct_of_best=100.0|warp_cycles=89178|eff_clk_mhz=1480|fma_per_warp_cycle=0.224
+SCHED|warps_per_sm=4|gridDim=288|blockDim=32|ms_per_rep=0.0602|GFLOPS=6122.4|speedup_vs_1warp=1.00|pct_of_best=100.0|warp_cycles=89184|eff_clk_mhz=1481|fma_per_warp_cycle=0.224
+SCHED|warps_per_sm=5|gridDim=360|blockDim=32|ms_per_rep=0.0610|GFLOPS=7556.7|speedup_vs_1warp=0.99|pct_of_best=100.0|warp_cycles=90418|eff_clk_mhz=1483|fma_per_warp_cycle=0.221
+SCHED|warps_per_sm=6|gridDim=432|blockDim=32|ms_per_rep=0.0611|GFLOPS=9045.2|speedup_vs_1warp=0.98|pct_of_best=100.0|warp_cycles=90422|eff_clk_mhz=1479|fma_per_warp_cycle=0.221
+SCHED|warps_per_sm=7|gridDim=504|blockDim=32|ms_per_rep=0.0612|GFLOPS=10543.9|speedup_vs_1warp=0.98|pct_of_best=100.0|warp_cycles=90410|eff_clk_mhz=1478|fma_per_warp_cycle=0.221
+SCHED|warps_per_sm=8|gridDim=576|blockDim=32|ms_per_rep=0.0614|GFLOPS=12010.0|speedup_vs_1warp=0.98|pct_of_best=100.0|warp_cycles=90429|eff_clk_mhz=1473|fma_per_warp_cycle=0.221
+SCHED|warps_per_sm=9|gridDim=648|blockDim=32|ms_per_rep=0.0652|GFLOPS=12715.9|speedup_vs_1warp=0.92|pct_of_best=100.0|warp_cycles=92906|eff_clk_mhz=1424|fma_per_warp_cycle=0.215
+SCHED|warps_per_sm=10|gridDim=720|blockDim=32|ms_per_rep=0.0653|GFLOPS=14106.6|speedup_vs_1warp=0.92|pct_of_best=100.0|warp_cycles=95410|eff_clk_mhz=1460|fma_per_warp_cycle=0.210
+SCHED|warps_per_sm=11|gridDim=792|blockDim=32|ms_per_rep=0.0654|GFLOPS=15505.1|speedup_vs_1warp=0.92|pct_of_best=100.0|warp_cycles=95386|eff_clk_mhz=1459|fma_per_warp_cycle=0.210
+SCHED|warps_per_sm=12|gridDim=864|blockDim=32|ms_per_rep=0.0654|GFLOPS=16902.2|speedup_vs_1warp=0.92|pct_of_best=100.0|warp_cycles=92931|eff_clk_mhz=1420|fma_per_warp_cycle=0.215
+SCHED|warps_per_sm=13|gridDim=936|blockDim=32|ms_per_rep=0.0776|GFLOPS=15447.5|speedup_vs_1warp=0.78|pct_of_best=91.4|warp_cycles=95456|eff_clk_mhz=1231|fma_per_warp_cycle=0.210
+SCHED|warps_per_sm=14|gridDim=1008|blockDim=32|ms_per_rep=0.0775|GFLOPS=16644.6|speedup_vs_1warp=0.78|pct_of_best=98.5|warp_cycles=95474|eff_clk_mhz=1232|fma_per_warp_cycle=0.209
+SCHED|warps_per_sm=15|gridDim=1080|blockDim=32|ms_per_rep=0.0756|GFLOPS=18292.7|speedup_vs_1warp=0.80|pct_of_best=100.0|warp_cycles=95453|eff_clk_mhz=1263|fma_per_warp_cycle=0.210
+SCHED|warps_per_sm=16|gridDim=1152|blockDim=32|ms_per_rep=0.0740|GFLOPS=19917.0|speedup_vs_1warp=0.81|pct_of_best=100.0|warp_cycles=95476|eff_clk_mhz=1290|fma_per_warp_cycle=0.209
+=== done ===

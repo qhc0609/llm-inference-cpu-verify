@@ -1,0 +1,16 @@
+### DDR=2112000000
+GEMM variant=naive n=512 ms=592.6 gflops=0.45 checksum=1328720.559
+GEMM variant=naive n=512 ms=583.5 gflops=0.46 checksum=1328720.559
+GEMM variant=naive n=512 ms=597.2 gflops=0.45 checksum=1328720.559
+GEMM variant=block:64 n=512 ms=80.3 gflops=3.34 checksum=1328720.559
+GEMM variant=block:64 n=512 ms=80.5 gflops=3.33 checksum=1328720.559
+GEMM variant=block:64 n=512 ms=78.8 gflops=3.41 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=25.3 gflops=10.62 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=26.1 gflops=10.30 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=24.7 gflops=10.86 checksum=1328720.559
+GEMM variant=mt:2 n=512 ms=39.0 gflops=6.88 checksum=1328720.559
+GEMM variant=mt:2 n=512 ms=39.7 gflops=6.77 checksum=1328720.559
+GEMM variant=mt:2 n=512 ms=41.0 gflops=6.54 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=160.1 gflops=1.68 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=159.5 gflops=1.68 checksum=1328720.559
+GEMM variant=mt:4 n=512 ms=160.2 gflops=1.68 checksum=1328720.559

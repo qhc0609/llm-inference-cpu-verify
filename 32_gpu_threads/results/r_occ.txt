@@ -1,0 +1,14 @@
+=== gpu02 mode=occ ===
+WARM|ms=400|rounds=2602
+OCC|nsm=72|maxThreadsPerSM=1536|maxWarpsPerSM=48|maxBlocksPerSM=16|regsPerSM=65536
+OCC_ROW|blockDim=32|warpsPerBlock=1|capByBlocks=16|capByWarps=48|capByThreads=48|blocksPerSM=16|residentWarpsPerSM=16|residentThreadsPerSM=512|residentThreadsGPU=36864|limited_by=blockSlot|matches=1
+OCC_ROW|blockDim=64|warpsPerBlock=2|capByBlocks=16|capByWarps=24|capByThreads=24|blocksPerSM=16|residentWarpsPerSM=32|residentThreadsPerSM=1024|residentThreadsGPU=73728|limited_by=blockSlot|matches=1
+OCC_ROW|blockDim=96|warpsPerBlock=3|capByBlocks=16|capByWarps=16|capByThreads=16|blocksPerSM=16|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=blockSlot|matches=1
+OCC_ROW|blockDim=128|warpsPerBlock=4|capByBlocks=16|capByWarps=12|capByThreads=12|blocksPerSM=12|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=192|warpsPerBlock=6|capByBlocks=16|capByWarps=8|capByThreads=8|blocksPerSM=8|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=256|warpsPerBlock=8|capByBlocks=16|capByWarps=6|capByThreads=6|blocksPerSM=6|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=384|warpsPerBlock=12|capByBlocks=16|capByWarps=4|capByThreads=4|blocksPerSM=4|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=512|warpsPerBlock=16|capByBlocks=16|capByWarps=3|capByThreads=3|blocksPerSM=3|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=768|warpsPerBlock=24|capByBlocks=16|capByWarps=2|capByThreads=2|blocksPerSM=2|residentWarpsPerSM=48|residentThreadsPerSM=1536|residentThreadsGPU=110592|limited_by=warpSlot|matches=1
+OCC_ROW|blockDim=1024|warpsPerBlock=32|capByBlocks=16|capByWarps=1|capByThreads=1|blocksPerSM=1|residentWarpsPerSM=32|residentThreadsPerSM=1024|residentThreadsGPU=73728|limited_by=warpSlot|matches=1
+=== done ===

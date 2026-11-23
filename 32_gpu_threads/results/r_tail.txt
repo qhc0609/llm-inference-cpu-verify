@@ -1,0 +1,11 @@
+=== gpu02 mode=tail ===
+WARM|ms=400|rounds=2649
+TAIL_META|nsm=72|blocksPerSM=6|blockDim=256|waveBlocks=432|warpsPerWave=3456
+TAIL|grid=72|blockDim=256|waves=1|ms_per_rep=0.0610|ms_per_wave=0.0610|vs_full_wave=0.00
+TAIL|grid=216|blockDim=256|waves=1|ms_per_rep=0.1167|ms_per_wave=0.1167|vs_full_wave=0.00
+TAIL|grid=431|blockDim=256|waves=1|ms_per_rep=0.2044|ms_per_wave=0.2044|vs_full_wave=0.00
+TAIL|grid=432|blockDim=256|waves=1|ms_per_rep=0.2043|ms_per_wave=0.2043|vs_full_wave=1.00
+TAIL|grid=433|blockDim=256|waves=2|ms_per_rep=0.2370|ms_per_wave=0.1185|vs_full_wave=1.16
+TAIL|grid=864|blockDim=256|waves=2|ms_per_rep=0.3950|ms_per_wave=0.1975|vs_full_wave=1.93
+TAIL|grid=865|blockDim=256|waves=3|ms_per_rep=0.4269|ms_per_wave=0.1423|vs_full_wave=2.09
+=== done ===

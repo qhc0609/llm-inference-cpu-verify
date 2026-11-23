@@ -1,0 +1,6 @@
+### burst threads=4 on=40 off=20 cycles=4 wmb=32
+cycle,on_s,tokens,tokens_per_s,cpu_us_per_token
+1,40.0,3985,99.6,9992.1
+2,40.0,3988,99.6,9986.5
+3,40.0,3986,99.6,9989.2
+4,40.0,3985,99.6,9990.6

@@ -1,0 +1,18 @@
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=30.68 gbs=21.87 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.59 gbs=22.68 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.51 gbs=22.74 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=30.00 gbs=22.37 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.51 gbs=22.74 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=30.04 gbs=22.34 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.83 gbs=22.50 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=28.99 gbs=23.15 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.75 gbs=22.56 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.48 gbs=22.76 checksum=-15572.8926
+## GEMM 一致性 n=256
+GEMM variant=naive n=256 ms=16.9 gflops=1.99 checksum=166069.790
+GEMM variant=block:64 n=256 ms=3.3 gflops=10.04 checksum=166069.790
+GEMM variant=mt:4 n=256 ms=2.4 gflops=14.08 checksum=166069.790
+## GEMM n=384（越界 bug 的那个尺寸）
+GEMM variant=naive n=384 ms=61.6 gflops=1.84 checksum=560548.199
+GEMM variant=block:64 n=384 ms=11.0 gflops=10.26 checksum=560548.199
+GEMM variant=mt:4 n=384 ms=5.0 gflops=22.55 checksum=700705.291

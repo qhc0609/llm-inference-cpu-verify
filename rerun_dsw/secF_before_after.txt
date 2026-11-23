@@ -1,0 +1,18 @@
+## before 标量单线程
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=195.90 gbs=3.43 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=196.52 gbs=3.41 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=195.98 gbs=3.42 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=196.94 gbs=3.41 checksum=-15573.6523
+GEMV variant=scalar mb=32 n=8388608 reps=20 ms=196.62 gbs=3.41 checksum=-15573.6523
+## after AVX2x4 单线程
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.02 gbs=23.13 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.63 gbs=22.65 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.42 gbs=22.81 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.17 gbs=23.01 checksum=-15572.8926
+GEMV variant=avx2x4 mb=32 n=8388608 reps=20 ms=29.78 gbs=22.53 checksum=-15572.8926
+## after AVX2x4 + 4 物理核
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.39 gbs=80.02 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=7.98 gbs=84.12 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.48 gbs=79.18 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.31 gbs=80.76 checksum=-15572.8916
+GEMV variant=mt:4 mb=32 n=8388608 reps=20 ms=8.09 gbs=82.97 checksum=-15572.8916
