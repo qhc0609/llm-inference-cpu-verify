@@ -10,3 +10,5 @@
 *.rpm   binary
 *.json text eol=lf
 *.log  text eol=lf
+*.png   binary
+*.jpg   binary

@@ -1,0 +1,65 @@
+Linux kunlun-rk3588 5.10.110 #1 SMP Wed Oct 21 15:19:20 CST 2026 aarch64 GNU/Linux
+
+NAME="KunLunOS"
+
+VERSION="3.00.00.001"
+
+ID="KunLunOS"
+
+-- cpu parts --
+
+processor : 0 CPU part : 0xd05
+
+processor : 1 CPU part : 0xd05
+
+processor : 2 CPU part : 0xd05
+
+processor : 3 CPU part : 0xd05
+
+processor : 4 CPU part : 0xd0b
+
+processor : 5 CPU part : 0xd0b
+
+processor : 6 CPU part : 0xd0b
+
+processor : 7 CPU part : 0xd0b
+
+-- freq table --
+
+cpu0 max=1800000
+
+cpu4 max=2352000
+
+cpu6 max=2256000
+
+cpu0 gov=performance
+
+cpu4 gov=performance
+
+cpu6 gov=performance
+
+-- thermal zones --
+
+soc-thermal=27769
+
+bigcore0-thermal=27769
+
+bigcore1-thermal=27769
+
+littlecore-thermal=27769
+
+center-thermal=26846
+
+gpu-thermal=26846
+
+npu-thermal=27769
+
+-- misc --
+
+psi=none
+
+perf=none
+
+steal(cpu line)=cpu  2159 0 855 508184 152 0 41 0 0 0
+
+idle_big_temp=27769

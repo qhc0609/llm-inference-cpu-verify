@@ -1,0 +1,7 @@
+CHASE kb=4 n=512 reps=39062 ns_per_access=1.689 checksum=258
+CHASE kb=32 n=4096 reps=4882 ns_per_access=1.681 checksum=1229
+CHASE kb=256 n=32768 reps=610 ns_per_access=5.897 checksum=31477
+CHASE kb=1024 n=131072 reps=152 ns_per_access=12.459 checksum=5898
+CHASE kb=8192 n=1048576 reps=19 ns_per_access=84.005 checksum=484762
+STREAM mb=256 mode=read ms=193.1 gbs=13.90 checksum=25530598720.0
+STREAM mb=256 mode=copy ms=266.0 gbs=20.18 checksum=0.0
