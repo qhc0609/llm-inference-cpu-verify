@@ -1,0 +1,42 @@
+=== 第03篇实验原始数据（Kaggle Tesla T4, cc7.5, CUDA 12.x, 2026-11-24）===
+来源：Kaggle notebook notebook6c685a3ed2 内 Console 执行 /tmp/gpu03
+编译：nvcc -O3 -arch=sm_75 -o /tmp/gpu03 /tmp/gpu03.cu
+
+--- 设备规格（cudaDeviceProp 实测）---
+DEV|name=Tesla T4|cc=7.5|sm=40|thr_per_sm=1024|warps_per_sm=32
+（torch 交叉核对: DEV|Tesla T4|cc=(7,5)|sm=40|mem=15.6GB）
+
+--- 计算单元数量（规格值，由 SM 数推导，非实测）---
+CCOUNT|cc=75|sm=40|fp32_core_per_sm=128|fp32_core_total=5120|tensor_core_per_sm=8|tensor_core_total=320|note=spec_derived
+
+--- 片上存储（cudaDeviceProp 实测）---
+MEM|regs_per_sm=65536|regs_per_block=65536|smem_per_sm=65536
+
+--- 预热后时钟（cudaDeviceGetAttribute 实测）---
+WARM|ms=500|clk_mhz=1590   （gemm_f16 那轮读到 1590）
+
+--- 峰值算力（规格 × 实测时钟推算，非直接实测）---
+PEAK|cc=75|sm=40|clk_mhz=1590|fp32_core_sm=128|peak_fp32_GFLOPS=16282|tc_f16_flop_sm_cycle=1024|peak_fp16_GFLOPS=65126|note=spec_x_clock_not_measured
+（注：初版代码的 /1e6 单位换算错误，已修正为 /1e3 并重跑；上面是修正后的值。
+ T4 官方 FP16 峰值约 65 TFLOPS，与 65126 GFLOPS 吻合。）
+
+--- GEMM 实测（N=1024，cudaEvent 计时，warm 后，统一口径 2*N^3*reps/ms）---
+模式                          ms(总)     reps    ms/call   GFLOPS(重算)
+GEMM_F32_CUDA_CORE(朴素FMA)   84.7213    20      4.2361    507.0
+GEMM_F16_TENSOR_CORE(WMMA)    27.8200    50      0.5564    3859.6
+GEMM_INT8_TENSOR_CORE(WMMA)   14.4201    50      0.2884    7446.1
+
+注：代码初版对 INT8 用了 flops*2 折算，导致输出 14892.3，口径不一致。
+上面 GFLOPS 列为统一用 2*N^3*reps/ms/1e6 重算的正确值（1 MAC = 2 ops），仓库代码已同步修正。
+
+--- 派生结论 ---
+F16 Tensor Core / F32 CUDA Core = 7.61 倍
+INT8 Tensor Core / F32 CUDA Core = 14.69 倍
+INT8 / F16 = 1.93 倍（接近 2 倍，符合 INT8 吞吐翻倍预期）
+F32 实测/峰值 = 507/16282 = 3.1%（朴素逐元素 kernel，未用共享内存分块，远未到峰值）
+F16 实测/峰值 = 3859.6/65126 = 5.9%（WMMA 但未做流水线/双缓冲优化）
+
+--- 跳过的精度（诚实标注）---
+SKIP|TF32 needs cc>=8.0 (Ampere+), got 75; Kaggle T4 is cc7.5
+SKIP|BF16 WMMA needs cc>=8.0 (Ampere+), got 75; Kaggle T4 is cc7.5
+（Turing 架构不支持 TF32 与 BF16 Tensor Core，本实验不冒充实测。）
