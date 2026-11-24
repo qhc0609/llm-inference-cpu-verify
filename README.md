@@ -378,16 +378,16 @@ bash run.sh              # 十一组，输出落到 raw/
 
 ---
 
-## 追加： —— GPU 篇 03：SM / CUDA Core / Tensor Core
+## 追加：`33_gpu_units/` —— GPU 篇 03：SM / CUDA Core / Tensor Core
 
 Kaggle T4 上同一份 1024×1024 矩阵乘，只换计算单元：FP32 507 GFLOPS、
 FP16 Tensor Core 3860 GFLOPS、INT8 Tensor Core 7446 GFLOPS。
-代码、原始数据和 6 张配图见 [](33_gpu_units/README.md)。
+代码、原始数据和 6 张配图见 [`33_gpu_units/README.md`](33_gpu_units/README.md)。
 
 ---
 
-## 追加： —— GPU 篇 04：显存 / Cache / Shared Memory
+## 追加：`34_gpu_memory/` —— GPU 篇 04：显存 / Cache / Shared Memory
 
 Kaggle T4 上的 7 组内存微基准：连续 vs 跨步全局读、共享内存 bank conflict、
 寄存器 vs 本地内存、常量广播/分散、工作集与 Cache、指针追逐延迟。
-代码、原始数据和 7 张配图见 [](34_gpu_memory/README.md)。
+代码、原始数据和 7 张配图见 [`34_gpu_memory/README.md`](34_gpu_memory/README.md)。
