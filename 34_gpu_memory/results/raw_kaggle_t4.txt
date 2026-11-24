@@ -1,0 +1,31 @@
+=== 第04篇实验原始数据（Kaggle Tesla T4 / cc7.5 / CUDA 12.x）===
+DEV|name=Tesla T4|cc=7.5|sm=40|l2_bytes=4194304|mem_clock_khz=5001000|bus_width=256|smem_per_sm=65536|regs_per_sm=65536|global_bytes=15636037632
+CLK|clk_mhz=1590
+BW|name=global_stride_1|us_per_call=680.13|useful_GBs=197.3|footprint_MB=16
+BW|name=global_stride_2|us_per_call=1063.15|useful_GBs=126.2|footprint_MB=32
+BW|name=global_stride_4|us_per_call=1973.23|useful_GBs=68.0|footprint_MB=64
+BW|name=global_stride_8|us_per_call=3906.07|useful_GBs=34.4|footprint_MB=128
+BW|name=shared_stride_1_way|us_per_call=62.66|GBs=1338.7|note=1_way_conflict
+BW|name=shared_stride_2_way|us_per_call=103.63|GBs=809.5|note=2_way_conflict
+BW|name=shared_stride_4_way|us_per_call=200.81|GBs=417.7|note=4_way_conflict
+BW|name=shared_stride_8_way|us_per_call=394.76|GBs=212.5|note=8_way_conflict
+BW|name=shared_stride_16_way|us_per_call=783.10|GBs=107.1|note=16_way_conflict
+BW|name=shared_stride_32_way|us_per_call=1559.86|GBs=53.8|note=32_way_conflict
+REG|name=register_scalar|us_per_call=373.75|ns_per_iter=91.248|iters=4096
+REG|name=local_array_dynamic_index|us_per_call=391.92|ns_per_iter=95.684|iters=4096
+REG|name=local_volatile_forced|us_per_call=6201.00|ns_per_iter=1513.916|iters=4096
+CONST|pattern=broadcast_same_address|space=global|us_per_call=166.91|ns_per_read=20.375
+CONST|pattern=broadcast_same_address|space=constant|us_per_call=166.91|ns_per_read=20.375
+CONST|pattern=scatter_1024_words|space=global|us_per_call=412.02|ns_per_read=50.296
+CONST|pattern=scatter_1024_words|space=constant|us_per_call=2983.12|ns_per_read=364.150
+TEX|name=normal_global_load|us_per_call=604.64|GBs=222.0
+TEX|name=texture_fetch|us_per_call=566.61|GBs=236.9
+WS|bytes=65536|loops=4096|us_per_call=462.48|GBs=580.4
+WS|bytes=1048576|loops=256|us_per_call=122.87|GBs=2184.8
+WS|bytes=16777216|loops=16|us_per_call=1234.31|GBs=217.5
+WS|bytes=268435456|loops=1|us_per_call=1202.50|GBs=223.2
+LAT|name=global_32KB|steps=512|us_per_call=57.42|ns_per_load=112.14
+LAT|name=global_4MB|steps=512|us_per_call=277.02|ns_per_load=541.05
+LAT|name=global_256MB|steps=512|us_per_call=2635.77|ns_per_load=5147.99
+LAT|name=shared_32KB|steps=512|us_per_call=21.57|ns_per_load=42.13
+=== END ===
